@@ -7,9 +7,10 @@ namespace SIAairportSecurity.Training
     public class Training : _MenuState
     {
         [Header("Menu Container")]
-        [SerializeField]private RectTransform _menuContainer;
-        [SerializeField]private float _bottomOffset = 10f; // Offset from the bottom of the screen
-        [SerializeField]private float _moveSpeed = 1f; // movement speed to show menu container
+        [SerializeField] private RectTransform _menuContainer;
+        [SerializeField] private float _bottomOffset = 10f; // Offset from the bottom of the screen
+        [SerializeField] private float _moveSpeed = 1f; // movement speed to show menu container
+        [SerializeField] private GameObject _conformBTN;
         private Vector2 _menuContainerInitialPos;
         private bool _isMenuOpen = false;
         //Specific for this state
@@ -30,6 +31,8 @@ namespace SIAairportSecurity.Training
         {
             //move menu container down
             MoveToBottom(true);
+
+            ShowConformButton(false);
         }
 
         private void MoveToBottom(bool isInit)
@@ -77,7 +80,19 @@ namespace SIAairportSecurity.Training
         }
         public void JumpToSelection()
         {
+            _menuCanvasController.ResetObject();
             _menuCanvasController.SetActiveState(GameCanvasController.MenuState.Selection);
+        }
+
+        public void ShowConformButton(bool Condition)
+        {
+            _conformBTN.SetActive(Condition);
+        }
+
+        public void ConformPosition()
+        {
+            _menuCanvasController.ConformObject();
+            ShowConformButton(false);
         }
 
         public void QuitGame()

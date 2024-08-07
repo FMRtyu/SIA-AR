@@ -12,8 +12,10 @@ namespace SIAairportSecurity
         {
             public int itemID;
             public GameObject itemPrefabs;
+            public Sprite itemSprite;
             public string itemName;
             public string itemInfo;
+            public bool isObjectSmall;
         }
 
         public ItemInfo[] items;

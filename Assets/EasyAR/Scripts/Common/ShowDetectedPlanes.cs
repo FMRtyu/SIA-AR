@@ -16,6 +16,8 @@ public class ShowDetectedPlanes : MonoBehaviour
     MultipleObjectPlacement allObject;
 
     public bool planeEnable = false;
+    [SerializeField] private Material newMaterial;
+    [SerializeField] private Material pointMaterial;
 
     /// <summary>
     /// Access the Shadow plane
@@ -68,11 +70,28 @@ public class ShowDetectedPlanes : MonoBehaviour
     public void ShowPlanes()
     {
         planeEnable = true;
+
+        MeshRenderer[] meshRenderer = m_plane.GetComponentsInChildren<MeshRenderer>();
+        if (meshRenderer != null)
+        {
+            foreach (var renderer in meshRenderer)
+            {
+                renderer.material = pointMaterial;
+            }
+        }
     }
 
     public void HidePlanes()
     {
-        planeEnable = false;
+        MeshRenderer[] meshRenderer = m_plane.GetComponentsInChildren<MeshRenderer>();
+        if (meshRenderer != null)
+        {
+            foreach (var renderer in meshRenderer)
+            {
+                renderer.material = newMaterial;
+            }
+        }
+
     }
     public void ResetPlanes()
     {

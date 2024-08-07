@@ -14,10 +14,12 @@ namespace SIAairportSecurity.Training
         //Drags = the different menus we have
         public _MenuState[] allMenus;
 
+        [SerializeField] private GameObject _tapInstruction;
+
         //The states we can choose from
         public enum MenuState
         {
-            Selection, Training
+            Splash, Selection, Training
         }
 
         //State-object dictionary to make it easier to activate a menu 
@@ -29,10 +31,11 @@ namespace SIAairportSecurity.Training
 
         protected GamePlayController gamePlayController;
 
+        private int _itemSelected;
+
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
-            FadeIn();
             initMenuState();
         }
 
@@ -44,9 +47,33 @@ namespace SIAairportSecurity.Training
 
         #region SetData
 
-        public virtual void InitState(GamePlayController gamePlayController)
+        public void InitState(GamePlayController gamePlayController)
         {
             this.gamePlayController = gamePlayController;
+        }
+
+        public void SetObject(int objectIndex)
+        {
+            _itemSelected = objectIndex;
+        }
+
+        public void ShowConformedBTN(bool Condition)
+        {
+            if (activeState.state == MenuState.Training)
+            {
+                activeState.gameObject.GetComponent<Training>().ShowConformButton(Condition);
+            }
+        }
+
+        public void JumpToTraining()
+        {
+            gamePlayController.SetGameObject(_itemSelected);
+
+            EnableDisableInstrruction(true);
+
+            SetActiveState(MenuState.Training);
+
+
         }
 
         //Jump back one step = what happens when we press escape or one of the back buttons
@@ -65,6 +92,31 @@ namespace SIAairportSecurity.Training
                 //Activate the menu that's on the top of the stack
                 SetActiveState(stateHistory.Peek(), isJumpingBack: true);
             }
+        }
+
+        public void EnableDisableInstrruction(bool Intruction)
+        {
+            _tapInstruction.SetActive(Intruction);
+        }
+
+        public void ResetObject()
+        {
+            gamePlayController.ResetObject();
+            gamePlayController.ShowAllPlane();
+        }
+
+        public void ConformObject()
+        {
+            gamePlayController.ConformObjectPosition();
+        }
+
+        #endregion
+
+        #region GetData
+
+        public Dictionary<int, (Sprite, bool, bool)> GetListData()
+        {
+            return gamePlayController.GetSelectionData();
         }
 
         #endregion
@@ -102,11 +154,12 @@ namespace SIAairportSecurity.Training
             }
 
             //Activate the default menu
-            SetActiveState(MenuState.Training);
+            SetActiveState(MenuState.Splash);
         }
 
         public void SetActiveState(MenuState newState, bool isJumpingBack = false)
         {
+            
             //First check if this menu exists
             if (!menuDictionary.ContainsKey(newState))
             {
@@ -137,7 +190,7 @@ namespace SIAairportSecurity.Training
 
         #region FadeScreen
 
-        private void FadeIn()
+        public void FadeIn()
         {
             LeanTween.alphaCanvas(fadeImgObject, to: 0, fadeTime).setOnComplete(() =>
             {
@@ -145,10 +198,16 @@ namespace SIAairportSecurity.Training
             });
         }
 
+        public void FadeOut()
+        {
+            fadeImgObject.blocksRaycasts = true;
+            LeanTween.alphaCanvas(fadeImgObject, to: 1, fadeTime);
+        }
+
         public void FadeOutQuit()
         {
             fadeImgObject.blocksRaycasts = true;
-            LeanTween.alphaCanvas(fadeImgObject, to: 0, fadeTime).setOnComplete(() =>
+            LeanTween.alphaCanvas(fadeImgObject, to: 1, fadeTime).setOnComplete(() =>
             {
                 Application.Quit();
             });

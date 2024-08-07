@@ -3,7 +3,27 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - ThrowingObject
+  - Fire
+  - PlayerDamageZone
+  - Floor
+  - FailZone
+  - Ring
+  - Net
+  - Backboard
+  - Pole
+  - RingTrigger
+  - NetTrigger
+  - ShadowPlane
+  - ScalePercentage
+  - TouchIndicator
+  - ScanSurfaceAnim
+  - DetectionText
+  - Placement
+  - Interactable
+  - PizzaToppingArea
+  - NotificationPanel
   layers:
   - Default
   - TransparentFX
@@ -13,15 +33,15 @@ TagManager:
   - UI
   - 
   - 
+  - ThrowingObject
+  - NoCollisionsInLayer
+  - Active Environment
+  - Floor
+  - Shootable
   - 
+  - BasketballNet
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - FailZone
   - 
   - 
   - 

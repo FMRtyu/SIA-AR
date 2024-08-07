@@ -40,9 +40,11 @@ public class TouchIndicatorHandler : MonoBehaviour
     /// check the interaction with the object
     /// </summary>
     bool interactable = false;
+    bool isObjectMoveaable = true;
     void Update()
     {
-        
+        if (!isObjectMoveaable)
+            return;
 
         if((Input.touchCount > 0))
         {
@@ -52,8 +54,11 @@ public class TouchIndicatorHandler : MonoBehaviour
                 RaycastHit Hit;
                 if (Physics.Raycast(ray, out Hit))
                 {
-                    hitObject = Hit.transform.gameObject;
-                    interactable = true;
+                    if (Hit.transform.GetComponent<SpawningObjectDetails>())
+                    {
+                        hitObject = Hit.transform.gameObject;
+                        interactable = true;
+                    }
                 }
                 else
                 {
@@ -66,7 +71,8 @@ public class TouchIndicatorHandler : MonoBehaviour
                 RaycastHit Hit;
                 if (Physics.Raycast(ray, out Hit))
                 {
-                  
+                    if (Hit.transform.GetComponent<SpawningObjectDetails>())
+                    {
                         hitObject = Hit.transform.gameObject;
                         if (previousHitObject == null)
                         {
@@ -77,13 +83,13 @@ public class TouchIndicatorHandler : MonoBehaviour
                         {
                             PlaceOnPlane.showTouchIndicator();
                         }
-                        else 
+                        else
                         {
-                            if(hitObject != null)
-                             MultipleObjectPlacement.showTouchIndicator();
+                            //if (hitObject != null)
+                                //MultipleObjectPlacement.showTouchIndicator();
                         }
-                    
-                    isTouchedTheObject = true;
+                        isTouchedTheObject = true;
+                    }
                 }
 
             }
@@ -97,7 +103,7 @@ public class TouchIndicatorHandler : MonoBehaviour
                 }
                 else
                 {
-                    MultipleObjectPlacement.hideTouchIndicator();
+                    //MultipleObjectPlacement.hideTouchIndicator();
                 }
 
                 startTimer = true;
@@ -116,7 +122,7 @@ public class TouchIndicatorHandler : MonoBehaviour
                 }
                 else
                 {
-                    MultipleObjectPlacement.hideTouchIndicator();
+                    //MultipleObjectPlacement.hideTouchIndicator();
                 }
 
                 startTimer = true;
@@ -133,19 +139,30 @@ public class TouchIndicatorHandler : MonoBehaviour
                 }
                 else
                 {
-                    MultipleObjectPlacement.hideTouchIndicator();
-                    MultipleObjectPlacement.hideScalePercentageIndicator();
+                    //MultipleObjectPlacement.hideTouchIndicator();
+                    //MultipleObjectPlacement.hideScalePercentageIndicator();
                 }
 
                 startTimer = true;
             }
         }
 
-            DestroyInstaceObject();
+            //DestroyInstaceObject();
     }
 
 
-
+    public void SetMoveabled(bool condition)
+    {
+        if (condition)
+        {
+            MultipleObjectPlacement.showTouchIndicator();
+        }
+        else
+        {
+            MultipleObjectPlacement.hideTouchIndicator();
+        }
+        isObjectMoveaable = condition;
+    }
 
 
     void DestroyInstaceObject()

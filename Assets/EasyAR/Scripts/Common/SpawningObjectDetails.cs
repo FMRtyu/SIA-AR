@@ -169,8 +169,11 @@ public class SpawningObjectDetails : MonoBehaviour
     {
         _initialPlacedRotation = gameObject.transform.rotation;
         _initialScale = gameObject.transform.localScale;
-        _shadowPlane.SetActive(false);
+        if (_shadowPlane != null)
+        {
+            _shadowPlane.SetActive(false);
+        }
         _scalePersentageIndicator.SetActive(false);
-        _touchIndicator.SetActive(false);
+        //_touchIndicator.SetActive(false);
     }
 }

@@ -192,6 +192,7 @@ public class MultipleObjectPlacement : MonoBehaviour
     /// Access the percentage scanSurface prefab
     /// </summary>
     public static GameObject scanSurface;
+    [SerializeField]private GameObject _scanSurface;
 
     /// <summary>
     /// Access the notification prefab
@@ -234,7 +235,7 @@ public class MultipleObjectPlacement : MonoBehaviour
         aRPlaneManager = FindObjectOfType<ARPlaneManager>();
         ArCamera = GameObject.FindWithTag("MainCamera");
         m_RaycastManager = GetComponent<ARRaycastManager>();
-        scanSurface = GameObject.FindWithTag("ScanSurfaceAnim");
+        scanSurface = _scanSurface;
         notification = GameObject.FindWithTag("NotificationPanel");
         scanSurface.SetActive(true);
     }
@@ -334,7 +335,7 @@ public class MultipleObjectPlacement : MonoBehaviour
         }
         if (TouchIndicatorHandler.isTouchedTheObject)
         {
-            TouchIndicatorHandler.hitObject.GetComponent<SpawningObjectDetails>().scalePersentageIndicator.transform.rotation = Quaternion.Euler(ArCamera.transform.rotation.eulerAngles.x, ArCamera.transform.rotation.eulerAngles.y, 0);
+            //TouchIndicatorHandler.hitObject.GetComponent<SpawningObjectDetails>().scalePersentageIndicator.transform.rotation = Quaternion.Euler(ArCamera.transform.rotation.eulerAngles.x, ArCamera.transform.rotation.eulerAngles.y, 0);
         }
 
         MultipleTouchHandler();
