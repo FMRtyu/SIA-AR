@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace SIAairportSecurity.Training
 {
@@ -13,6 +14,10 @@ namespace SIAairportSecurity.Training
         [SerializeField] private GameObject _conformBTN;
         private Vector2 _menuContainerInitialPos;
         private bool _isMenuOpen = false;
+
+        [Header("RotateMoveUI")]
+        [SerializeField] private Button _MoveBTN;
+        [SerializeField] private Button _RotateBTN;
         //Specific for this state
         public override void InitState(GameCanvasController menuController)
         {
@@ -25,6 +30,7 @@ namespace SIAairportSecurity.Training
         {
             //save initial container pos
             _menuContainerInitialPos = _menuContainer.anchoredPosition;
+
         }
 
         private void OnEnable()
@@ -33,6 +39,8 @@ namespace SIAairportSecurity.Training
             MoveToBottom(true);
 
             ShowConformButton(false);
+
+            SwitchToMove();
         }
 
         private void MoveToBottom(bool isInit)
@@ -98,6 +106,22 @@ namespace SIAairportSecurity.Training
         public void QuitGame()
         {
             _menuCanvasController.FadeOutQuit();
+        }
+
+        #endregion
+
+        #region MoveRotateBTN
+
+        public void SwitchToMove()
+        {
+            _MoveBTN.interactable = false;
+            _RotateBTN.interactable = true;
+        }
+
+        public void SwitchToRotate()
+        {
+            _MoveBTN.interactable = true;
+            _RotateBTN.interactable = false;
         }
 
         #endregion

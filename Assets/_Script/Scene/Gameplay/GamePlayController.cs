@@ -79,7 +79,6 @@ namespace SIAairportSecurity.Training
             _spawnedObjects = null;
 
             isSpawnConformed = false;
-            _raycastController.ShowGizmo(false);
 
             _touchIndicatorHandler.SetMoveabled(true);
         }
@@ -88,7 +87,6 @@ namespace SIAairportSecurity.Training
         {
             isSpawnConformed = true;
             _gameCanvasController.ShowConformedBTN(false);
-            _raycastController.ShowGizmo(false);
             showDetectedPlanes.HidePlanes();
 
             _touchIndicatorHandler.SetMoveabled(false);
@@ -150,11 +148,7 @@ namespace SIAairportSecurity.Training
                     _gameCanvasController.ShowConformedBTN(true);
                     Debug.Log("Object spawned at: " + hitPose.position);
 
-                    _raycastController.ShowGizmo(true);
-
                     Transform interactableObject = FindChildWithTag(spawnedObject.transform, "Interactable");
-
-                    _raycastController.SetGizmoPosition(spawnedObject, interactableObject.gameObject);
 
                 }
             }

@@ -214,5 +214,18 @@ namespace SIAairportSecurity.Training
         }
 
         #endregion
+
+        #region MoveRotateBTN
+
+        public void SwitchToMove()
+        {
+
+        }
+
+        public void SwitchToRotate()
+        {
+
+        }
+        #endregion
     }
 }

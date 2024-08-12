@@ -14,12 +14,8 @@ namespace SIAairportSecurity.Training
         private GamePlayController _gamePlayController;
         private ARRaycastManager raycastManager;
 
-        private Transform _selectedParentObject;
-        private Transform _selectedChildObject;
+        private Transform _selectedObject;
         private List<ARRaycastHit> hits = new List<ARRaycastHit>();
-
-        private ObjectTransformGizmo _objectTransformGizmoRotate;
-        private ObjectTransformGizmo _objectTransformGizmoMove;
 
         // Rotate the selected object based on touch movement
         [SerializeField]private float rotationSpeed = 0.1f;
@@ -38,21 +34,12 @@ namespace SIAairportSecurity.Training
             {
                 Raycast();
             }
-            UpdateRotateGizmo();
         }
 
         private void init()
         {
             _gamePlayController = GetComponent<GamePlayController>();
             raycastManager = FindObjectOfType<ARRaycastManager>();
-
-            _objectTransformGizmoRotate = RTGizmosEngine.Get.CreateObjectRotationGizmo();
-            _objectTransformGizmoMove = RTGizmosEngine.Get.CreateObjectMoveGizmo();
-
-            _objectTransformGizmoMove.SetTransformSpace(GizmoSpace.Global);
-            _objectTransformGizmoRotate.SetTransformSpace(GizmoSpace.Global);
-
-            ShowGizmo(false);
         }
 
         private void Raycast()
@@ -75,40 +62,33 @@ namespace SIAairportSecurity.Training
 
                             if (Physics.Raycast(ray, out hita))
                             {
-                                if (!IsPointerOverUIObject() && _gamePlayController._spawnedObjects == null)
+                                if (_gamePlayController._spawnedObjects == null)
                                 {
                                     _gamePlayController.SpawnObject(hits[0]);
+                                }
+                                else
+                                {
+                                    Debug.Log("object selecting " + hita.transform.name);
+                                    if (hita.transform.CompareTag("Interactable"))
+                                    {
+                                        _selectedObject = hita.transform;
+                                    }
+                                    // Check if the hit object has a specific tag or component
                                 }
                             }
                         }
                     }
+                    else if (touch.phase == TouchPhase.Moved && _selectedObject != null)
+                    {
+                        _selectedObject.Rotate(new Vector3(touch.deltaPosition.y, -touch.deltaPosition.x, 0) * rotationSpeed, Space.World);
+                    }
+                    else if (touch.phase == TouchPhase.Ended)
+                    {
+                        // Deselect the object when touch ends
+                        _selectedObject = null;
+                    }
                 }
             }
-        }
-
-        private void UpdateRotateGizmo()
-        {
-            if (_selectedParentObject != null && _selectedChildObject != null)
-            {
-                // Ensure the rotate gizmo follows the object's position
-                _objectTransformGizmoRotate.SetTargetObject(_selectedChildObject.gameObject);
-                _objectTransformGizmoMove.SetTargetObject(_selectedParentObject.gameObject);
-            }
-        }
-
-        public void ShowGizmo(bool condition)
-        {
-            _objectTransformGizmoRotate.Gizmo.SetEnabled(condition);
-            _objectTransformGizmoMove.Gizmo.SetEnabled(condition);
-        }
-
-        public void SetGizmoPosition(GameObject SpawnedParentObject, GameObject SpawnedChildObject)
-        {
-            _selectedParentObject = SpawnedParentObject.transform;
-            _selectedChildObject = SpawnedChildObject.transform;
-
-            ShowGizmo(true);
-
         }
 
         private bool IsPointerOverUIObject()

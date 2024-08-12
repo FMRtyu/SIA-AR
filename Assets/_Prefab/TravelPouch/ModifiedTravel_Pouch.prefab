@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _planeDetectionMode: 1
-  _enbleDragFeature: 0
+  _enbleDragFeature: 1
   _enableRotateFeature: 0
   _rotateFactor: 750
   _enableScaleFeature: 0
