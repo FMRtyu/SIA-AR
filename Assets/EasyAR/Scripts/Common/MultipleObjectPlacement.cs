@@ -245,13 +245,15 @@ public class MultipleObjectPlacement : MonoBehaviour
         {
             Vector3 rayEmitPosition = new Vector3(Screen.width / 2, Screen.height / 2, 0);
             if (m_RaycastManager.Raycast(rayEmitPosition, s_Hits, TrackableType.PlaneWithinPolygon))
-            {             
+            {
+                scanSurface.SetActive(false);
+                return;
                 var hitPose = s_Hits[0].pose;
                 if (_PointerIndicator == null) { _PointerIndicator = Instantiate(PointerIndicator); }
                 if (_PointerIndicator.activeSelf == false && !hideIndicator) { _PointerIndicator.SetActive(true); }
                 _PointerIndicator.transform.position = hitPose.position;
                 _PointerIndicator.transform.rotation = hitPose.rotation;
-                scanSurface.SetActive(false);
+                
                 if(Vector3.Distance(ArCamera.transform.position, hitPose.position) < 0.8f)
                 {
                     _PointerIndicator.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
@@ -308,7 +310,7 @@ public class MultipleObjectPlacement : MonoBehaviour
         }
         else
         {
-            _PointerIndicator.SetActive(false);
+            //_PointerIndicator.SetActive(false);
         }
 
         //Finding the Dragging position 

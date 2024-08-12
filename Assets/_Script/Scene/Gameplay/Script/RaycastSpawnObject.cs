@@ -23,6 +23,8 @@ namespace SIAairportSecurity.Training
 
         // Rotate the selected object based on touch movement
         [SerializeField]private float rotationSpeed = 0.1f;
+
+        [SerializeField] private RTGizmosEngine _rtGizmosEngine;
         // Start is called before the first frame update
         void Start()
         {
@@ -52,7 +54,8 @@ namespace SIAairportSecurity.Training
             _objectTransformGizmoMove.SetTransformSpace(GizmoSpace.Global);
             _objectTransformGizmoRotate.SetTransformSpace(GizmoSpace.Global);
 
-            ShowGizmo(false);
+            ShowMoveGizmo(false);
+            ShowRotateGizmo(false);
         }
 
         private void Raycast()
@@ -96,9 +99,15 @@ namespace SIAairportSecurity.Training
             }
         }
 
-        public void ShowGizmo(bool condition)
+        public void ShowRotateGizmo(bool condition)
         {
             _objectTransformGizmoRotate.Gizmo.SetEnabled(condition);
+
+            //_rtGizmosEngine.MoveGizmoLookAndFeel3D.Scale
+        }
+
+        public void ShowMoveGizmo(bool condition)
+        {
             _objectTransformGizmoMove.Gizmo.SetEnabled(condition);
         }
 
@@ -107,7 +116,7 @@ namespace SIAairportSecurity.Training
             _selectedParentObject = SpawnedParentObject.transform;
             _selectedChildObject = SpawnedChildObject.transform;
 
-            ShowGizmo(true);
+            ShowMoveGizmo(true);
 
         }
 

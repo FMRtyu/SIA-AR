@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace SIAairportSecurity.Training
 {
@@ -15,6 +16,25 @@ namespace SIAairportSecurity.Training
         public _MenuState[] allMenus;
 
         [SerializeField] private GameObject _tapInstruction;
+
+        [Header("Gizmo BTN property")]
+        [SerializeField] private GameObject _gizmoParent;
+        [SerializeField] private Button _gizmomoveBTN;
+        [SerializeField] private Button _gizmoRotateBTN;
+
+        [SerializeField] private Sprite _selectedSprite;
+        [SerializeField] private Sprite _unselectedSprite;
+
+        [SerializeField] private Image _BTNMove;
+        [SerializeField] private Image _BTNMoveIcon;
+        [SerializeField] private Sprite _selectedMoveSprite;
+        [SerializeField] private Sprite _unselectedMoveSprite;
+
+        [SerializeField] private Image _BTNRotate;
+        [SerializeField] private Image _BTNRotateIcon;
+        [SerializeField] private Sprite _selectedRotateSprite;
+        [SerializeField] private Sprite _unselectedRotateSprite;
+        public bool isGizmoMove = true;
 
         //The states we can choose from
         public enum MenuState
@@ -97,6 +117,8 @@ namespace SIAairportSecurity.Training
         public void EnableDisableInstrruction(bool Intruction)
         {
             _tapInstruction.SetActive(Intruction);
+
+            ShowGizmoGroupBTN(!Intruction);
         }
 
         public void ResetObject()
@@ -108,6 +130,8 @@ namespace SIAairportSecurity.Training
         public void ConformObject()
         {
             gamePlayController.ConformObjectPosition();
+
+            ResetGizmoBTN();
         }
 
         #endregion
@@ -155,6 +179,9 @@ namespace SIAairportSecurity.Training
 
             //Activate the default menu
             SetActiveState(MenuState.Splash);
+
+            //gizmos btn
+            InitGizmoBTN();
         }
 
         public void SetActiveState(MenuState newState, bool isJumpingBack = false)
@@ -213,6 +240,72 @@ namespace SIAairportSecurity.Training
             });
         }
 
+        #endregion
+
+        #region GizmoShow
+
+        private void InitGizmoBTN()
+        {
+            ShowGizmoGroupBTN(false);
+        }
+
+        public void ShowGizmoGroupBTN(bool condition)
+        {
+            _gizmoParent.SetActive(condition);
+        }
+
+        public void ShowMoveGizmo()
+        {
+            gamePlayController.SwitchGizmoMove();
+
+            //switch btn sprite
+            _gizmomoveBTN.interactable = false;
+            _gizmoRotateBTN.interactable = true;
+
+            //move
+            _BTNMove.sprite = _selectedSprite;
+            _BTNMoveIcon.sprite = _selectedMoveSprite;
+
+            //rotate
+            _BTNRotate.sprite = _unselectedSprite;
+            _BTNRotateIcon.sprite = _unselectedRotateSprite;
+        }
+
+        public void ShowRotateGizmo()
+        {
+            gamePlayController.SwitchGizmoRotate();
+
+            //switch btn sprite
+            _gizmomoveBTN.interactable = true;
+            _gizmoRotateBTN.interactable = false;
+
+            //move
+
+            _BTNMove.sprite = _unselectedSprite;
+            _BTNMoveIcon.sprite = _unselectedMoveSprite;
+
+            //rotate
+
+            _BTNRotate.sprite = _selectedSprite;
+            _BTNRotateIcon.sprite = _selectedRotateSprite;
+        }
+
+        private void ResetGizmoBTN()
+        {
+            ShowGizmoGroupBTN(false);
+
+            //switch btn sprite
+            _gizmomoveBTN.interactable = false;
+            _gizmoRotateBTN.interactable = true;
+
+            //move
+            _BTNMove.sprite = _selectedSprite;
+            _BTNMoveIcon.sprite = _selectedMoveSprite;
+
+            //rotate
+            _BTNRotate.sprite = _unselectedSprite;
+            _BTNRotateIcon.sprite = _unselectedRotateSprite;
+        }
         #endregion
     }
 }
