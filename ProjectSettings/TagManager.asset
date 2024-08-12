@@ -24,6 +24,7 @@ TagManager:
   - Interactable
   - PizzaToppingArea
   - NotificationPanel
+  - Shadow
   layers:
   - Default
   - TransparentFX

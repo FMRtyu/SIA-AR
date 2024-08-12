@@ -51,7 +51,7 @@ namespace SIAairportSecurity.Training
                 {
                     Touch touch = Input.GetTouch(0);
 
-                    if (touch.phase == TouchPhase.Began)
+                    if (touch.phase == TouchPhase.Began && _gamePlayController.GetIsConfirmedPosition() == false)
                     {
                         // Perform AR raycast
                         if (raycastManager.Raycast(touch.position, hits, TrackableType.PlaneWithinPolygon))

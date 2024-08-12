@@ -23,6 +23,11 @@ namespace SIAairportSecurity.Training
         //which object that selected and list of object in scene
         private GameObject _selectedObject;
         public GameObject _spawnedObjects { private set; get; }
+        private Transform _spawnedObjectRotateObject;
+        private Vector3 _intialposition;
+        private SpawningObjectDetails _spawnedObjectProperty;
+        private BoxCollider _spawnedObjectCollider;
+        private Rigidbody _spawnedObjectRigidbody;
 
         private bool isSpawnConformed = false;
 
@@ -81,6 +86,8 @@ namespace SIAairportSecurity.Training
             isSpawnConformed = false;
 
             _touchIndicatorHandler.SetMoveabled(true);
+
+            ShowHideMoveRotateBTN(true);
         }
 
         public void ConformObjectPosition()
@@ -88,8 +95,22 @@ namespace SIAairportSecurity.Training
             isSpawnConformed = true;
             _gameCanvasController.ShowConformedBTN(false);
             showDetectedPlanes.HidePlanes();
-
             _touchIndicatorHandler.SetMoveabled(false);
+
+            //move down the object
+            _spawnedObjectRotateObject.localPosition = _intialposition;
+
+            ShowHideMoveRotateBTN(false);
+
+            //delete box collider in rotatale object
+            Destroy(_spawnedObjectRotateObject.GetComponent<BoxCollider>());
+            _spawnedObjectCollider.enabled = true;
+            //add rigidbody
+            _spawnedObjectRigidbody = _spawnedObjects.AddComponent<Rigidbody>();
+            _spawnedObjectRigidbody.freezeRotation = true;
+
+            //delete rigidbody after a second
+            Invoke("DeleteRigidbody", 2.5f);
         }
         #endregion
 
@@ -114,6 +135,10 @@ namespace SIAairportSecurity.Training
             return temp;
         }
 
+        public bool GetIsConfirmedPosition()
+        {
+            return isSpawnConformed;
+        }
         #endregion
 
         #region Operation
@@ -140,15 +165,18 @@ namespace SIAairportSecurity.Training
                 {
                     // Instantiate and place the object at the hit pose
                     GameObject spawnedObject = Instantiate(_selectedObject, hitPose.position, hitPose.rotation);
-                    //GameObject spawnedObject2 = Instantiate(_selectedObject, hitPose.position, hitPose.rotation);
                     _spawnedObjects = spawnedObject;
-                    //Destroy(spawnedObject2);
+
+                    //set all necessary value
+                    Transform[] childTransforms = spawnedObject.GetComponentsInChildren<Transform>();
+                    _spawnedObjectRotateObject = FindChildWithTag(spawnedObject.transform, "Interactable");
+                    _intialposition = _spawnedObjectRotateObject.localPosition;
+                    _spawnedObjectProperty = spawnedObject.GetComponent<SpawningObjectDetails>();
+                    _spawnedObjectCollider = spawnedObject.GetComponent<BoxCollider>();
 
                     _gameCanvasController.EnableDisableInstrruction(false);
                     _gameCanvasController.ShowConformedBTN(true);
                     Debug.Log("Object spawned at: " + hitPose.position);
-
-                    Transform interactableObject = FindChildWithTag(spawnedObject.transform, "Interactable");
 
                 }
             }
@@ -183,6 +211,43 @@ namespace SIAairportSecurity.Training
             {
                 return false;
             }
+        }
+
+        private void DeleteRigidbody()
+        {
+            Destroy(_spawnedObjectRigidbody);
+        }
+        #endregion
+
+        #region SwitchRotateMove
+
+        public void SwitchToMove()
+        {
+            if (_spawnedObjectCollider != null && _spawnedObjectProperty != null)
+            {
+                _spawnedObjectCollider.enabled = true;
+                _spawnedObjectProperty.EnabledDrag(true);
+
+                //move down the object
+                _spawnedObjectRotateObject.localPosition = _intialposition;
+            }
+        }
+        public void SwitchToRotate()
+        {
+            if (_spawnedObjectCollider != null && _spawnedObjectProperty != null)
+            {
+                _spawnedObjectCollider.enabled = false;
+                _spawnedObjectProperty.EnabledDrag(false);
+
+                //move up the object
+                Vector3 newPos = new Vector3(_intialposition.x, _intialposition.y + 0.15f, _intialposition.z);
+                _spawnedObjectRotateObject.localPosition = newPos;
+            }
+        }
+
+        public void ShowHideMoveRotateBTN(bool Condition)
+        {
+            _gameCanvasController.ShowHideMoveRotateBTN(Condition);
         }
         #endregion
     }

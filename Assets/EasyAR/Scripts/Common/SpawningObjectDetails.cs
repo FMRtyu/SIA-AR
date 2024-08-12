@@ -82,6 +82,11 @@ public class SpawningObjectDetails : MonoBehaviour
     {
         get { return _enbleDragFeature; }
     }
+
+    public void EnabledDrag(bool condition)
+    {
+        _enbleDragFeature = condition;
+    }
     public bool enableRotateFeature
     {
         get { return _enableRotateFeature; }

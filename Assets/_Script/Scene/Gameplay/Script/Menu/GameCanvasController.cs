@@ -119,6 +119,19 @@ namespace SIAairportSecurity.Training
             return gamePlayController.GetSelectionData();
         }
 
+        private Training GetTrainingScript()
+        {
+            Training trainingMenu = null;
+            foreach (_MenuState item in allMenus)
+            {
+                if (item.state == MenuState.Training)
+                {
+                    trainingMenu = item.GetComponent<Training>();
+                }
+            }
+            return trainingMenu;
+        }
+
         #endregion
 
         #region MenuState
@@ -219,12 +232,17 @@ namespace SIAairportSecurity.Training
 
         public void SwitchToMove()
         {
-
+            gamePlayController.SwitchToMove();
         }
 
         public void SwitchToRotate()
         {
+            gamePlayController.SwitchToRotate();
+        }
 
+        public void ShowHideMoveRotateBTN(bool Condition)
+        {
+            GetTrainingScript().ShowHideMoveRotateBTN(Condition);
         }
         #endregion
     }

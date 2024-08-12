@@ -16,6 +16,7 @@ namespace SIAairportSecurity.Training
         private bool _isMenuOpen = false;
 
         [Header("RotateMoveUI")]
+        [SerializeField] private GameObject _moveRotateParent;
         [SerializeField] private Button _MoveBTN;
         [SerializeField] private Button _RotateBTN;
         //Specific for this state
@@ -116,12 +117,20 @@ namespace SIAairportSecurity.Training
         {
             _MoveBTN.interactable = false;
             _RotateBTN.interactable = true;
+
+            _menuCanvasController.SwitchToMove();
         }
 
         public void SwitchToRotate()
         {
             _MoveBTN.interactable = true;
             _RotateBTN.interactable = false;
+            _menuCanvasController.SwitchToRotate();
+        }
+
+        public void ShowHideMoveRotateBTN(bool Condition)
+        {
+            _moveRotateParent.SetActive(Condition);
         }
 
         #endregion
