@@ -11,7 +11,7 @@ public class ShowDetectedPlanes : MonoBehaviour
     /// <summary>
     /// ARPlaneManager
     /// </summary>
-    ARPlaneManager m_plane;
+    ARPlaneManager _planeManager;
     ARSession ar_session;
     MultipleObjectPlacement allObject;
 
@@ -27,43 +27,30 @@ public class ShowDetectedPlanes : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        m_plane = FindObjectOfType<ARPlaneManager>();
+        _planeManager = FindObjectOfType<ARPlaneManager>();
         ar_session = FindObjectOfType<ARSession>();
         allObject = FindObjectOfType<MultipleObjectPlacement>();
+
+        shadowPlane = GameObject.FindWithTag("ShadowPlane");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if (shadowPlane == null)
-        {
-            shadowPlane = GameObject.FindWithTag("ShadowPlane");
-        }
-
         if (planeEnable)
         {
             SetAllPlanesActive(true);
-            if (shadowPlane != null)
-            {
-                shadowPlane.SetActive(false);
-            }
             
         }
         else
         {
             SetAllPlanesActive(false);
-            
-            if (shadowPlane != null)
-            {
-                shadowPlane.SetActive(true);
-            }
         }
     }
 
     void SetAllPlanesActive(bool value)
     {
-        foreach (var plane in m_plane.trackables)
+        foreach (var plane in _planeManager.trackables)
             plane.gameObject.SetActive(value);
     }
 
@@ -71,7 +58,7 @@ public class ShowDetectedPlanes : MonoBehaviour
     {
         planeEnable = true;
 
-        MeshRenderer[] meshRenderer = m_plane.GetComponentsInChildren<MeshRenderer>();
+        MeshRenderer[] meshRenderer = _planeManager.GetComponentsInChildren<MeshRenderer>();
         if (meshRenderer != null)
         {
             foreach (var renderer in meshRenderer)
@@ -79,11 +66,12 @@ public class ShowDetectedPlanes : MonoBehaviour
                 renderer.material = pointMaterial;
             }
         }
+        _planeManager.enabled = true;
     }
 
     public void HidePlanes()
     {
-        MeshRenderer[] meshRenderer = m_plane.GetComponentsInChildren<MeshRenderer>();
+        MeshRenderer[] meshRenderer = _planeManager.GetComponentsInChildren<MeshRenderer>();
         if (meshRenderer != null)
         {
             foreach (var renderer in meshRenderer)
@@ -91,6 +79,7 @@ public class ShowDetectedPlanes : MonoBehaviour
                 renderer.material = newMaterial;
             }
         }
+        _planeManager.enabled = false;
 
     }
     public void ResetPlanes()

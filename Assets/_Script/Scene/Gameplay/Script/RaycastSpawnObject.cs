@@ -14,15 +14,20 @@ namespace SIAairportSecurity.Training
         private GamePlayController _gamePlayController;
         private ARRaycastManager raycastManager;
 
-        private Transform _selectedObject;
+        private GameObject _selectedObject;
         private List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
+        //scan surface UI
+        [SerializeField] private GameObject _scanSurface;
+
         // Rotate the selected object based on touch movement
-        [SerializeField]private float rotationSpeed = 0.1f;
+        private Vector2 lastTouchPosition;
+        private bool isMovingObject = true;
+
         // Start is called before the first frame update
         void Start()
         {
-            //getting needed value
+            //get value
             init();
         }
 
@@ -33,6 +38,7 @@ namespace SIAairportSecurity.Training
             if (raycastManager != null)
             {
                 Raycast();
+                CheckPlaneScanned();
             }
         }
 
@@ -40,61 +46,109 @@ namespace SIAairportSecurity.Training
         {
             _gamePlayController = GetComponent<GamePlayController>();
             raycastManager = FindObjectOfType<ARRaycastManager>();
+
+            _scanSurface.SetActive(true);
         }
 
+        #region RayCast
         private void Raycast()
         {
             if (_gamePlayController.GetCurrentScreen() != MenuState.Selection)
             {
-                // Check if the screen is touched
                 if (Input.touchCount > 0)
                 {
                     Touch touch = Input.GetTouch(0);
 
+                    Debug.Log("return " + IsPointerOverUIObject(touch));
+                    if (IsPointerOverUIObject(touch))
+                        return;
+
                     if (touch.phase == TouchPhase.Began && _gamePlayController.GetIsConfirmedPosition() == false)
                     {
-                        // Perform AR raycast
-                        if (raycastManager.Raycast(touch.position, hits, TrackableType.PlaneWithinPolygon))
-                        {
-                            // Perform a physics raycast from the camera to the hit position
-                            Ray ray = Camera.main.ScreenPointToRay(touch.position);
-                            RaycastHit hita;
+                        lastTouchPosition = touch.position;
 
-                            if (Physics.Raycast(ray, out hita))
-                            {
-                                if (_gamePlayController._spawnedObjects == null)
-                                {
-                                    _gamePlayController.SpawnObject(hits[0]);
-                                }
-                                else
-                                {
-                                    Debug.Log("object selecting " + hita.transform.name);
-                                    if (hita.transform.CompareTag("Interactable"))
-                                    {
-                                        _selectedObject = hita.transform;
-                                    }
-                                    // Check if the hit object has a specific tag or component
-                                }
-                            }
-                        }
+                        SelectOrSpawnObject(touch);
                     }
                     else if (touch.phase == TouchPhase.Moved && _selectedObject != null)
                     {
-                        _selectedObject.Rotate(new Vector3(touch.deltaPosition.y, -touch.deltaPosition.x, 0) * rotationSpeed, Space.World);
+                        if (isMovingObject)
+                        {
+                            // Drag the selected object
+                            DragObject(touch);
+                        }
+                        else
+                        {
+                            RotateObject(touch);
+                        }
                     }
                     else if (touch.phase == TouchPhase.Ended)
                     {
-                        // Deselect the object when touch ends
+                        // Deselect the object
                         _selectedObject = null;
                     }
                 }
             }
         }
 
-        private bool IsPointerOverUIObject()
+
+        private void SelectOrSpawnObject(Touch touch)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(touch.position);
+            RaycastHit hitObject;
+
+            // LayerMask to ignore the AR planes
+            int layerMask = 1 << LayerMask.NameToLayer("ARPlane");
+
+            // First, try to select an existing object
+            if (Physics.Raycast(ray, out hitObject, Mathf.Infinity, ~layerMask))
+            {
+                Debug.Log(hitObject.transform.name);
+                // Check if the object has the tag "Interactable"
+                if (hitObject.transform.CompareTag("Interactable"))
+                {
+                    _selectedObject = hitObject.transform.gameObject;
+                }
+            }
+            else if(_gamePlayController._spawnedObjects == null)
+            {
+                // Raycast to get the position in the AR world using PlaneWithinPolygon
+                if (raycastManager.Raycast(touch.position, hits, TrackableType.PlaneWithinPolygon))
+                {
+                    _gamePlayController.SpawnObject(hits[0]);
+                }
+            }
+        }
+
+        private void DragObject(Touch touch)
+        {
+            // Raycast to get the position in the AR world
+            if (raycastManager.Raycast(touch.position, hits, TrackableType.PlaneWithinBounds))
+            {
+                Pose hitPose = hits[0].pose;
+                _selectedObject.transform.position = hitPose.position;
+            }
+        }
+
+        private void RotateObject(Touch touch)
+        {
+            _selectedObject.transform.Rotate(new Vector3(touch.deltaPosition.y, -touch.deltaPosition.x, 0) * 0.5f, Space.World);
+        }
+        #endregion
+
+        private void CheckPlaneScanned()
+        {
+            Vector3 rayEmitPosition = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+            if (raycastManager.Raycast(rayEmitPosition, hits, TrackableType.PlaneWithinPolygon))
+                _scanSurface.SetActive(false);
+        }
+        public void IsSetToMove(bool condition)
+        {
+            isMovingObject = condition;
+        }
+        private bool IsPointerOverUIObject(Touch touch)
         {
             PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
-            eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            eventDataCurrentPosition.position = new Vector2(touch.position.x, touch.position.y);
             List<RaycastResult> results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
             return results.Count > 0;

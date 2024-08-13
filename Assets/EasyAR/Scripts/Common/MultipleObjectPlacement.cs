@@ -328,6 +328,7 @@ public class MultipleObjectPlacement : MonoBehaviour
                     {
                         if(TouchIndicatorHandler.hitObject.GetComponent<SpawningObjectDetails>().enbleDragFeature)
                             TouchIndicatorHandler.hitObject.transform.position = hitPose.position;
+                        Debug.Log("x : " + hitPose.position.x + ", y : " + hitPose.position.y + ", z : " + hitPose.position.z);
                     }
                     previousPosition = hitPose.position;
                 }

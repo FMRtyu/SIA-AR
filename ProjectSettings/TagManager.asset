@@ -25,6 +25,8 @@ TagManager:
   - PizzaToppingArea
   - NotificationPanel
   - Shadow
+  - Move
+  - Rotate
   layers:
   - Default
   - TransparentFX
@@ -43,7 +45,7 @@ TagManager:
   - BasketballNet
   - 
   - FailZone
-  - 
+  - ARPlane
   - 
   - 
   - 

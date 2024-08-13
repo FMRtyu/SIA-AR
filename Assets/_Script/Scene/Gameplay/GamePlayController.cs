@@ -17,7 +17,6 @@ namespace SIAairportSecurity.Training
         [Header("Controllers")]
         [SerializeField]private GameCanvasController _gameCanvasController;
         [SerializeField]private ItemDatabase _itemDatabase;
-        [SerializeField]private TouchIndicatorHandler _touchIndicatorHandler;
         private RaycastSpawnObject _raycastController;
 
         //which object that selected and list of object in scene
@@ -25,15 +24,12 @@ namespace SIAairportSecurity.Training
         public GameObject _spawnedObjects { private set; get; }
         private Transform _spawnedObjectRotateObject;
         private Vector3 _intialposition;
-        private SpawningObjectDetails _spawnedObjectProperty;
         private BoxCollider _spawnedObjectCollider;
         private Rigidbody _spawnedObjectRigidbody;
 
         private bool isSpawnConformed = false;
 
         private ARSession arSession;
-        private ARSessionOrigin arSessionOrigin;
-        private MultipleObjectPlacement multipleObject;
 
         private Dictionary<GameObject, bool> _spawnedObjectsDictionary;
         private ShowDetectedPlanes showDetectedPlanes;
@@ -58,8 +54,6 @@ namespace SIAairportSecurity.Training
 
             //get value
             arSession = FindObjectOfType<ARSession>();
-            arSessionOrigin = FindObjectOfType<ARSessionOrigin>();
-            multipleObject = FindObjectOfType<MultipleObjectPlacement>();
             showDetectedPlanes = FindObjectOfType<ShowDetectedPlanes>();
             _raycastController= GetComponent<RaycastSpawnObject>();
         }
@@ -85,9 +79,8 @@ namespace SIAairportSecurity.Training
 
             isSpawnConformed = false;
 
-            _touchIndicatorHandler.SetMoveabled(true);
-
             ShowHideMoveRotateBTN(true);
+            _raycastController.IsSetToMove(true);
         }
 
         public void ConformObjectPosition()
@@ -95,16 +88,19 @@ namespace SIAairportSecurity.Training
             isSpawnConformed = true;
             _gameCanvasController.ShowConformedBTN(false);
             showDetectedPlanes.HidePlanes();
-            _touchIndicatorHandler.SetMoveabled(false);
 
             //move down the object
             _spawnedObjectRotateObject.localPosition = _intialposition;
 
             ShowHideMoveRotateBTN(false);
 
-            //delete box collider in rotatale object
+            //delete box collider in rotate object
             Destroy(_spawnedObjectRotateObject.GetComponent<BoxCollider>());
             _spawnedObjectCollider.enabled = true;
+
+            //disable touch indicator
+            FindChildWithTag(_spawnedObjects.transform, "TouchIndicator").gameObject.SetActive(false);
+
             //add rigidbody
             _spawnedObjectRigidbody = _spawnedObjects.AddComponent<Rigidbody>();
             _spawnedObjectRigidbody.freezeRotation = true;
@@ -171,7 +167,6 @@ namespace SIAairportSecurity.Training
                     Transform[] childTransforms = spawnedObject.GetComponentsInChildren<Transform>();
                     _spawnedObjectRotateObject = FindChildWithTag(spawnedObject.transform, "Interactable");
                     _intialposition = _spawnedObjectRotateObject.localPosition;
-                    _spawnedObjectProperty = spawnedObject.GetComponent<SpawningObjectDetails>();
                     _spawnedObjectCollider = spawnedObject.GetComponent<BoxCollider>();
 
                     _gameCanvasController.EnableDisableInstrruction(false);
@@ -223,25 +218,27 @@ namespace SIAairportSecurity.Training
 
         public void SwitchToMove()
         {
-            if (_spawnedObjectCollider != null && _spawnedObjectProperty != null)
+            if (_spawnedObjectCollider != null)
             {
                 _spawnedObjectCollider.enabled = true;
-                _spawnedObjectProperty.EnabledDrag(true);
+                _raycastController.IsSetToMove(true);
 
                 //move down the object
                 _spawnedObjectRotateObject.localPosition = _intialposition;
+                _spawnedObjectRotateObject.GetComponent<BoxCollider>().enabled = false;
             }
         }
         public void SwitchToRotate()
         {
-            if (_spawnedObjectCollider != null && _spawnedObjectProperty != null)
+            if (_spawnedObjectCollider != null)
             {
                 _spawnedObjectCollider.enabled = false;
-                _spawnedObjectProperty.EnabledDrag(false);
+                _raycastController.IsSetToMove(false);
 
                 //move up the object
                 Vector3 newPos = new Vector3(_intialposition.x, _intialposition.y + 0.15f, _intialposition.z);
                 _spawnedObjectRotateObject.localPosition = newPos;
+                _spawnedObjectRotateObject.GetComponent<BoxCollider>().enabled = true;
             }
         }
 
