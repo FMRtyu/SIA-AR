@@ -59,7 +59,6 @@ namespace SIAairportSecurity.Training
                 {
                     Touch touch = Input.GetTouch(0);
 
-                    Debug.Log("return " + IsPointerOverUIObject(touch));
                     if (IsPointerOverUIObject(touch))
                         return;
 

@@ -19,7 +19,7 @@ namespace SIAairportSecurity
         private ARSession arSession;
         private ARSessionOrigin arSessionOrigin;
         private ARRaycastManager raycastManager;
-        private MultipleObjectPlacement multipleObject;
+        //private MultipleObjectPlacement multipleObject;
         private GameObject selectedGameobject;
         private List<GameObject> spawnedObjects;
         private Dictionary<GameObject, bool> spawnedObjectsDictionary;
@@ -42,7 +42,7 @@ namespace SIAairportSecurity
 
             arSession = FindObjectOfType<ARSession>();
             arSessionOrigin = FindObjectOfType<ARSessionOrigin>();
-            multipleObject = FindObjectOfType<MultipleObjectPlacement>();
+            //multipleObject = FindObjectOfType<MultipleObjectPlacement>();
             showDetectedPlanes = FindObjectOfType<ShowDetectedPlanes>();
             raycastManager = FindObjectOfType<ARRaycastManager>();
         }

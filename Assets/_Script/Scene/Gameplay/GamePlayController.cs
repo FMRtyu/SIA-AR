@@ -34,8 +34,6 @@ namespace SIAairportSecurity.Training
         private Dictionary<GameObject, bool> _spawnedObjectsDictionary;
         private ShowDetectedPlanes showDetectedPlanes;
 
-        public TMP_Text test;
-
         private void Start()
         {
             init();
@@ -95,7 +93,7 @@ namespace SIAairportSecurity.Training
             ShowHideMoveRotateBTN(false);
 
             //delete box collider in rotate object
-            Destroy(_spawnedObjectRotateObject.GetComponent<BoxCollider>());
+            _spawnedObjectRotateObject.GetComponent<BoxCollider>().enabled = false;
             _spawnedObjectCollider.enabled = true;
 
             //disable touch indicator
