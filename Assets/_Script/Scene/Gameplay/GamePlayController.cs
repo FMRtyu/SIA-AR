@@ -246,6 +246,15 @@ namespace SIAairportSecurity.Training
         {
             _gameCanvasController.ShowHideMoveRotateBTN(Condition);
         }
+
+        public void ResetMoveRotate()
+        {
+            isSpawnConformed = false;
+
+            _raycastController.IsSetToMove(true);
+            showDetectedPlanes.ShowPlanes();
+            FindChildWithTag(_spawnedObjects.transform, "TouchIndicator").gameObject.SetActive(true);
+        }
         #endregion
     }
 }

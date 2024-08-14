@@ -19,6 +19,9 @@ namespace SIAairportSecurity.Training
         [SerializeField] private GameObject _moveRotateParent;
         [SerializeField] private Button _MoveBTN;
         [SerializeField] private Button _RotateBTN;
+
+        [Header("RotateMoveBTN")]
+        [SerializeField] private Animator _moveRotateAnim;
         //Specific for this state
         public override void InitState(GameCanvasController menuController)
         {
@@ -93,16 +96,28 @@ namespace SIAairportSecurity.Training
             _menuCanvasController.SetActiveState(GameCanvasController.MenuState.Selection);
         }
 
+        #region ShowHideMoveRotateBTN
         public void ShowConformButton(bool Condition)
         {
             _conformBTN.SetActive(Condition);
+            _moveRotateAnim.SetBool("InitalOpen", Condition);
         }
 
         public void ConformPosition()
         {
             _menuCanvasController.ConformObject();
             ShowConformButton(false);
+            _moveRotateAnim.SetBool("Open", false);
         }
+
+        public void ReopenMoveRotateBTN()
+        {
+            _moveRotateAnim.SetBool("Open", true);
+            ShowConformButton(true);
+            _menuCanvasController.ResetMoveRotate();
+            SwitchToMove();
+        }
+        #endregion
 
         public void QuitGame()
         {
@@ -130,7 +145,7 @@ namespace SIAairportSecurity.Training
 
         public void ShowHideMoveRotateBTN(bool Condition)
         {
-            _moveRotateParent.SetActive(Condition);
+            //_moveRotateParent.SetActive(Condition);
         }
 
         #endregion

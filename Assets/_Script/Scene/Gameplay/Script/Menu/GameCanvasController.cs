@@ -26,7 +26,7 @@ namespace SIAairportSecurity.Training
         private Dictionary<MenuState, _MenuState> menuDictionary = new Dictionary<MenuState, _MenuState>();
 
         //The current active menu
-        public _MenuState activeState {  get; private set; }
+        public _MenuState activeState { get; private set; }
         private Stack<MenuState> stateHistory = new Stack<MenuState>();
 
         protected GamePlayController gamePlayController;
@@ -172,7 +172,7 @@ namespace SIAairportSecurity.Training
 
         public void SetActiveState(MenuState newState, bool isJumpingBack = false)
         {
-            
+
             //First check if this menu exists
             if (!menuDictionary.ContainsKey(newState))
             {
@@ -243,6 +243,11 @@ namespace SIAairportSecurity.Training
         public void ShowHideMoveRotateBTN(bool Condition)
         {
             GetTrainingScript().ShowHideMoveRotateBTN(Condition);
+        }
+
+        public void ResetMoveRotate()
+        {
+            gamePlayController.ResetMoveRotate();
         }
         #endregion
     }
