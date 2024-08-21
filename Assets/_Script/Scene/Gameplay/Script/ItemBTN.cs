@@ -41,5 +41,10 @@ namespace SIAairportSecurity.Training
         {
             _imageChild.sprite = sprite;
         }
+
+        public void PlayButtonSound()
+        {
+            _selection.PlayButtonSound();
+        }
     }
 }

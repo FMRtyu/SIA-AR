@@ -11,7 +11,6 @@ namespace SIAairportSecurity.Training
         [SerializeField] private GameObject _itemBTNPrefabs;
         [SerializeField] private RectTransform _itemBTNParent;
         [SerializeField] private Button _selectItemBTN;
-        [SerializeField] private GameObject _conformBTN;
 
         private List<GameObject> _itemBTNList = new List<GameObject>();
         private Button _selectedItem;
@@ -33,6 +32,7 @@ namespace SIAairportSecurity.Training
             ShowAllItem();
         }
 
+        #region Show and set item
         private void ShowAllItem()
         {
             foreach (GameObject item in _itemBTNList)
@@ -49,15 +49,13 @@ namespace SIAairportSecurity.Training
 
                 ItemBTN tempItemBTN = temp.GetComponent<ItemBTN>();
 
-                //temporary
                 tempItemBTN.InitSelection(this, item.Key);
-
 
                 (Sprite itemIcon, bool isObjectAvaible, bool isObjectSmall) = item.Value;
 
                 tempItemBTN.SetIcon(itemIcon);
 
-
+                //check if 3D object available
                 if (!isObjectAvaible)
                 {
                     tempItemBTN.GetComponent<Image>().sprite = _tempSprite;
@@ -85,12 +83,6 @@ namespace SIAairportSecurity.Training
                 }
 
                 _itemBTNList.Add(temp);
-                /*
-                tempItemBTN.InitSelection(this, item.Key);
-                tempItemBTN.SetIcon(item.Value);
-
-                _itemBTNList.Add(temp);
-                */
             }
         }
 
@@ -113,6 +105,7 @@ namespace SIAairportSecurity.Training
                 _selectedItem = _selectedItemBTN;
             }
         }
+        #endregion
         public void JumpToTraining()
         {
             _selectItemBTN.interactable = false;
@@ -120,6 +113,11 @@ namespace SIAairportSecurity.Training
             _selectedItem.interactable = false;
 
             _menuCanvasController.JumpToTraining();
+        }
+
+        public void PlayButtonSound()
+        {
+            _menuCanvasController.PlayButtonSound();
         }
     }
 }

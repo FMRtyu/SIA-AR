@@ -277,20 +277,13 @@ public class ARPlaneDetectionControl : MonoBehaviour
 
     public void PlaceObjectOnConfirmedPlaneUnderCamera(Transform targetObject)
     {
-        //arSessionOrigin.MakeContentAppearAt(
-        //    targetObject,
-        //    new Vector3(
-        //        arCameraManager.transform.position.x,
-        //        posOfSpawnedObjectOnDetectedPlane.y,
-        //        arCameraManager.transform.position.z));
+        targetObject.position = new Vector3(arCameraManager.transform.position.x, posOfSpawnedObjectOnDetectedPlane.y, arCameraManager.transform.position.z);
     }
 
     public void PlaceObjectOnConfirmedPlaneUnderDetectedPoint(
         Transform targetObject)
     {
-        //arSessionOrigin.MakeContentAppearAt(
-        //    targetObject,
-        //    posOfSpawnedObjectOnDetectedPlane);
+        targetObject.position = posOfSpawnedObjectOnDetectedPlane;
     }
 
     public void MoveObjectXZLocalPosToCamera(

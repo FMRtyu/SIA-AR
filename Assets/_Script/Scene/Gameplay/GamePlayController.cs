@@ -17,25 +17,29 @@ namespace SIAairportSecurity.Training
         [Header("Controllers")]
         [SerializeField]private GameCanvasController _gameCanvasController;
         [SerializeField]private ItemDatabase _itemDatabase;
-        [SerializeField]private TouchIndicatorHandler _touchIndicatorHandler;
         private RaycastSpawnObject _raycastController;
 
         //which object that selected and list of object in scene
-        private GameObject _selectedObject;
-        public GameObject _spawnedObjects { private set; get; }
+        private GameObject _selectedObjectPrefab;
+        private GameObject _spawnedObjects;
 
+        //_spawnedObjects property
+        private Transform _spawnedObjectRotateObject;
+        private Vector3 _intialposition;
+        private BoxCollider _spawnedObjectCollider;
+        private Rigidbody _spawnedObjectRigidbody;
         private bool isSpawnConformed = false;
 
+        //ARF
         private ARSession arSession;
-        private ARSessionOrigin arSessionOrigin;
-        private MultipleObjectPlacement multipleObject;
-
-        private Dictionary<GameObject, bool> _spawnedObjectsDictionary;
         private ShowDetectedPlanes showDetectedPlanes;
 
-        public TMP_Text test;
+        [Header("SFX")]
+        [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioClip _tapAudio;
+        [SerializeField] private AudioClip _SpawnAudio;
 
-        private void Start()
+        private void Awake()
         {
             init();
         }
@@ -53,8 +57,6 @@ namespace SIAairportSecurity.Training
 
             //get value
             arSession = FindObjectOfType<ARSession>();
-            arSessionOrigin = FindObjectOfType<ARSessionOrigin>();
-            multipleObject = FindObjectOfType<MultipleObjectPlacement>();
             showDetectedPlanes = FindObjectOfType<ShowDetectedPlanes>();
             _raycastController= GetComponent<RaycastSpawnObject>();
         }
@@ -64,7 +66,7 @@ namespace SIAairportSecurity.Training
         //Set object to spawn
         public void SetGameObject(int gameobjectIndex)
         {
-            _selectedObject = _itemDatabase.items[gameobjectIndex].itemPrefabs;
+            _selectedObjectPrefab = _itemDatabase.items[gameobjectIndex].itemPrefabs;
 
             if (!arSession.enabled)
             {
@@ -73,25 +75,43 @@ namespace SIAairportSecurity.Training
             GetComponent<ShowDetectedPlanes>().planeEnable = true;
         }
 
+        //reset training session
         public void ResetObject()
         {
             Destroy(_spawnedObjects);
             _spawnedObjects = null;
 
             isSpawnConformed = false;
-            _raycastController.ShowGizmo(false);
 
-            _touchIndicatorHandler.SetMoveabled(true);
+            ShowHideMoveRotateBTN(true);
+            _raycastController.IsSetToMove(true);
         }
 
+        //place item
         public void ConformObjectPosition()
         {
             isSpawnConformed = true;
             _gameCanvasController.ShowConformedBTN(false);
-            _raycastController.ShowGizmo(false);
             showDetectedPlanes.HidePlanes();
 
-            _touchIndicatorHandler.SetMoveabled(false);
+            //move down the object
+            _spawnedObjectRotateObject.localPosition = _intialposition;
+
+            ShowHideMoveRotateBTN(false);
+
+            //delete box collider in rotate object
+            _spawnedObjectRotateObject.GetComponent<BoxCollider>().enabled = false;
+            _spawnedObjectCollider.enabled = true;
+
+            //disable touch indicator
+            FindChildWithTag(_spawnedObjects.transform, "TouchIndicator").gameObject.SetActive(false);
+
+            //add rigidbody
+            _spawnedObjectRigidbody = _spawnedObjects.AddComponent<Rigidbody>();
+            _spawnedObjectRigidbody.freezeRotation = true;
+
+            //delete rigidbody after a second
+            Invoke("DeleteRigidbody", 2.5f);
         }
         #endregion
 
@@ -103,6 +123,7 @@ namespace SIAairportSecurity.Training
             return _gameCanvasController.activeState.state;
         }
 
+        //get item data from dataset
         public Dictionary<int, (Sprite, bool, bool)> GetSelectionData()
         {
             Dictionary<int, (Sprite, bool, bool)> temp = new Dictionary<int, (Sprite, bool, bool)>();
@@ -116,6 +137,24 @@ namespace SIAairportSecurity.Training
             return temp;
         }
 
+        //check if the object has been confirm
+        public bool GetIsConfirmedPosition()
+        {
+            return isSpawnConformed;
+        }
+
+        //check if the object already spawned
+        public bool GetIfObjectSpawned()
+        {
+            if (_spawnedObjects == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
         #endregion
 
         #region Operation
@@ -141,25 +180,30 @@ namespace SIAairportSecurity.Training
                 if (hitPose != null)
                 {
                     // Instantiate and place the object at the hit pose
-                    GameObject spawnedObject = Instantiate(_selectedObject, hitPose.position, hitPose.rotation);
-                    //GameObject spawnedObject2 = Instantiate(_selectedObject, hitPose.position, hitPose.rotation);
+                    GameObject spawnedObject = Instantiate(_selectedObjectPrefab, hitPose.position, hitPose.rotation);
                     _spawnedObjects = spawnedObject;
-                    //Destroy(spawnedObject2);
+
+                    //set all necessary value
+                    Transform[] childTransforms = spawnedObject.GetComponentsInChildren<Transform>();
+                    _spawnedObjectRotateObject = FindChildWithTag(spawnedObject.transform, "Interactable");
+                    _intialposition = _spawnedObjectRotateObject.localPosition;
+                    _spawnedObjectCollider = spawnedObject.GetComponent<BoxCollider>();
+
+                    //scale up object
+                    Vector3 InitalScale = _spawnedObjectRotateObject.transform.localScale;
+                    _spawnedObjectRotateObject.transform.localScale = Vector3.zero;
+                    LeanTween.scale(_spawnedObjectRotateObject.gameObject, to: InitalScale, 1f).setEase(LeanTweenType.easeOutBack);
+                    PlayPlaceSound();
 
                     _gameCanvasController.EnableDisableInstrruction(false);
                     _gameCanvasController.ShowConformedBTN(true);
                     Debug.Log("Object spawned at: " + hitPose.position);
 
-                    _raycastController.ShowGizmo(true);
-
-                    Transform interactableObject = FindChildWithTag(spawnedObject.transform, "Interactable");
-
-                    _raycastController.SetGizmoPosition(spawnedObject, interactableObject.gameObject);
-
                 }
             }
         }
 
+        //find child object from parent with tag
         Transform FindChildWithTag(Transform parent, string tag)
         {
             foreach (Transform child in parent)
@@ -173,12 +217,12 @@ namespace SIAairportSecurity.Training
         }
 
         //show all plane
-
         public void ShowAllPlane()
         {
             showDetectedPlanes.ShowPlanes();
         }
 
+        //check if object prefabs was set
         private bool CheckIfAvaible(int itemIndex)
         {
             if (_itemDatabase.items[itemIndex].itemPrefabs != null)
@@ -189,6 +233,89 @@ namespace SIAairportSecurity.Training
             {
                 return false;
             }
+        }
+
+        //delete rigidbody from spawned object after i second
+        private void DeleteRigidbody()
+        {
+            Destroy(_spawnedObjectRigidbody);
+        }
+
+        //play button SFX
+        public void PlayButtonSound()
+        {
+            if (_audioSource.isPlaying)
+            {
+                _audioSource.Stop();
+            }
+
+            // Set the clip and play it
+            if (_audioSource.clip != _tapAudio)
+            {
+                _audioSource.clip = _tapAudio;
+            }
+            _audioSource.Play();
+        }
+        public void PlayPlaceSound()
+        {
+            if (_audioSource.isPlaying)
+            {
+                _audioSource.Stop();
+            }
+
+            // Set the clip and play it
+            if (_audioSource.clip != _SpawnAudio)
+            {
+                _audioSource.clip = _SpawnAudio;
+            }
+            _audioSource.Play();
+        }
+        #endregion
+
+        #region SwitchRotateMove
+
+        //switch to move object 1 finger
+        public void SwitchToMove()
+        {
+            if (_spawnedObjectCollider != null)
+            {
+                _spawnedObjectCollider.enabled = true;
+                _raycastController.IsSetToMove(true);
+
+                //move down the object
+                _spawnedObjectRotateObject.localPosition = _intialposition;
+                _spawnedObjectRotateObject.GetComponent<BoxCollider>().enabled = false;
+            }
+        }
+        //switch to rotate object 1 finger
+        public void SwitchToRotate()
+        {
+            if (_spawnedObjectCollider != null)
+            {
+                _spawnedObjectCollider.enabled = false;
+                _raycastController.IsSetToMove(false);
+
+                //move up the object
+                Vector3 newPos = new Vector3(_intialposition.x, _intialposition.y + 0.15f, _intialposition.z);
+                _spawnedObjectRotateObject.localPosition = newPos;
+                _spawnedObjectRotateObject.GetComponent<BoxCollider>().enabled = true;
+            }
+        }
+
+        //show or hide move rotate panel
+        public void ShowHideMoveRotateBTN(bool Condition)
+        {
+            _gameCanvasController.ShowHideMoveRotateBTN(Condition);
+        }
+
+        //reset move rotate panel
+        public void ResetMoveRotate()
+        {
+            isSpawnConformed = false;
+
+            _raycastController.IsSetToMove(true);
+            showDetectedPlanes.ShowPlanes();
+            FindChildWithTag(_spawnedObjects.transform, "TouchIndicator").gameObject.SetActive(true);
         }
         #endregion
     }

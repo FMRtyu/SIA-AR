@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace SIAairportSecurity.Training
 {
@@ -13,6 +14,15 @@ namespace SIAairportSecurity.Training
         [SerializeField] private GameObject _conformBTN;
         private Vector2 _menuContainerInitialPos;
         private bool _isMenuOpen = false;
+
+        [Header("RotateMoveUI")]
+        [SerializeField] private GameObject _moveRotateParent;
+        [SerializeField] private Button _MoveBTN;
+        [SerializeField] private Button _RotateBTN;
+
+        [Header("RotateMoveBTN")]
+        [SerializeField] private Animator _moveRotateAnim;
+
         //Specific for this state
         public override void InitState(GameCanvasController menuController)
         {
@@ -25,6 +35,7 @@ namespace SIAairportSecurity.Training
         {
             //save initial container pos
             _menuContainerInitialPos = _menuContainer.anchoredPosition;
+
         }
 
         private void OnEnable()
@@ -33,6 +44,8 @@ namespace SIAairportSecurity.Training
             MoveToBottom(true);
 
             ShowConformButton(false);
+
+            SwitchToMove();
         }
 
         private void MoveToBottom(bool isInit)
@@ -84,16 +97,28 @@ namespace SIAairportSecurity.Training
             _menuCanvasController.SetActiveState(GameCanvasController.MenuState.Selection);
         }
 
+        #region ShowHideMoveRotateBTN
         public void ShowConformButton(bool Condition)
         {
             _conformBTN.SetActive(Condition);
+            _moveRotateAnim.SetBool("InitalOpen", Condition);
         }
 
         public void ConformPosition()
         {
             _menuCanvasController.ConformObject();
             ShowConformButton(false);
+            _moveRotateAnim.SetBool("Open", false);
         }
+
+        public void ReopenMoveRotateBTN()
+        {
+            _moveRotateAnim.SetBool("Open", true);
+            ShowConformButton(true);
+            _menuCanvasController.ResetMoveRotate();
+            SwitchToMove();
+        }
+        #endregion
 
         public void QuitGame()
         {
@@ -101,5 +126,34 @@ namespace SIAairportSecurity.Training
         }
 
         #endregion
+
+        #region MoveRotateBTN
+
+        public void SwitchToMove()
+        {
+            _MoveBTN.interactable = false;
+            _RotateBTN.interactable = true;
+
+            _menuCanvasController.SwitchToMove();
+        }
+
+        public void SwitchToRotate()
+        {
+            _MoveBTN.interactable = true;
+            _RotateBTN.interactable = false;
+            _menuCanvasController.SwitchToRotate();
+        }
+
+        public void ShowHideMoveRotateBTN(bool Condition)
+        {
+            //_moveRotateParent.SetActive(Condition);
+        }
+
+        #endregion
+
+        public void PlayButtonSound()
+        {
+            _menuCanvasController.PlayButtonSound();
+        }
     }
 }

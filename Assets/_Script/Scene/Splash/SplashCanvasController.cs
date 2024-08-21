@@ -21,8 +21,10 @@ namespace SIAairportSecurity.MainMenu
         #region Fade Fuctions
         private void FadeOut()
         {
-            LeanTween.alphaCanvas(fadeImgObject, to: 0, fadeTime);
-            fadeImgObject.blocksRaycasts = false;
+            LeanTween.alphaCanvas(fadeImgObject, to: 0, fadeTime).setOnComplete(() =>
+            {
+                StartTraining();
+            });
         }
 
         public void StartTraining()

@@ -15,15 +15,12 @@ TagManager:
   - Pole
   - RingTrigger
   - NetTrigger
+  - Interactable
+  - TouchIndicator
   - ShadowPlane
   - ScalePercentage
-  - TouchIndicator
   - ScanSurfaceAnim
   - DetectionText
-  - Placement
-  - Interactable
-  - PizzaToppingArea
-  - NotificationPanel
   layers:
   - Default
   - TransparentFX
@@ -38,7 +35,7 @@ TagManager:
   - Active Environment
   - Floor
   - Shootable
-  - 
+  - ARPlane
   - BasketballNet
   - 
   - FailZone

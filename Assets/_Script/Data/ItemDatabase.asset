@@ -20,7 +20,7 @@ MonoBehaviour:
     itemInfo: Pouch bag
     isObjectSmall: 0
   - itemID: 1
-    itemPrefabs: {fileID: 2871587354579089985, guid: d90bfec6fc517fb4bb28b4f29057b214, type: 3}
+    itemPrefabs: {fileID: 2871587354579089985, guid: a0251822f6613b64ba68f87d5cf6aa5b, type: 3}
     itemSprite: {fileID: 21300000, guid: e16911a1a2bffa04f8e62f2c48f23c00, type: 3}
     itemName: Laptop bag
     itemInfo: Laptop bag
