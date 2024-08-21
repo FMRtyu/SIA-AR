@@ -15,18 +15,12 @@ TagManager:
   - Pole
   - RingTrigger
   - NetTrigger
-  - ShadowPlane
-  - ScalePercentage
-  - TouchIndicator
   - ScanSurfaceAnim
   - DetectionText
-  - Placement
   - Interactable
-  - PizzaToppingArea
-  - NotificationPanel
-  - Shadow
-  - Move
-  - Rotate
+  - TouchIndicator
+  - ScalePercentage
+  - ShadowPlane
   layers:
   - Default
   - TransparentFX

@@ -13,6 +13,7 @@ public class ShowDetectedPlanes : MonoBehaviour
     /// </summary>
     ARPlaneManager _planeManager;
     ARSession ar_session;
+    ARPointCloudManager pointCloud;
     //MultipleObjectPlacement allObject;
 
     public bool planeEnable = false;
@@ -29,6 +30,7 @@ public class ShowDetectedPlanes : MonoBehaviour
     {
         _planeManager = FindObjectOfType<ARPlaneManager>();
         ar_session = FindObjectOfType<ARSession>();
+        pointCloud = FindObjectOfType<ARPointCloudManager>();
         //allObject = FindObjectOfType<MultipleObjectPlacement>();
 
         shadowPlane = GameObject.FindWithTag("ShadowPlane");
@@ -67,6 +69,7 @@ public class ShowDetectedPlanes : MonoBehaviour
             }
         }
         _planeManager.enabled = true;
+        pointCloud.SetTrackablesActive(true);
     }
 
     public void HidePlanes()
@@ -80,6 +83,7 @@ public class ShowDetectedPlanes : MonoBehaviour
             }
         }
         _planeManager.enabled = false;
+        pointCloud.SetTrackablesActive(false);
 
     }
     public void ResetPlanes()

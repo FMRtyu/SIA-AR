@@ -22,6 +22,7 @@ namespace SIAairportSecurity.Training
 
         [Header("RotateMoveBTN")]
         [SerializeField] private Animator _moveRotateAnim;
+
         //Specific for this state
         public override void InitState(GameCanvasController menuController)
         {
@@ -149,5 +150,10 @@ namespace SIAairportSecurity.Training
         }
 
         #endregion
+
+        public void PlayButtonSound()
+        {
+            _menuCanvasController.PlayButtonSound();
+        }
     }
 }

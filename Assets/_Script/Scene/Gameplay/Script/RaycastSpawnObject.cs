@@ -108,7 +108,7 @@ namespace SIAairportSecurity.Training
                     _selectedObject = hitObject.transform.gameObject;
                 }
             }
-            else if(_gamePlayController._spawnedObjects == null)
+            else if(!_gamePlayController.GetIfObjectSpawned())
             {
                 // Raycast to get the position in the AR world using PlaneWithinPolygon
                 if (raycastManager.Raycast(touch.position, hits, TrackableType.PlaneWithinPolygon))

@@ -6,7 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/__Scene/Main/GamePlay 1.unity
+    path: Assets/__Scene/Main/Splash.unity
+    guid: 8adbf19d48b63d945af272658770247f
+  - enabled: 1
+    path: Assets/__Scene/Main/GamePlay.unity
     guid: e1142f38ca3ceda468ae2cc2e13e988c
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: fa54a67388d2142339d865709a8492d7, type: 2}

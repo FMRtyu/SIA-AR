@@ -15,6 +15,7 @@ namespace SIAairportSecurity.Training
         public _MenuState[] allMenus;
 
         [SerializeField] private GameObject _tapInstruction;
+        
 
         //The states we can choose from
         public enum MenuState
@@ -29,14 +30,14 @@ namespace SIAairportSecurity.Training
         public _MenuState activeState { get; private set; }
         private Stack<MenuState> stateHistory = new Stack<MenuState>();
 
-        protected GamePlayController gamePlayController;
+        protected GamePlayController _gamePlayController;
 
         private int _itemSelected;
 
         // Start is called before the first frame update
-        void Awake()
+        void Start()
         {
-            initMenuState();
+            
         }
 
         // Update is called once per frame
@@ -49,7 +50,9 @@ namespace SIAairportSecurity.Training
 
         public void InitState(GamePlayController gamePlayController)
         {
-            this.gamePlayController = gamePlayController;
+            this._gamePlayController = gamePlayController;
+            initMenuState();
+            FadeIn();
         }
 
         public void SetObject(int objectIndex)
@@ -67,7 +70,7 @@ namespace SIAairportSecurity.Training
 
         public void JumpToTraining()
         {
-            gamePlayController.SetGameObject(_itemSelected);
+            _gamePlayController.SetGameObject(_itemSelected);
 
             EnableDisableInstrruction(true);
 
@@ -101,13 +104,13 @@ namespace SIAairportSecurity.Training
 
         public void ResetObject()
         {
-            gamePlayController.ResetObject();
-            gamePlayController.ShowAllPlane();
+            _gamePlayController.ResetObject();
+            _gamePlayController.ShowAllPlane();
         }
 
         public void ConformObject()
         {
-            gamePlayController.ConformObjectPosition();
+            _gamePlayController.ConformObjectPosition();
         }
 
         #endregion
@@ -116,7 +119,7 @@ namespace SIAairportSecurity.Training
 
         public Dictionary<int, (Sprite, bool, bool)> GetListData()
         {
-            return gamePlayController.GetSelectionData();
+            return _gamePlayController.GetSelectionData();
         }
 
         private Training GetTrainingScript()
@@ -167,7 +170,7 @@ namespace SIAairportSecurity.Training
             }
 
             //Activate the default menu
-            SetActiveState(MenuState.Splash);
+            SetActiveState(MenuState.Selection);
         }
 
         public void SetActiveState(MenuState newState, bool isJumpingBack = false)
@@ -232,12 +235,12 @@ namespace SIAairportSecurity.Training
 
         public void SwitchToMove()
         {
-            gamePlayController.SwitchToMove();
+            _gamePlayController.SwitchToMove();
         }
 
         public void SwitchToRotate()
         {
-            gamePlayController.SwitchToRotate();
+            _gamePlayController.SwitchToRotate();
         }
 
         public void ShowHideMoveRotateBTN(bool Condition)
@@ -247,8 +250,13 @@ namespace SIAairportSecurity.Training
 
         public void ResetMoveRotate()
         {
-            gamePlayController.ResetMoveRotate();
+            _gamePlayController.ResetMoveRotate();
         }
         #endregion
+
+        public void PlayButtonSound()
+        {
+            _gamePlayController.PlayButtonSound();
+        }
     }
 }
