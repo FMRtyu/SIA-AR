@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 26
-  productGUID: af91e4f5830680b4eb69865dce46de6c
+  productGUID: d2b2b545cf34700488d853f1e0ea7f03
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: FXMedia1
-  productName: 'Non Occlusion - SIA : Suspicious Items Training'
+  companyName: FXMedia
+  productName: 'Test SIA : Suspicious Items Training'
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -139,7 +139,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: V0.2.14
+  bundleVersion: v0.2.15
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -161,7 +161,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.FXMedia1.NonOcclusionSIASuspiciousItemsTraining
+    Android: com.FXMedia.TestSIASuspiciousItemsTraining
     Standalone: com.DefaultCompany.ARShadow
     iPhone: com.DefaultCompany.ARShadow
   buildNumber:
@@ -171,7 +171,7 @@ PlayerSettings:
     tvOS: 0
   overrideDefaultApplicationIdentifier: 0
   AndroidBundleVersionCode: 1
-  AndroidMinSdkVersion: 26
+  AndroidMinSdkVersion: 24
   AndroidTargetSdkVersion: 34
   AndroidPreferredInstallLocation: 1
   aotOptions: 
@@ -867,16 +867,16 @@ PlayerSettings:
     iPhone: 3
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: SIAURP
+  metroPackageName: SIA-NewProject
   metroPackageVersion: 1.0.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: SIA_URP
+  metroApplicationDescription: SIA - New Project
   wsaImages: {}
-  metroTileShortName: 'SIA : Suspicious Items Training'
+  metroTileShortName: SIA - New Project
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0
@@ -944,10 +944,10 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 085eb1bf-c114-4270-b316-c7189cecd57a
+  cloudProjectId: c5909c1b-2970-4733-bcc3-682214396970
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: SIA_2
+  projectName: SIA - New Project
   organizationId: fadil060800
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
