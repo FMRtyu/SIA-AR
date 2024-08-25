@@ -8,87 +8,75 @@ using UnityEngine.UI;
 
 public class ShowDetectedPlanes : MonoBehaviour
 {
-    /// <summary>
-    /// ARPlaneManager
-    /// </summary>
     ARPlaneManager _planeManager;
     ARSession ar_session;
     ARPointCloudManager pointCloud;
-    //MultipleObjectPlacement allObject;
 
-    public bool planeEnable = false;
-    [SerializeField] private Material newMaterial;
-    [SerializeField] private Material pointMaterial;
-
-    /// <summary>
-    /// Access the Shadow plane
-    /// </summary>
-    GameObject shadowPlane;
+    [Header("ARPlane Material")]
+    [SerializeField] private Material shadowMaterial;
+    [SerializeField] private Material dotsMaterial;
+    private bool useDotsMaterial = true; // Toggle flag
 
     // Start is called before the first frame update
     void Awake()
     {
+        initial();
+    }
+
+    private void initial()
+    {
         _planeManager = FindObjectOfType<ARPlaneManager>();
         ar_session = FindObjectOfType<ARSession>();
         pointCloud = FindObjectOfType<ARPointCloudManager>();
-        //allObject = FindObjectOfType<MultipleObjectPlacement>();
 
-        shadowPlane = GameObject.FindWithTag("ShadowPlane");
+        // Set initial material for all existing planes
+        foreach (ARPlane plane in _planeManager.trackables)
+        {
+            SetMaterial(plane);
+        }
+
+        // Subscribe to the plane added event
+        _planeManager.planesChanged += OnPlanesChanged;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (planeEnable)
+
+    }
+
+    void OnPlanesChanged(ARPlanesChangedEventArgs args)
+    {
+        // Change the material of all newly detected planes
+        foreach (ARPlane plane in args.added)
         {
-            SetAllPlanesActive(true);
-            
-        }
-        else
-        {
-            SetAllPlanesActive(false);
+            SetMaterial(plane);
         }
     }
 
-    void SetAllPlanesActive(bool value)
+    void SetMaterial(ARPlane plane)
     {
-        foreach (var plane in _planeManager.trackables)
-            plane.gameObject.SetActive(value);
-    }
+        // Get the MeshRenderer component of the ARPlane
+        MeshRenderer meshRenderer = plane.GetComponent<MeshRenderer>();
 
-    public void ShowPlanes()
-    {
-        planeEnable = true;
-
-        MeshRenderer[] meshRenderer = _planeManager.GetComponentsInChildren<MeshRenderer>();
         if (meshRenderer != null)
         {
-            foreach (var renderer in meshRenderer)
-            {
-                renderer.material = pointMaterial;
-            }
+            // Set the material based on the toggle flag
+            meshRenderer.material = useDotsMaterial ? dotsMaterial : shadowMaterial;
         }
-        _planeManager.enabled = true;
-        pointCloud.SetTrackablesActive(true);
     }
 
-    public void HidePlanes()
+    //switch between dots or shadow
+    public void ShowDotsPlane(bool condition)
     {
-        MeshRenderer[] meshRenderer = _planeManager.GetComponentsInChildren<MeshRenderer>();
-        if (meshRenderer != null)
+        // Toggle between the two materials
+        useDotsMaterial = condition;
+        pointCloud.SetTrackablesActive(condition);
+
+        // Update the material for all currently tracked planes
+        foreach (ARPlane plane in _planeManager.trackables)
         {
-            foreach (var renderer in meshRenderer)
-            {
-                renderer.material = newMaterial;
-            }
+            SetMaterial(plane);
         }
-        _planeManager.enabled = false;
-        pointCloud.SetTrackablesActive(false);
-
-    }
-    public void ResetPlanes()
-    {
-        ar_session.Reset();
-        ShowPlanes();
     }
 }

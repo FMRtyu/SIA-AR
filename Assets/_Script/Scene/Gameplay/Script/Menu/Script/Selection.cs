@@ -35,11 +35,10 @@ namespace SIAairportSecurity.Training
         #region Show and set item
         private void ShowAllItem()
         {
-            foreach (GameObject item in _itemBTNList)
+            if (_itemBTNList.Count > 0)
             {
-                Destroy(item);
+                return;
             }
-            _itemBTNList.Clear();
 
             _itemDatabase = _menuCanvasController.GetListData();
 

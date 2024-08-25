@@ -55,3 +55,21 @@ MonoBehaviour:
     itemName: Can drink
     itemInfo: Can drink
     isObjectSmall: 1
+  - itemID: 7
+    itemPrefabs: {fileID: 0}
+    itemSprite: {fileID: 21300000, guid: 4434072cb6e8437479649ef9f9f0ad3b, type: 3}
+    itemName: Can drink
+    itemInfo: Can drink
+    isObjectSmall: 0
+  - itemID: 8
+    itemPrefabs: {fileID: 0}
+    itemSprite: {fileID: 21300000, guid: aa3ce440e7e82174c922d979c01041bb, type: 3}
+    itemName: Can drink
+    itemInfo: Can drink
+    isObjectSmall: 0
+  - itemID: 9
+    itemPrefabs: {fileID: 0}
+    itemSprite: {fileID: 21300000, guid: 4434072cb6e8437479649ef9f9f0ad3b, type: 3}
+    itemName: Can drink
+    itemInfo: Can drink
+    isObjectSmall: 0
