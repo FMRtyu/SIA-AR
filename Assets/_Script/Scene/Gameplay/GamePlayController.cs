@@ -124,14 +124,14 @@ namespace SIAairportSecurity.Training
         }
 
         //get item data from dataset
-        public Dictionary<int, (Sprite, bool, bool)> GetSelectionData()
+        public Dictionary<int, (Sprite, string, bool, bool)> GetSelectionData()
         {
-            Dictionary<int, (Sprite, bool, bool)> temp = new Dictionary<int, (Sprite, bool, bool)>();
+            Dictionary<int, (Sprite, string, bool, bool)> temp = new Dictionary<int, (Sprite, string, bool, bool)>();
 
 
             for (int i = 0; i < _itemDatabase.items.Length; i++)
             {
-                temp.Add(_itemDatabase.items[i].itemID, (_itemDatabase.items[i].itemSprite, CheckIfAvaible(i), _itemDatabase.items[i].isObjectSmall));
+                temp.Add(_itemDatabase.items[i].itemID, (_itemDatabase.items[i].itemSprite, _itemDatabase.items[i].itemName, CheckIfAvaible(i), _itemDatabase.items[i].isObjectSmall));
             }
 
             return temp;

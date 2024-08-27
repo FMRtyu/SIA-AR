@@ -17,7 +17,7 @@ namespace SIAairportSecurity.Training
 
         [SerializeField] private Sprite _tempSprite;
 
-        protected Dictionary<int, (Sprite, bool, bool)> _itemDatabase;
+        protected Dictionary<int, (Sprite, string, bool, bool)> _itemDatabase;
         //Specific for this state
         public override void InitState(GameCanvasController menuController)
         {
@@ -33,6 +33,10 @@ namespace SIAairportSecurity.Training
         }
 
         #region Show and set item
+
+        /// <summary>
+        /// instantate all items from scriptable data into a button
+        /// </summary>
         private void ShowAllItem()
         {
             if (_itemBTNList.Count > 0)
@@ -50,9 +54,10 @@ namespace SIAairportSecurity.Training
 
                 tempItemBTN.InitSelection(this, item.Key);
 
-                (Sprite itemIcon, bool isObjectAvaible, bool isObjectSmall) = item.Value;
+                (Sprite itemIcon, string itemName, bool isObjectAvaible, bool isObjectSmall) = item.Value;
 
                 tempItemBTN.SetIcon(itemIcon);
+                tempItemBTN.SetItemName(itemName);
 
                 //check if 3D object available
                 if (!isObjectAvaible)
