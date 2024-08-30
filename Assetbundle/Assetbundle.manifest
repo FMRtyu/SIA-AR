@@ -1,0 +1,13 @@
+ManifestFileVersion: 0
+CRC: 4181660787
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: ardebugmenu
+      Dependencies: {}
+    Info_1:
+      Name: bombmodel
+      Dependencies: {}
+    Info_2:
+      Name: backpackmodel
+      Dependencies: {}

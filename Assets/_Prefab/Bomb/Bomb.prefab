@@ -268,7 +268,7 @@ SpriteRenderer:
   m_Size: {x: 2.05, y: 2.05}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &4019652988230654826
@@ -281,7 +281,6 @@ GameObject:
   m_Component:
   - component: {fileID: 94002908241713402}
   - component: {fileID: 6037921633641564324}
-  - component: {fileID: 2612133986103818367}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Untagged
@@ -329,30 +328,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.25, y: 0.23, z: 0.15}
   m_Center: {x: 0.02, y: 0, z: 0}
---- !u!114 &2612133986103818367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4019652988230654826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9773fa71f7a41174d8fe6e354731d8c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _planeDetectionMode: 1
-  _enbleDragFeature: 0
-  _enableRotateFeature: 0
-  _rotateFactor: 750
-  _enableScaleFeature: 0
-  _enableARQualityControl: 0
-  _scaleFactor: 400
-  _enableShadowPlane: 0
-  _shadowPlane: {fileID: 5995233182988930257}
-  _enableTouchIndicator: 0
-  _touchIndicator: {fileID: 1474412439464679568}
-  _scalePersentageIndicator: {fileID: 5013585701731962380}
 --- !u!1 &4664698202136111575
 GameObject:
   m_ObjectHideFlags: 0

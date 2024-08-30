@@ -1,3 +1,4 @@
+using SIAairportSecurity.FileInsert;
 using SIAairportSecurity.MainMenu;
 using SIAairportSecurity.Training;
 using System.Collections;
@@ -73,6 +74,17 @@ namespace SIAairportSecurity.Training
                 arSession.enabled = true;
             }
             
+        }
+
+        public void SetGameObject(string gameobjectPath)
+        {
+            if (!arSession.enabled)
+            {
+                arSession.enabled = true;
+            }
+
+            StartCoroutine(LoadAndInstantiateAssetBundle(gameobjectPath));
+
         }
 
         //reset training session
@@ -317,6 +329,41 @@ namespace SIAairportSecurity.Training
             showDetectedPlanes.ShowDotsPlane(true);
             FindChildWithTag(_spawnedObjects.transform, "TouchIndicator").gameObject.SetActive(true);
         }
+        #endregion
+
+        #region GetDataLocal
+
+        private IEnumerator LoadAndInstantiateAssetBundle(string filePath)
+        {
+            // Load Asset Bundle from selected file
+            AssetBundleCreateRequest bundleRequest = AssetBundle.LoadFromFileAsync(filePath);
+            yield return bundleRequest;
+
+            AssetBundle bundle = bundleRequest.assetBundle;
+            if (bundle != null)
+            {
+                // Load the first asset from the bundle (adjust to load specific assets if needed)
+                string assetName = bundle.GetAllAssetNames()[0];
+                GameObject prefab = bundle.LoadAsset<GameObject>(assetName);
+
+                if (prefab != null)
+                {
+                    _selectedObjectPrefab = prefab;
+                }
+                else
+                {
+                    Debug.LogError("Failed to load asset from Asset Bundle.");
+                }
+
+                // Unload the Asset Bundle after use
+                bundle.Unload(false);
+            }
+            else
+            {
+                Debug.LogError("Failed to load Asset Bundle from file.");
+            }
+        }
+
         #endregion
     }
 }

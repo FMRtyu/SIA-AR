@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace SIAairportSecurity.Training
 {
@@ -32,7 +33,8 @@ namespace SIAairportSecurity.Training
 
         protected GamePlayController _gamePlayController;
 
-        private int _itemSelected;
+        private int _itemSelected = -1;
+        private string _itemSelectedPath;
 
         // Start is called before the first frame update
         void Start()
@@ -60,6 +62,11 @@ namespace SIAairportSecurity.Training
             _itemSelected = objectIndex;
         }
 
+        public void SetObject(string objectIndex)
+        {
+            _itemSelectedPath = objectIndex;
+        }
+
         public void ShowConformedBTN(bool Condition)
         {
             if (activeState.state == MenuState.Training)
@@ -70,7 +77,13 @@ namespace SIAairportSecurity.Training
 
         public void JumpToTraining()
         {
-            _gamePlayController.SetGameObject(_itemSelected);
+            if (_itemSelected > -1)
+            {
+                _gamePlayController.SetGameObject(_itemSelected);
+            }else if (_itemSelectedPath != null)
+            {
+                _gamePlayController.SetGameObject(_itemSelectedPath);
+            }
 
             EnableDisableInstrruction(true);
 
@@ -106,6 +119,9 @@ namespace SIAairportSecurity.Training
         {
             _gamePlayController.ResetObject();
             _gamePlayController.ShowAllPlane();
+
+            _itemSelected = -1;
+            _itemSelectedPath = null;
         }
 
         public void ConformObject()
@@ -218,6 +234,16 @@ namespace SIAairportSecurity.Training
         {
             fadeImgObject.blocksRaycasts = true;
             LeanTween.alphaCanvas(fadeImgObject, to: 1, fadeTime);
+        }
+
+        public void FadeOutChangeScene()
+        {
+            fadeImgObject.blocksRaycasts = true;
+            fadeImgObject.interactable = true;
+            LeanTween.alphaCanvas(fadeImgObject, to: 1, fadeTime).setOnComplete(() =>
+            {
+                SceneManager.LoadScene(2);
+            });
         }
 
         public void FadeOutQuit()
