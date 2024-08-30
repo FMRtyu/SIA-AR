@@ -1204,7 +1204,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Edit Item List
+  m_text: Add Item
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bf4e31f7235d70341bb5eb2dd3647739, type: 2}
   m_sharedMaterial: {fileID: 4196694705321861141, guid: bf4e31f7235d70341bb5eb2dd3647739, type: 2}
