@@ -100,7 +100,6 @@ namespace SIAairportSecurity.Training
             // First, try to select an existing object
             if (Physics.Raycast(ray, out hitObject, Mathf.Infinity, ~layerMask))
             {
-                Debug.Log(hitObject.transform.name);
                 // Check if the object has the tag "Interactable"
                 if (hitObject.transform.CompareTag("Interactable"))
                 {

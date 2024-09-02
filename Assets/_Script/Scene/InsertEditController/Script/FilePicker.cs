@@ -39,7 +39,6 @@ namespace SIAairportSecurity.FileInsert
                 {
                     _fileModelName = Path.GetFileName(path); // Get the file name
                     _fileModelPath = path; // Set the destination path
-                    Debug.Log("Picked file: " + path);
                     LoadFile(path);
                 }
             }, null); // No MIME type filter specified
@@ -101,8 +100,6 @@ namespace SIAairportSecurity.FileInsert
                         Destroy(_spawnedObject);
                         _spawnedObject = instance;
                     }
-                    Debug.Log("Asset instantiated from Asset Bundle.");
-                    //pickFileButton.gameObject.GetComponentInParent<GameObject>().SetActive(false);
                     _insertEditController.EditMenu();
                 }
                 else
