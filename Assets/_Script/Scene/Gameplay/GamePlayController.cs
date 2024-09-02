@@ -72,7 +72,7 @@ namespace SIAairportSecurity.Training
             {
                 arSession.enabled = true;
             }
-            GetComponent<ShowDetectedPlanes>().planeEnable = true;
+            
         }
 
         //reset training session
@@ -92,7 +92,7 @@ namespace SIAairportSecurity.Training
         {
             isSpawnConformed = true;
             _gameCanvasController.ShowConformedBTN(false);
-            showDetectedPlanes.HidePlanes();
+            showDetectedPlanes.ShowDotsPlane(false);
 
             //move down the object
             _spawnedObjectRotateObject.localPosition = _intialposition;
@@ -124,14 +124,14 @@ namespace SIAairportSecurity.Training
         }
 
         //get item data from dataset
-        public Dictionary<int, (Sprite, bool, bool)> GetSelectionData()
+        public Dictionary<int, (Sprite, string, bool, bool)> GetSelectionData()
         {
-            Dictionary<int, (Sprite, bool, bool)> temp = new Dictionary<int, (Sprite, bool, bool)>();
+            Dictionary<int, (Sprite, string, bool, bool)> temp = new Dictionary<int, (Sprite, string, bool, bool)>();
 
 
             for (int i = 0; i < _itemDatabase.items.Length; i++)
             {
-                temp.Add(_itemDatabase.items[i].itemID, (_itemDatabase.items[i].itemSprite, CheckIfAvaible(i), _itemDatabase.items[i].isObjectSmall));
+                temp.Add(_itemDatabase.items[i].itemID, (_itemDatabase.items[i].itemSprite, _itemDatabase.items[i].itemName, CheckIfAvaible(i), _itemDatabase.items[i].isObjectSmall));
             }
 
             return temp;
@@ -197,7 +197,6 @@ namespace SIAairportSecurity.Training
 
                     _gameCanvasController.EnableDisableInstrruction(false);
                     _gameCanvasController.ShowConformedBTN(true);
-                    Debug.Log("Object spawned at: " + hitPose.position);
 
                 }
             }
@@ -219,7 +218,7 @@ namespace SIAairportSecurity.Training
         //show all plane
         public void ShowAllPlane()
         {
-            showDetectedPlanes.ShowPlanes();
+            showDetectedPlanes.ShowDotsPlane(true);
         }
 
         //check if object prefabs was set
@@ -314,7 +313,7 @@ namespace SIAairportSecurity.Training
             isSpawnConformed = false;
 
             _raycastController.IsSetToMove(true);
-            showDetectedPlanes.ShowPlanes();
+            showDetectedPlanes.ShowDotsPlane(true);
             FindChildWithTag(_spawnedObjects.transform, "TouchIndicator").gameObject.SetActive(true);
         }
         #endregion

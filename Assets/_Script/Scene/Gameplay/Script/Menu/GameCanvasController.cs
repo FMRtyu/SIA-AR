@@ -117,7 +117,7 @@ namespace SIAairportSecurity.Training
 
         #region GetData
 
-        public Dictionary<int, (Sprite, bool, bool)> GetListData()
+        public Dictionary<int, (Sprite,string, bool, bool)> GetListData()
         {
             return _gamePlayController.GetSelectionData();
         }

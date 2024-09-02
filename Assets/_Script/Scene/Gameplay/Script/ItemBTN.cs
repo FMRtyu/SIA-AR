@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,8 @@ namespace SIAairportSecurity.Training
     {
 
         private int _itemIndex;
-        [SerializeField]private Image _imageChild;
+        [SerializeField] private Image _imageChild;
+        [SerializeField] private TMP_Text _itemName;
         protected Selection _selection;
 
         private void Start()
@@ -45,6 +47,11 @@ namespace SIAairportSecurity.Training
         public void PlayButtonSound()
         {
             _selection.PlayButtonSound();
+        }
+
+        public void SetItemName(string itemName)
+        {
+            _itemName.text = itemName;
         }
     }
 }

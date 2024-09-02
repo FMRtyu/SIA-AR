@@ -71,11 +71,9 @@ namespace SIAairportSecurity
                             {
                                 // Instantiate and place the object at the hit pose
                                 GameObject spawnedObject = Instantiate(objectToSpawn, hitPose.position, hitPose.rotation);
-                                GameObject spawnedObject2 = Instantiate(objectToSpawn, hitPose.position, hitPose.rotation);
                                 spawnedObjects.Add(spawnedObject);
-                                spawnedObjects.Add(spawnedObject2);
                                 spawnedObjectsDictionary[objectToSpawn] = true;
-                                showDetectedPlanes.HidePlanes();
+                                showDetectedPlanes.ShowDotsPlane(false);
 
                                 Debug.Log("Object spawned at: " + hitPose.position);
                             }
