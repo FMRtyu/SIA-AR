@@ -197,7 +197,6 @@ namespace SIAairportSecurity.Training
 
                     _gameCanvasController.EnableDisableInstrruction(false);
                     _gameCanvasController.ShowConformedBTN(true);
-                    Debug.Log("Object spawned at: " + hitPose.position);
 
                 }
             }
