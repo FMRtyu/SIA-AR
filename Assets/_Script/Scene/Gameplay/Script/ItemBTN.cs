@@ -12,6 +12,7 @@ namespace SIAairportSecurity.Training
         private int _itemIndex;
         [SerializeField] private Image _imageChild;
         [SerializeField] private TMP_Text _itemName;
+        private Color _itemInitNameColor;
         protected Selection _selection;
 
         private void Start()
@@ -32,11 +33,14 @@ namespace SIAairportSecurity.Training
             {
                 SetObject();
             });
+
+            _itemInitNameColor = _itemName.color;
         }
 
         private void SetObject()
         {
             _selection.SetObject(_itemIndex, GetComponent<Button>());
+            _itemName.color = Color.black;
         }
 
         public void SetIcon(Sprite sprite)
@@ -52,6 +56,11 @@ namespace SIAairportSecurity.Training
         public void SetItemName(string itemName)
         {
             _itemName.text = itemName;
+        }
+
+        public void ResetNameColor()
+        {
+            _itemName.color = _itemInitNameColor;
         }
     }
 }

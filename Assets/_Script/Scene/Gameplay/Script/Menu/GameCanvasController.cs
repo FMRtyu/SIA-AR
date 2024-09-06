@@ -252,6 +252,15 @@ namespace SIAairportSecurity.Training
         {
             _gamePlayController.ResetMoveRotate();
         }
+
+        public void SnapXAxis()
+        {
+            _gamePlayController.SnapObjectXAxis();
+        }
+        public void SnapYAxis()
+        {
+            _gamePlayController.SnapObjectYAxis();
+        }
         #endregion
 
         public void PlayButtonSound()

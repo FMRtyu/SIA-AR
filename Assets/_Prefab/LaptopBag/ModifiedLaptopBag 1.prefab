@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 813399969320128794}
   - component: {fileID: 1151059615237874579}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: ModifiedLaptopBag 1
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -65,7 +65,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6683500665701159246}
   - component: {fileID: 5069365592234062541}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: LaptopBagAnchor
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4868519641747029019}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -121,7 +121,6 @@ GameObject:
   - component: {fileID: 8168616908337111502}
   - component: {fileID: 6248804429676287236}
   - component: {fileID: 4599351876746123194}
-  - component: {fileID: 5782106692212687370}
   m_Layer: 0
   m_Name: LaptopBag(15-16inch)
   m_TagString: Interactable
@@ -137,7 +136,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5600449291778897105}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -216,27 +215,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3149910524886099141, guid: e822da6a58308744fa4a7260ecb9f405, type: 3}
---- !u!65 &5782106692212687370
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5600449291778897105}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 0.43697402, y: 0.34006208, z: 0.14789075}
-  m_Center: {x: 0.006707728, y: 0.17285374, z: 0.018392099}
 --- !u!1001 &2113692218758370520
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -245,9 +223,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 813399969320128794}
     m_Modifications:
+    - target: {fileID: 375742628017388972, guid: 31813f6a06e87c64d89f29fb5aeaa3d2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4542212312934817459, guid: 31813f6a06e87c64d89f29fb5aeaa3d2, type: 3}
       propertyPath: m_Name
       value: Indicator
+      objectReference: {fileID: 0}
+    - target: {fileID: 4542212312934817459, guid: 31813f6a06e87c64d89f29fb5aeaa3d2, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6098203944995265682, guid: 31813f6a06e87c64d89f29fb5aeaa3d2, type: 3}
       propertyPath: m_LocalScale.x
