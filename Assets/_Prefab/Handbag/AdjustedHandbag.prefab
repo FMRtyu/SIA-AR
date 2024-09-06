@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3018772755886956397}
   - component: {fileID: 3232821608181094813}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: AdjustedHandbag
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -53,8 +53,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.18, y: 0.49, z: 0.5}
-  m_Center: {x: 0, y: 0.26, z: -0.02}
+  m_Size: {x: 0.46, y: 0.53, z: 0.19}
+  m_Center: {x: -0.025, y: 0.25, z: 0}
 --- !u!1 &3725464328980077038
 GameObject:
   m_ObjectHideFlags: 0
@@ -66,7 +66,6 @@ GameObject:
   - component: {fileID: 3457087173494245202}
   - component: {fileID: 7684186583511802415}
   - component: {fileID: 5574681919313224901}
-  - component: {fileID: 2093866261867279946}
   m_Layer: 0
   m_Name: Handbag
   m_TagString: Interactable
@@ -82,13 +81,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3725464328980077038}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1562112757231181488}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
 --- !u!33 &7684186583511802415
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -139,27 +138,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2093866261867279946
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3725464328980077038}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 0.1814636, y: 0.41918227, z: 0.5023275}
-  m_Center: {x: 0.0012851395, y: 0.020642033, z: -0.0079835}
 --- !u!1 &5874096778668969275
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,7 +148,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1562112757231181488}
   - component: {fileID: 6436884884425577560}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: HandBagAnchor
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -185,7 +163,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5874096778668969275}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -212,8 +190,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 0.1814636, y: 0.52, z: 0.42}
-  m_Center: {x: 0.0012851395, y: 0, z: -0.024}
+  m_Size: {x: 0.46, y: 0.53, z: 0.19}
+  m_Center: {x: -0.025, y: 0, z: 0}
 --- !u!1001 &213809248497634939
 PrefabInstance:
   m_ObjectHideFlags: 0

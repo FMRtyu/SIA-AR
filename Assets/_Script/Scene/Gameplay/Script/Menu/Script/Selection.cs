@@ -12,6 +12,9 @@ namespace SIAairportSecurity.Training
         [SerializeField] private RectTransform _itemBTNParent;
         [SerializeField] private Button _selectItemBTN;
 
+        private RectTransform _selectItemBTNTransform;
+        private Vector3 _initialScaleSelectItemBTN;
+
         private List<GameObject> _itemBTNList = new List<GameObject>();
         private Button _selectedItem;
 
@@ -30,6 +33,11 @@ namespace SIAairportSecurity.Training
         private void OnEnable()
         {
             ShowAllItem();
+        }
+
+        private void Start()
+        {
+            init();
         }
 
         #region Show and set item
@@ -90,9 +98,23 @@ namespace SIAairportSecurity.Training
             }
         }
 
+        private void init()
+        {
+            _selectItemBTNTransform = _selectItemBTN.GetComponent<RectTransform>();
+            _initialScaleSelectItemBTN = _selectItemBTNTransform.localScale;
+
+            _selectItemBTNTransform.localScale = Vector3.zero;
+            ShowAllItem();
+        }
+
         public void SetObject(int itemIndex , Button _selectedItemBTN)
         {
             _menuCanvasController.SetObject(itemIndex);
+
+            if (_selectItemBTNTransform.localScale == Vector3.zero)
+            {
+                LeanTween.scale(_selectItemBTNTransform, _initialScaleSelectItemBTN, 1f).setEase(LeanTweenType.easeOutBack);
+            }
             _selectItemBTN.interactable = true;
 
             if (_selectedItem == null)
@@ -104,6 +126,7 @@ namespace SIAairportSecurity.Training
             else
             {
                 _selectedItem.interactable = true;
+                _selectedItem.GetComponent<ItemBTN>().ResetNameColor();
                 _selectedItemBTN.interactable = false;
 
                 _selectedItem = _selectedItemBTN;
@@ -114,7 +137,10 @@ namespace SIAairportSecurity.Training
         {
             _selectItemBTN.interactable = false;
 
-            _selectedItem.interactable = false;
+            _selectedItem.GetComponent<ItemBTN>().ResetNameColor();
+            _selectedItem.interactable = true;
+
+            _selectItemBTNTransform.localScale = Vector3.zero;
 
             _menuCanvasController.JumpToTraining();
         }

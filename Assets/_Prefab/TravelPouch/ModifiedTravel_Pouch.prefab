@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4852403603984608730}
   - component: {fileID: 2749751481073249498}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: TravelPouchAnchor
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1440968500941165356}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.15, z: 0.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -52,8 +52,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 0.15, y: 0.41, z: 0.37}
-  m_Center: {x: -0.01, y: 0.045, z: -0.0261}
+  m_Size: {x: 0.46, y: 0.42, z: 0.24}
+  m_Center: {x: -0.03, y: 0.05, z: 0.013374036}
 --- !u!1 &1889543176568519930
 GameObject:
   m_ObjectHideFlags: 0
@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 4653790890316882410}
   - component: {fileID: 4480598875796825379}
   - component: {fileID: 6389078731881442703}
-  - component: {fileID: 7549904464868241936}
+  - component: {fileID: 8414354975698881572}
   m_Layer: 0
   m_Name: Travel_Pouch
   m_TagString: Interactable
@@ -81,13 +81,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1889543176568519930}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5, y: -0.5, z: 0.5, w: 0.5}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4852403603984608730}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!33 &4480598875796825379
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -138,7 +138,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7549904464868241936
+--- !u!65 &8414354975698881572
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -157,8 +157,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 0.40565526, y: 0.35827377, z: 0.14628758}
-  m_Center: {x: 0.044010848, y: 0.029378876, z: 0.013374036}
+  m_Size: {x: 0.40565535, y: 0.35827386, z: 0.14628758}
+  m_Center: {x: 0.04401086, y: 0.029378884, z: 0.013374036}
 --- !u!1 &2704573545643323280
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,7 +169,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2836288564160554831}
   - component: {fileID: 5892073151561927657}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: ModifiedTravel_Pouch
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -212,8 +212,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.2, y: 0.41, z: 0.45}
-  m_Center: {x: 0, y: 0.2, z: -0.02}
+  m_Size: {x: 0.46, y: 0.42, z: 0.24}
+  m_Center: {x: -0.03, y: 0.2, z: 0.045}
 --- !u!1001 &6843206972260407267
 PrefabInstance:
   m_ObjectHideFlags: 0

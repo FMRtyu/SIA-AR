@@ -5,6 +5,7 @@ using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using SIAairportSecurity.Training;
 
 public class ShowDetectedPlanes : MonoBehaviour
 {
@@ -51,6 +52,8 @@ public class ShowDetectedPlanes : MonoBehaviour
         foreach (ARPlane plane in args.added)
         {
             SetMaterial(plane);
+
+            //plane.GetComponent<DualSurfacePlane>().ChangeSecondSurfaceMaterial(useDotsMaterial ? dotsMaterial : shadowMaterial);
         }
     }
 
@@ -63,6 +66,10 @@ public class ShowDetectedPlanes : MonoBehaviour
         {
             // Set the material based on the toggle flag
             meshRenderer.material = useDotsMaterial ? dotsMaterial : shadowMaterial;
+            if (plane.GetComponent<DualSurfacePlane>())
+            {
+                plane.GetComponent<DualSurfacePlane>().ChangeSecondSurfaceMaterial(useDotsMaterial ? dotsMaterial : shadowMaterial);
+            }
         }
     }
 
@@ -77,6 +84,7 @@ public class ShowDetectedPlanes : MonoBehaviour
         foreach (ARPlane plane in _planeManager.trackables)
         {
             SetMaterial(plane);
+            //plane.GetComponent<DualSurfacePlane>().ChangeSecondSurfaceMaterial(useDotsMaterial ? dotsMaterial : shadowMaterial);
         }
     }
 }

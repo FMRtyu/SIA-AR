@@ -20,8 +20,13 @@ namespace SIAairportSecurity.Training
         [SerializeField] private Button _MoveBTN;
         [SerializeField] private Button _RotateBTN;
 
+        [Header("RotateSprite")]
+        [SerializeField] private Sprite _inactiveSprite;
+        [SerializeField] private Sprite _activeSprite;
+
         [Header("RotateMoveBTN")]
         [SerializeField] private Animator _moveRotateAnim;
+        [SerializeField] private Animator _rotateAdvanceAnim;
 
         //Specific for this state
         public override void InitState(GameCanvasController menuController)
@@ -109,6 +114,7 @@ namespace SIAairportSecurity.Training
             _menuCanvasController.ConformObject();
             ShowConformButton(false);
             _moveRotateAnim.SetBool("Open", false);
+            _rotateAdvanceAnim.SetBool("isOpen", false);
         }
 
         public void ReopenMoveRotateBTN()
@@ -133,15 +139,23 @@ namespace SIAairportSecurity.Training
         {
             _MoveBTN.interactable = false;
             _RotateBTN.interactable = true;
+            _RotateBTN.GetComponent<Image>().sprite = _inactiveSprite;
 
             _menuCanvasController.SwitchToMove();
+            _rotateAdvanceAnim.SetBool("isOpen", false);
         }
 
         public void SwitchToRotate()
         {
             _MoveBTN.interactable = true;
-            _RotateBTN.interactable = false;
+
+            _RotateBTN.GetComponent<Image>().sprite = _activeSprite;
             _menuCanvasController.SwitchToRotate();
+
+            if (!_rotateAdvanceAnim.GetBool("isOpen"))
+            {
+                _rotateAdvanceAnim.SetBool("isOpen", true);
+            }
         }
 
         public void ShowHideMoveRotateBTN(bool Condition)
@@ -149,6 +163,25 @@ namespace SIAairportSecurity.Training
             //_moveRotateParent.SetActive(Condition);
         }
 
+        public void SnapXRotation(Button button)
+        {
+            _menuCanvasController.SnapXAxis();
+            button.interactable = false;
+            StartCoroutine(EnabledBTNAfterSecond(button));
+        }
+
+        public void SnapYRotation(Button button)
+        {
+            _menuCanvasController.SnapYAxis();
+            button.interactable = false;
+            StartCoroutine(EnabledBTNAfterSecond(button));
+        }
+
+        private IEnumerator EnabledBTNAfterSecond(Button button)
+        {
+            yield return new WaitForSeconds(0.3f);
+            button.interactable = true;
+        }
         #endregion
 
         public void PlayButtonSound()

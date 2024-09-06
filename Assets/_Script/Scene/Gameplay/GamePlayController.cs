@@ -29,6 +29,7 @@ namespace SIAairportSecurity.Training
         private BoxCollider _spawnedObjectCollider;
         private Rigidbody _spawnedObjectRigidbody;
         private bool isSpawnConformed = false;
+        private bool isInitRotate = false;
 
         //ARF
         private ARSession arSession;
@@ -84,10 +85,10 @@ namespace SIAairportSecurity.Training
             isSpawnConformed = false;
 
             ShowHideMoveRotateBTN(true);
-            _raycastController.IsSetToMove(true);
+            _raycastController.ChangeState(ObjectManipulation.Move);
         }
 
-        //place item
+        //confirm items placement after click place item
         public void ConformObjectPosition()
         {
             isSpawnConformed = true;
@@ -100,14 +101,15 @@ namespace SIAairportSecurity.Training
             ShowHideMoveRotateBTN(false);
 
             //delete box collider in rotate object
-            _spawnedObjectRotateObject.GetComponent<BoxCollider>().enabled = false;
+            _spawnedObjectRotateObject.GetComponent<BoxCollider>().enabled = true;
+            _spawnedObjects.GetComponent<BoxCollider>().enabled = false;
             _spawnedObjectCollider.enabled = true;
 
             //disable touch indicator
             FindChildWithTag(_spawnedObjects.transform, "TouchIndicator").gameObject.SetActive(false);
 
             //add rigidbody
-            _spawnedObjectRigidbody = _spawnedObjects.AddComponent<Rigidbody>();
+            _spawnedObjectRigidbody = _spawnedObjectRotateObject.gameObject.AddComponent<Rigidbody>();
             _spawnedObjectRigidbody.freezeRotation = true;
 
             //delete rigidbody after a second
@@ -215,7 +217,7 @@ namespace SIAairportSecurity.Training
             return null;
         }
 
-        //show all plane
+        //show all ARPlane
         public void ShowAllPlane()
         {
             showDetectedPlanes.ShowDotsPlane(true);
@@ -238,6 +240,7 @@ namespace SIAairportSecurity.Training
         private void DeleteRigidbody()
         {
             Destroy(_spawnedObjectRigidbody);
+            _spawnedObjects.GetComponent<BoxCollider>().enabled = true;
         }
 
         //play button SFX
@@ -279,11 +282,12 @@ namespace SIAairportSecurity.Training
             if (_spawnedObjectCollider != null)
             {
                 _spawnedObjectCollider.enabled = true;
-                _raycastController.IsSetToMove(true);
+                _raycastController.ChangeState(ObjectManipulation.Move);
 
                 //move down the object
                 _spawnedObjectRotateObject.localPosition = _intialposition;
                 _spawnedObjectRotateObject.GetComponent<BoxCollider>().enabled = false;
+                isInitRotate = false;
             }
         }
         //switch to rotate object 1 finger
@@ -292,11 +296,19 @@ namespace SIAairportSecurity.Training
             if (_spawnedObjectCollider != null)
             {
                 _spawnedObjectCollider.enabled = false;
-                _raycastController.IsSetToMove(false);
+                _raycastController.ChangeState(ObjectManipulation.Rotate);
 
                 //move up the object
                 Vector3 newPos = new Vector3(_intialposition.x, _intialposition.y + 0.15f, _intialposition.z);
                 _spawnedObjectRotateObject.localPosition = newPos;
+                if (isInitRotate)
+                {
+                    ChangeRotateOrientation(_spawnedObjectRotateObject);
+                }
+                else
+                {
+                    isInitRotate = true;
+                }
                 _spawnedObjectRotateObject.GetComponent<BoxCollider>().enabled = true;
             }
         }
@@ -312,9 +324,44 @@ namespace SIAairportSecurity.Training
         {
             isSpawnConformed = false;
 
-            _raycastController.IsSetToMove(true);
+            _raycastController.ChangeState(ObjectManipulation.Move);
             showDetectedPlanes.ShowDotsPlane(true);
             FindChildWithTag(_spawnedObjects.transform, "TouchIndicator").gameObject.SetActive(true);
+        }
+
+        private void ChangeRotateOrientation(Transform rotatedObject)
+        {
+            // Get the x rotation in degrees
+            float x = rotatedObject.eulerAngles.x;
+
+            // Define a small tolerance for comparison
+            float tolerance = 0.1f;
+
+            // Check if the x rotation is approximately 0 degrees
+            if (Mathf.Abs(x) < tolerance || Mathf.Abs(x - 360) < tolerance)
+            {
+                rotatedObject.rotation = Quaternion.Euler(-90, rotatedObject.eulerAngles.y, rotatedObject.eulerAngles.z);
+            }
+            else
+            {
+                rotatedObject.rotation = Quaternion.Euler(0, rotatedObject.eulerAngles.y, rotatedObject.eulerAngles.z);
+            }
+        }
+
+        public void SnapObjectXAxis()
+        {
+            Quaternion currentRotation = _spawnedObjectRotateObject.rotation;
+            float newRotationX = currentRotation.x + 90;
+            Debug.Log(newRotationX + " " + currentRotation);
+            _spawnedObjectRotateObject.Rotate(new Vector3(newRotationX, _spawnedObjectRotateObject.rotation.y, _spawnedObjectRotateObject.rotation.z), Space.Self);
+        }
+
+        public void SnapObjectYAxis()
+        {
+            Quaternion currentRotation = _spawnedObjectRotateObject.rotation;
+            float newRotationY = currentRotation.y + 90;
+            Debug.Log(newRotationY + " " + currentRotation);
+            _spawnedObjectRotateObject.Rotate(new Vector3(_spawnedObjectRotateObject.rotation.x, newRotationY, _spawnedObjectRotateObject.rotation.z), Space.Self);
         }
         #endregion
     }

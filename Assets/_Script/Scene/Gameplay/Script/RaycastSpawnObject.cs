@@ -10,6 +10,8 @@ namespace SIAairportSecurity.Training
 {
     public class RaycastSpawnObject : MonoBehaviour
     {
+        private ObjectManipulation _objectManipulation;
+
         private GamePlayController _gamePlayController;
         private ARRaycastManager raycastManager;
 
@@ -18,6 +20,7 @@ namespace SIAairportSecurity.Training
 
         //scan surface UI
         [SerializeField] private GameObject _scanSurface;
+        [SerializeField] private LayerMask itemLayerMask;
 
         // Rotate the selected object based on touch movement
         private Vector2 lastTouchPosition;
@@ -63,18 +66,25 @@ namespace SIAairportSecurity.Training
 
                     if (touch.phase == TouchPhase.Began && _gamePlayController.GetIsConfirmedPosition() == false)
                     {
-                        lastTouchPosition = touch.position;
+                        Ray ray = Camera.main.ScreenPointToRay(touch.position);
 
-                        SelectOrSpawnObject(touch);
+                        if (!_gamePlayController.GetIfObjectSpawned())
+                        {
+                            SpawnItem(touch);
+                        }
+                        else
+                        {
+                            SelectItem(ray);
+                        }
                     }
                     else if (touch.phase == TouchPhase.Moved && _selectedObject != null)
                     {
-                        if (isMovingObject)
+                        if (_objectManipulation == ObjectManipulation.Move)
                         {
                             // Drag the selected object
                             DragObject(touch);
                         }
-                        else
+                        else if (_objectManipulation == ObjectManipulation.Rotate)
                         {
                             RotateObject(touch);
                         }
@@ -88,31 +98,23 @@ namespace SIAairportSecurity.Training
             }
         }
 
-
-        private void SelectOrSpawnObject(Touch touch)
+        private void SelectItem(Ray ray)
         {
-            Ray ray = Camera.main.ScreenPointToRay(touch.position);
             RaycastHit hitObject;
 
-            // LayerMask to ignore the AR planes
-            int layerMask = 1 << LayerMask.NameToLayer("ARPlane");
-
             // First, try to select an existing object
-            if (Physics.Raycast(ray, out hitObject, Mathf.Infinity, ~layerMask))
+            if (Physics.Raycast(ray, out hitObject, Mathf.Infinity, itemLayerMask))
             {
-                // Check if the object has the tag "Interactable"
-                if (hitObject.transform.CompareTag("Interactable"))
-                {
-                    _selectedObject = hitObject.transform.gameObject;
-                }
+                _selectedObject = hitObject.transform.gameObject;
             }
-            else if(!_gamePlayController.GetIfObjectSpawned())
+        }
+
+        private void SpawnItem(Touch touch)
+        {
+            // Raycast to get the position in the AR world using PlaneWithinPolygon
+            if (raycastManager.Raycast(touch.position, hits, TrackableType.PlaneWithinPolygon))
             {
-                // Raycast to get the position in the AR world using PlaneWithinPolygon
-                if (raycastManager.Raycast(touch.position, hits, TrackableType.PlaneWithinPolygon))
-                {
-                    _gamePlayController.SpawnObject(hits[0]);
-                }
+                _gamePlayController.SpawnObject(hits[0]);
             }
         }
 
@@ -128,7 +130,7 @@ namespace SIAairportSecurity.Training
 
         private void RotateObject(Touch touch)
         {
-            _selectedObject.transform.Rotate(new Vector3(touch.deltaPosition.y, -touch.deltaPosition.x, 0) * 0.5f, Space.World);
+            _selectedObject.transform.Rotate(new Vector3(0, -touch.deltaPosition.x, 0) * 0.5f, Space.World);
         }
         #endregion
 
@@ -138,10 +140,6 @@ namespace SIAairportSecurity.Training
             if (raycastManager.Raycast(rayEmitPosition, hits, TrackableType.PlaneWithinPolygon))
                 _scanSurface.SetActive(false);
         }
-        public void IsSetToMove(bool condition)
-        {
-            isMovingObject = condition;
-        }
         private bool IsPointerOverUIObject(Touch touch)
         {
             PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
@@ -149,6 +147,11 @@ namespace SIAairportSecurity.Training
             List<RaycastResult> results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
             return results.Count > 0;
+        }
+
+        public void ChangeState(ObjectManipulation newState)
+        {
+            _objectManipulation = newState;
         }
     }
 }
