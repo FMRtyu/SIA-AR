@@ -14,6 +14,7 @@ namespace SIAairportSecurity.Training
 
         private GamePlayController _gamePlayController;
         private ARRaycastManager raycastManager;
+        private ARPlaneManager _arPlaneManager;
 
         private GameObject _selectedObject;
         private List<ARRaycastHit> hits = new List<ARRaycastHit>();
@@ -48,6 +49,8 @@ namespace SIAairportSecurity.Training
         {
             _gamePlayController = GetComponent<GamePlayController>();
             raycastManager = FindObjectOfType<ARRaycastManager>();
+
+            _arPlaneManager = FindAnyObjectByType<ARPlaneManager>();
 
             _scanSurface.SetActive(true);
         }
@@ -111,8 +114,10 @@ namespace SIAairportSecurity.Training
 
         private void SpawnItem(Touch touch)
         {
-            // Raycast to get the position in the AR world using PlaneWithinPolygon
-            if (raycastManager.Raycast(touch.position, hits, TrackableType.PlaneWithinPolygon))
+            TrackableId curId = hits[0].trackableId;
+            ARPlane plane = _arPlaneManager.GetPlane(curId);
+
+            if (plane.alignment != PlaneAlignment.Vertical)
             {
                 _gamePlayController.SpawnObject(hits[0]);
             }

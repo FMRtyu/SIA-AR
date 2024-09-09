@@ -12,7 +12,7 @@ namespace SIAairportSecurity.Training
     public class DualSurfacePlane : MonoBehaviour
     {
         [SerializeField] private float _surfaceOffset = 0.01f; // The distance between the two surfaces
-        [SerializeField] private Material _dotsMat;
+        [SerializeField] private Material _shadowMat;
 
         private ARPlaneMeshVisualizer _meshVisualizer;
         private MeshFilter _meshFilter;
@@ -27,7 +27,7 @@ namespace SIAairportSecurity.Training
             _meshFilter = GetComponent<MeshFilter>();
 
             // Create the second surface
-            CreateSecondSurface();
+            //CreateSecondSurface();
         }
 
         void OnEnable()
@@ -39,10 +39,10 @@ namespace SIAairportSecurity.Training
         void OnDisable()
         {
             // Unsubscribe from the boundaryChanged event to avoid memory leaks
-            GetComponent<ARPlane>().boundaryChanged -= OnPlaneBoundaryChanged;
+            //GetComponent<ARPlane>().boundaryChanged -= OnPlaneBoundaryChanged;
         }
 
-        void CreateSecondSurface()
+        public void CreateSecondSurface()
         {
             // Create a new GameObject for the second surface
             _secondSurface = new GameObject("SecondSurface");
@@ -56,13 +56,14 @@ namespace SIAairportSecurity.Training
             _secondSurfaceMeshFilter = _secondSurface.AddComponent<MeshFilter>();
             _secondSurfaceRenderer = _secondSurface.AddComponent<MeshRenderer>();
             _secondSurfaceCollider = _secondSurface.AddComponent<MeshCollider>();
-            _secondSurface.AddComponent<ARFeatheredPlaneMeshVisualizer>();
 
             // Use the same material as the original surface or assign a different one if needed
-            _secondSurfaceRenderer.material = _dotsMat;
+            _secondSurfaceRenderer.material = _shadowMat;
+            //_secondSurfaceRenderer.enabled = true;
 
             // Initialize the mesh
             UpdateSecondSurfaceMesh();
+            GetComponent<ARPlane>().boundaryChanged += OnPlaneBoundaryChanged;
         }
 
         void OnPlaneBoundaryChanged(ARPlaneBoundaryChangedEventArgs eventArgs)
@@ -93,6 +94,14 @@ namespace SIAairportSecurity.Training
             if (_secondSurfaceRenderer != null)
             {
                 _secondSurfaceRenderer.material = newMaterial;
+            }
+        }
+
+        public void ChangeSecondSurfaceMaterialShadow()
+        {
+            if (_secondSurfaceRenderer != null)
+            {
+                _secondSurfaceRenderer.material = _shadowMat;
             }
         }
     }

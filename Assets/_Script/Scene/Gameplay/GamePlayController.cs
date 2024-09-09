@@ -272,9 +272,23 @@ namespace SIAairportSecurity.Training
             }
             _audioSource.Play();
         }
+
+        float SnapValue(float value, float snapInterval)
+        {
+            float snappedValue = Mathf.Round(value / snapInterval) * snapInterval;
+            if (snappedValue >= 360f)
+            {
+                return 0f;
+            }
+            if (snappedValue == 0f || snappedValue == 90f || snappedValue == 180f || snappedValue == 270f)
+            {
+                snappedValue += 90f;
+            }
+            return snappedValue;
+        }
         #endregion
 
-        #region SwitchRotateMove
+        #region RotateMove
 
         //switch to move object 1 finger
         public void SwitchToMove()
@@ -359,9 +373,12 @@ namespace SIAairportSecurity.Training
         public void SnapObjectYAxis()
         {
             Quaternion currentRotation = _spawnedObjectRotateObject.rotation;
-            float newRotationY = currentRotation.y + 90;
-            Debug.Log(newRotationY + " " + currentRotation);
-            _spawnedObjectRotateObject.Rotate(new Vector3(_spawnedObjectRotateObject.rotation.x, newRotationY, _spawnedObjectRotateObject.rotation.z), Space.Self);
+            float newRotationY = currentRotation.eulerAngles.y;
+            Debug.Log(newRotationY + " " + currentRotation + " " + SnapValue(newRotationY, 90f));
+            _spawnedObjectRotateObject.rotation = Quaternion.Euler(_spawnedObjectRotateObject.rotation.eulerAngles.x,
+                SnapValue(newRotationY, 90f),
+                _spawnedObjectRotateObject.rotation.eulerAngles.z
+                );
         }
         #endregion
     }

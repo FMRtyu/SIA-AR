@@ -595,7 +595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e5a11b3bc271b84dae837c76891d113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shadowMaterial: {fileID: 2100000, guid: 9d0c339a38cd6aa49900a5e5e3f847fe, type: 2}
+  shadowMaterial: {fileID: 2100000, guid: 7dbb442b57484ca4d82a46d201cc8ae2, type: 2}
   dotsMaterial: {fileID: 2100000, guid: 553e54d8b83f74846a55585d2b28a262, type: 2}
 --- !u!114 &133239662
 MonoBehaviour:
@@ -2659,16 +2659,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 629518029}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b15f82cc229284894964d2d30806969d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_HumanSegmentationStencilMode: 3
   m_HumanSegmentationDepthMode: 2
-  m_EnvironmentDepthMode: 3
+  m_EnvironmentDepthMode: 0
   m_EnvironmentDepthTemporalSmoothing: 0
-  m_OcclusionPreferenceMode: 0
+  m_OcclusionPreferenceMode: 1
 --- !u!1 &642422380
 GameObject:
   m_ObjectHideFlags: 0
@@ -5755,7 +5755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlanePrefab: {fileID: 1159251590951757437, guid: 73c9789559635394cb54068170ea1399, type: 3}
-  m_DetectionMode: 1
+  m_DetectionMode: -1
 --- !u!114 &2078929937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5781,7 +5781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ab0e80cee9cc1d44928bfe488dd1e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PointCloudPrefab: {fileID: 1854016325464908, guid: a5cc015879618ae499404c6c08b86fa1, type: 3}
+  m_PointCloudPrefab: {fileID: 0}
 --- !u!1 &2112394067
 GameObject:
   m_ObjectHideFlags: 0

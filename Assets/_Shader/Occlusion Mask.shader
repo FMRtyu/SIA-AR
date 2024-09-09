@@ -11,7 +11,9 @@ Shader "Occlusion FX/Occlusion Mask"
             Ref 128
             Comp Always
             Pass Replace
-        }
+        }Pass {
+            ColorMask 0
+            }
         CGPROGRAM
         #pragma surface surf Standard
         #include "Utils.cginc"
