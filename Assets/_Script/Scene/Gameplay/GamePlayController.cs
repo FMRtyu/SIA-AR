@@ -91,7 +91,6 @@ namespace SIAairportSecurity.Training
         //confirm items placement after click place item
         public void ConformObjectPosition()
         {
-            isSpawnConformed = true;
             _gameCanvasController.ShowConformedBTN(false);
             showDetectedPlanes.ShowDotsPlane(false);
 
@@ -114,6 +113,9 @@ namespace SIAairportSecurity.Training
 
             //delete rigidbody after a second
             Invoke("DeleteRigidbody", 2.5f);
+
+            SetTapInstruction(false);
+            isSpawnConformed = true;
         }
         #endregion
 
@@ -197,7 +199,6 @@ namespace SIAairportSecurity.Training
                     LeanTween.scale(_spawnedObjectRotateObject.gameObject, to: InitalScale, 1f).setEase(LeanTweenType.easeOutBack);
                     PlayPlaceSound();
 
-                    _gameCanvasController.EnableDisableInstrruction(false);
                     _gameCanvasController.ShowConformedBTN(true);
 
                 }
@@ -286,6 +287,14 @@ namespace SIAairportSecurity.Training
             }
             return snappedValue;
         }
+
+        public void SetTapInstruction(bool condition)
+        {
+            if (!isSpawnConformed)
+            {
+                _gameCanvasController.EnableDisableInstrruction(condition);
+            }
+        }
         #endregion
 
         #region RotateMove
@@ -337,6 +346,7 @@ namespace SIAairportSecurity.Training
         public void ResetMoveRotate()
         {
             isSpawnConformed = false;
+            SetTapInstruction(true);
 
             _raycastController.ChangeState(ObjectManipulation.Move);
             showDetectedPlanes.ShowDotsPlane(true);

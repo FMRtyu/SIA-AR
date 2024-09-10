@@ -26,6 +26,7 @@ namespace SIAairportSecurity.Training
         // Rotate the selected object based on touch movement
         private Vector2 lastTouchPosition;
         private bool isMovingObject = true;
+        private bool isSurfaceDetected;
 
         // Start is called before the first frame update
         void Start()
@@ -53,6 +54,7 @@ namespace SIAairportSecurity.Training
             _arPlaneManager = FindAnyObjectByType<ARPlaneManager>();
 
             _scanSurface.SetActive(true);
+            _gamePlayController.SetTapInstruction(false);
         }
 
         #region RayCast
@@ -143,7 +145,14 @@ namespace SIAairportSecurity.Training
         {
             Vector3 rayEmitPosition = new Vector3(Screen.width / 2, Screen.height / 2, 0);
             if (raycastManager.Raycast(rayEmitPosition, hits, TrackableType.PlaneWithinPolygon))
-                _scanSurface.SetActive(false);
+            {
+                if (!isSurfaceDetected)
+                {
+                    _scanSurface.SetActive(false);
+                    _gamePlayController.SetTapInstruction(true);
+                    isSurfaceDetected = true;
+                }
+            }
         }
         private bool IsPointerOverUIObject(Touch touch)
         {

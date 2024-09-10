@@ -100,6 +100,7 @@ namespace SIAairportSecurity.Training
         {
             _menuCanvasController.ResetObject();
             _menuCanvasController.SetActiveState(GameCanvasController.MenuState.Selection);
+            _menuCanvasController.EnableDisableInstrruction(true);
         }
 
         #region ShowHideMoveRotateBTN
