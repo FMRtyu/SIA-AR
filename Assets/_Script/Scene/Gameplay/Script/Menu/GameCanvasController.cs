@@ -15,7 +15,8 @@ namespace SIAairportSecurity.Training
         public _MenuState[] allMenus;
 
         [SerializeField] private GameObject _tapInstruction;
-        
+        Vector3 _inital;
+
 
         //The states we can choose from
         public enum MenuState
@@ -37,7 +38,7 @@ namespace SIAairportSecurity.Training
         // Start is called before the first frame update
         void Start()
         {
-            
+             _inital = _tapInstruction.transform.localScale;
         }
 
         // Update is called once per frame
@@ -72,8 +73,6 @@ namespace SIAairportSecurity.Training
         {
             _gamePlayController.SetGameObject(_itemSelected);
 
-            EnableDisableInstrruction(true);
-
             SetActiveState(MenuState.Training);
 
 
@@ -99,7 +98,22 @@ namespace SIAairportSecurity.Training
 
         public void EnableDisableInstrruction(bool Intruction)
         {
-            _tapInstruction.SetActive(Intruction);
+
+            if (Intruction)
+            {
+                _tapInstruction.SetActive(Intruction);
+
+                _tapInstruction.transform.localScale = Vector3.zero;
+
+                LeanTween.scale(_tapInstruction, _inital, 0.5f).setEase(LeanTweenType.easeInOutExpo);
+            }
+            else
+            {
+                LeanTween.scale(_tapInstruction, Vector3.zero, 0.5f).setEase(LeanTweenType.easeInOutExpo).setOnComplete(() =>
+                {
+                    _tapInstruction.SetActive(Intruction);
+                });
+            }
         }
 
         public void ResetObject()

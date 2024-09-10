@@ -18,21 +18,23 @@ namespace SIAairportSecurity.MainMenu
             FadeOut();
         }
 
+        public void ChangeToTraining()
+        {
+            fadeImgObject.interactable = false;
+            fadeImgObject.blocksRaycasts = false;
+            LeanTween.alphaCanvas(fadeImgObject, to:1, fadeTime).setOnComplete(() =>
+            {
+                splashController.StartTrainingScene(1);
+            });
+        }
+
         #region Fade Fuctions
         private void FadeOut()
         {
             LeanTween.alphaCanvas(fadeImgObject, to: 0, fadeTime).setOnComplete(() =>
             {
-                StartTraining();
-            });
-        }
-
-        public void StartTraining()
-        {
-            fadeImgObject.blocksRaycasts = true;
-            LeanTween.alphaCanvas(fadeImgObject, to: 1, fadeTime).setOnComplete(() =>
-            {
-                splashController.StartTrainingScene(1);
+                fadeImgObject.interactable = false;
+                fadeImgObject.blocksRaycasts = false;
             });
         }
         #endregion

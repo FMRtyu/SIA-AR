@@ -14,6 +14,7 @@ namespace SIAairportSecurity.Training
 
         private GamePlayController _gamePlayController;
         private ARRaycastManager raycastManager;
+        private ARPlaneManager _arPlaneManager;
 
         private GameObject _selectedObject;
         private List<ARRaycastHit> hits = new List<ARRaycastHit>();
@@ -25,6 +26,7 @@ namespace SIAairportSecurity.Training
         // Rotate the selected object based on touch movement
         private Vector2 lastTouchPosition;
         private bool isMovingObject = true;
+        private bool isSurfaceDetected;
 
         // Start is called before the first frame update
         void Start()
@@ -49,7 +51,10 @@ namespace SIAairportSecurity.Training
             _gamePlayController = GetComponent<GamePlayController>();
             raycastManager = FindObjectOfType<ARRaycastManager>();
 
+            _arPlaneManager = FindAnyObjectByType<ARPlaneManager>();
+
             _scanSurface.SetActive(true);
+            _gamePlayController.SetTapInstruction(false);
         }
 
         #region RayCast
@@ -111,8 +116,10 @@ namespace SIAairportSecurity.Training
 
         private void SpawnItem(Touch touch)
         {
-            // Raycast to get the position in the AR world using PlaneWithinPolygon
-            if (raycastManager.Raycast(touch.position, hits, TrackableType.PlaneWithinPolygon))
+            TrackableId curId = hits[0].trackableId;
+            ARPlane plane = _arPlaneManager.GetPlane(curId);
+
+            if (plane.alignment != PlaneAlignment.Vertical)
             {
                 _gamePlayController.SpawnObject(hits[0]);
             }
@@ -138,7 +145,14 @@ namespace SIAairportSecurity.Training
         {
             Vector3 rayEmitPosition = new Vector3(Screen.width / 2, Screen.height / 2, 0);
             if (raycastManager.Raycast(rayEmitPosition, hits, TrackableType.PlaneWithinPolygon))
-                _scanSurface.SetActive(false);
+            {
+                if (!isSurfaceDetected)
+                {
+                    _scanSurface.SetActive(false);
+                    _gamePlayController.SetTapInstruction(true);
+                    isSurfaceDetected = true;
+                }
+            }
         }
         private bool IsPointerOverUIObject(Touch touch)
         {

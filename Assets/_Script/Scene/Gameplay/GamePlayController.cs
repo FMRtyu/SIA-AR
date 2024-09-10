@@ -91,7 +91,6 @@ namespace SIAairportSecurity.Training
         //confirm items placement after click place item
         public void ConformObjectPosition()
         {
-            isSpawnConformed = true;
             _gameCanvasController.ShowConformedBTN(false);
             showDetectedPlanes.ShowDotsPlane(false);
 
@@ -114,6 +113,9 @@ namespace SIAairportSecurity.Training
 
             //delete rigidbody after a second
             Invoke("DeleteRigidbody", 2.5f);
+
+            SetTapInstruction(false);
+            isSpawnConformed = true;
         }
         #endregion
 
@@ -197,7 +199,6 @@ namespace SIAairportSecurity.Training
                     LeanTween.scale(_spawnedObjectRotateObject.gameObject, to: InitalScale, 1f).setEase(LeanTweenType.easeOutBack);
                     PlayPlaceSound();
 
-                    _gameCanvasController.EnableDisableInstrruction(false);
                     _gameCanvasController.ShowConformedBTN(true);
 
                 }
@@ -272,9 +273,31 @@ namespace SIAairportSecurity.Training
             }
             _audioSource.Play();
         }
+
+        float SnapValue(float value, float snapInterval)
+        {
+            float snappedValue = Mathf.Round(value / snapInterval) * snapInterval;
+            if (snappedValue >= 360f)
+            {
+                return 0f;
+            }
+            if (snappedValue == 0f || snappedValue == 90f || snappedValue == 180f || snappedValue == 270f)
+            {
+                snappedValue += 90f;
+            }
+            return snappedValue;
+        }
+
+        public void SetTapInstruction(bool condition)
+        {
+            if (!isSpawnConformed)
+            {
+                _gameCanvasController.EnableDisableInstrruction(condition);
+            }
+        }
         #endregion
 
-        #region SwitchRotateMove
+        #region RotateMove
 
         //switch to move object 1 finger
         public void SwitchToMove()
@@ -323,6 +346,7 @@ namespace SIAairportSecurity.Training
         public void ResetMoveRotate()
         {
             isSpawnConformed = false;
+            SetTapInstruction(true);
 
             _raycastController.ChangeState(ObjectManipulation.Move);
             showDetectedPlanes.ShowDotsPlane(true);
@@ -359,9 +383,12 @@ namespace SIAairportSecurity.Training
         public void SnapObjectYAxis()
         {
             Quaternion currentRotation = _spawnedObjectRotateObject.rotation;
-            float newRotationY = currentRotation.y + 90;
-            Debug.Log(newRotationY + " " + currentRotation);
-            _spawnedObjectRotateObject.Rotate(new Vector3(_spawnedObjectRotateObject.rotation.x, newRotationY, _spawnedObjectRotateObject.rotation.z), Space.Self);
+            float newRotationY = currentRotation.eulerAngles.y;
+            Debug.Log(newRotationY + " " + currentRotation + " " + SnapValue(newRotationY, 90f));
+            _spawnedObjectRotateObject.rotation = Quaternion.Euler(_spawnedObjectRotateObject.rotation.eulerAngles.x,
+                SnapValue(newRotationY, 90f),
+                _spawnedObjectRotateObject.rotation.eulerAngles.z
+                );
         }
         #endregion
     }

@@ -116,7 +116,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b701fb6055e5bf44b84cbe041121eb4a, type: 2}
+  - {fileID: 2100000, guid: 7dbb442b57484ca4d82a46d201cc8ae2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -150,8 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db4b3819756696a4cb1be95d368010f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _surfaceOffset: 0.01
-  _dotsMat: {fileID: 2100000, guid: 553e54d8b83f74846a55585d2b28a262, type: 2}
+  _surfaceOffset: 0.07
+  _shadowMat: {fileID: 2100000, guid: 9d0c339a38cd6aa49900a5e5e3f847fe, type: 2}
 --- !u!114 &6256711097883135415
 MonoBehaviour:
   m_ObjectHideFlags: 0

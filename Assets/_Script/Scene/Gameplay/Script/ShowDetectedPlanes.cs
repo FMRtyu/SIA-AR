@@ -66,10 +66,6 @@ public class ShowDetectedPlanes : MonoBehaviour
         {
             // Set the material based on the toggle flag
             meshRenderer.material = useDotsMaterial ? dotsMaterial : shadowMaterial;
-            if (plane.GetComponent<DualSurfacePlane>())
-            {
-                plane.GetComponent<DualSurfacePlane>().ChangeSecondSurfaceMaterial(useDotsMaterial ? dotsMaterial : shadowMaterial);
-            }
         }
     }
 
@@ -84,7 +80,18 @@ public class ShowDetectedPlanes : MonoBehaviour
         foreach (ARPlane plane in _planeManager.trackables)
         {
             SetMaterial(plane);
-            //plane.GetComponent<DualSurfacePlane>().ChangeSecondSurfaceMaterial(useDotsMaterial ? dotsMaterial : shadowMaterial);
+
+            //if (!condition)
+            //{
+            //    plane.GetComponent<DualSurfacePlane>().CreateSecondSurface();
+            //}
+            //else
+            //{
+            //    foreach (Transform child in plane.gameObject.transform)
+            //    {
+            //        Destroy(child.gameObject);
+            //    }
+            //}
         }
     }
 }
