@@ -5,7 +5,6 @@ using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using SIAairportSecurity.Training;
 
 public class ShowDetectedPlanes : MonoBehaviour
 {
@@ -18,6 +17,8 @@ public class ShowDetectedPlanes : MonoBehaviour
     [SerializeField] private Material dotsMaterial;
     private bool useDotsMaterial = true; // Toggle flag
 
+    //temp
+    bool isPlaneScan = true;
     // Start is called before the first frame update
     void Awake()
     {
@@ -92,6 +93,41 @@ public class ShowDetectedPlanes : MonoBehaviour
             //        Destroy(child.gameObject);
             //    }
             //}
+        }
+    }
+
+    public void StartStopScanning(Button button)
+    {
+        button.interactable = false;
+        isPlaneScan = !isPlaneScan;
+        _planeManager.enabled = isPlaneScan;
+
+        StartCoroutine(EnabledBTNAfterSecond(button));
+    }
+
+    private IEnumerator EnabledBTNAfterSecond(Button button)
+    {
+        yield return new WaitForSeconds(0.3f);
+        button.interactable = true;
+    }
+
+    public void ResetPlane(Button button)
+    {
+        button.interactable = false;
+        ar_session.Reset();
+
+        StartCoroutine(EnabledBTNAfterSecond(button));
+    } 
+
+    public bool CheckARPlaneScanned()
+    {
+        if (_planeManager.trackables.count > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

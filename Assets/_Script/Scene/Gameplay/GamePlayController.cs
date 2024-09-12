@@ -6,6 +6,7 @@ using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using static SIAairportSecurity.Training.GameCanvasController;
@@ -87,6 +88,14 @@ namespace SIAairportSecurity.Training
             ShowHideMoveRotateBTN(true);
             _raycastController.ChangeState(ObjectManipulation.Move);
         }
+        public void DestroySpawnedObject()
+        {
+            Destroy(_spawnedObjects);
+            _spawnedObjects = null;
+
+            isSpawnConformed = false;
+            _raycastController.ChangeState(ObjectManipulation.Move);
+        }
 
         //confirm items placement after click place item
         public void ConformObjectPosition()
@@ -112,10 +121,19 @@ namespace SIAairportSecurity.Training
             _spawnedObjectRigidbody.freezeRotation = true;
 
             //delete rigidbody after a second
-            Invoke("DeleteRigidbody", 2.5f);
+            Invoke("DeleteRigidbody", 1.5f);
 
-            SetTapInstruction(false);
             isSpawnConformed = true;
+        }
+
+        public void ShowMappingInstruction(bool showInstruction)
+        {
+            _gameCanvasController.ShowMappingInstruction(showInstruction);
+        }
+
+        public void ResetPlane(Button button)
+        {
+            showDetectedPlanes.ResetPlane(button);
         }
         #endregion
 
@@ -158,6 +176,16 @@ namespace SIAairportSecurity.Training
             {
                 return true;
             }
+        }
+
+        public bool CheckARPlaneExist()
+        {
+            return showDetectedPlanes.CheckARPlaneScanned();
+        }
+
+        public bool CheckMenuToSpawn()
+        {
+            return _gameCanvasController.CheckMenuToSpawn();
         }
         #endregion
 
@@ -287,14 +315,6 @@ namespace SIAairportSecurity.Training
             }
             return snappedValue;
         }
-
-        public void SetTapInstruction(bool condition)
-        {
-            if (!isSpawnConformed)
-            {
-                _gameCanvasController.EnableDisableInstrruction(condition);
-            }
-        }
         #endregion
 
         #region RotateMove
@@ -346,7 +366,6 @@ namespace SIAairportSecurity.Training
         public void ResetMoveRotate()
         {
             isSpawnConformed = false;
-            SetTapInstruction(true);
 
             _raycastController.ChangeState(ObjectManipulation.Move);
             showDetectedPlanes.ShowDotsPlane(true);

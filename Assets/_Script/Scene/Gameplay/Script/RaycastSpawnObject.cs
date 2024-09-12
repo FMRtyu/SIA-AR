@@ -54,7 +54,6 @@ namespace SIAairportSecurity.Training
             _arPlaneManager = FindAnyObjectByType<ARPlaneManager>();
 
             _scanSurface.SetActive(true);
-            _gamePlayController.SetTapInstruction(false);
         }
 
         #region RayCast
@@ -73,7 +72,8 @@ namespace SIAairportSecurity.Training
                     {
                         Ray ray = Camera.main.ScreenPointToRay(touch.position);
 
-                        if (!_gamePlayController.GetIfObjectSpawned())
+                        Debug.Log("spawning");
+                        if (!_gamePlayController.GetIfObjectSpawned() && _gamePlayController.CheckMenuToSpawn())
                         {
                             SpawnItem(touch);
                         }
@@ -84,12 +84,12 @@ namespace SIAairportSecurity.Training
                     }
                     else if (touch.phase == TouchPhase.Moved && _selectedObject != null)
                     {
-                        if (_objectManipulation == ObjectManipulation.Move)
+                        if (_objectManipulation == ObjectManipulation.Move && _gamePlayController.CheckMenuToSpawn())
                         {
                             // Drag the selected object
                             DragObject(touch);
                         }
-                        else if (_objectManipulation == ObjectManipulation.Rotate)
+                        else if (_objectManipulation == ObjectManipulation.Rotate && _gamePlayController.CheckMenuToSpawn())
                         {
                             RotateObject(touch);
                         }
@@ -148,8 +148,8 @@ namespace SIAairportSecurity.Training
             {
                 if (!isSurfaceDetected)
                 {
-                    _scanSurface.SetActive(false);
-                    _gamePlayController.SetTapInstruction(true);
+                    _gamePlayController.ShowMappingInstruction(true);
+
                     isSurfaceDetected = true;
                 }
             }

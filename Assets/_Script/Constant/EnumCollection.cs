@@ -4,3 +4,11 @@ public enum ObjectManipulation
     Rotate,
     Confirmed
 }
+
+public enum GameState
+{
+    Scanning,
+    MapArea,
+    PlaceItem,
+    Gameplay
+}

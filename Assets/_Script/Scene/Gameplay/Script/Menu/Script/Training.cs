@@ -28,6 +28,8 @@ namespace SIAairportSecurity.Training
         [SerializeField] private Animator _moveRotateAnim;
         [SerializeField] private Animator _rotateAdvanceAnim;
 
+        private SubCanvasTraining _subMenu;
+
         //Specific for this state
         public override void InitState(GameCanvasController menuController)
         {
@@ -40,6 +42,11 @@ namespace SIAairportSecurity.Training
         {
             //save initial container pos
             _menuContainerInitialPos = _menuContainer.anchoredPosition;
+
+            //get sub menu value
+            _subMenu = GetComponent<SubCanvasTraining>();
+
+            _subMenu.initTraining(this);
 
         }
 
@@ -99,8 +106,8 @@ namespace SIAairportSecurity.Training
         public void JumpToSelection()
         {
             _menuCanvasController.ResetObject();
+
             _menuCanvasController.SetActiveState(GameCanvasController.MenuState.Selection);
-            _menuCanvasController.EnableDisableInstrruction(true);
         }
 
         #region ShowHideMoveRotateBTN
@@ -132,6 +139,15 @@ namespace SIAairportSecurity.Training
             _menuCanvasController.FadeOutQuit();
         }
 
+        public void ResetPlane(Button button)
+        {
+            _menuCanvasController.ResetPlane(button);
+        }
+
+        public bool CheckMenuToSpawn()
+        {
+            return _subMenu.CheckMenuToSpawn();
+        }
         #endregion
 
         #region MoveRotateBTN
@@ -163,6 +179,19 @@ namespace SIAairportSecurity.Training
         {
             //_moveRotateParent.SetActive(Condition);
         }
+        public void HideMoveRotateBTN()
+        {
+            _moveRotateAnim.SetBool("Back", true);
+            _moveRotateAnim.SetBool("Open", false);
+            _moveRotateAnim.SetBool("InitalOpen", false);
+
+        }
+
+        public void ShowMoveRotate()
+        {
+            _moveRotateAnim.SetBool("Back", false);
+                _moveRotateAnim.SetBool("Open", true);
+        }
 
         public void SnapXRotation(Button button)
         {
@@ -185,6 +214,14 @@ namespace SIAairportSecurity.Training
         }
         #endregion
 
+        #region SubMenu
+
+        public void ShowMappingInstruction(bool showInstruction)
+        {
+            _subMenu.ShowMappingInstruction(showInstruction);
+        }
+
+        #endregion
         public void PlayButtonSound()
         {
             _menuCanvasController.PlayButtonSound();
