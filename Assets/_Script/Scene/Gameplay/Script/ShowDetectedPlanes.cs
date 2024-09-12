@@ -5,10 +5,10 @@ using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using SIAairportSecurity.Training;
 
 public class ShowDetectedPlanes : MonoBehaviour
 {
-    ARPlaneManager _planeManager;
     ARSession ar_session;
     ARPointCloudManager pointCloud;
 
@@ -19,6 +19,8 @@ public class ShowDetectedPlanes : MonoBehaviour
 
     //temp
     bool isPlaneScan = true;
+
+    private GamePlayController _gamePlayController;
     // Start is called before the first frame update
     void Awake()
     {
@@ -27,18 +29,19 @@ public class ShowDetectedPlanes : MonoBehaviour
 
     private void initial()
     {
-        _planeManager = FindObjectOfType<ARPlaneManager>();
+        _gamePlayController = GetComponent<GamePlayController>();
+
         ar_session = FindObjectOfType<ARSession>();
         pointCloud = FindObjectOfType<ARPointCloudManager>();
 
         // Set initial material for all existing planes
-        foreach (ARPlane plane in _planeManager.trackables)
+        foreach (ARPlane plane in _gamePlayController.GetARPlaneManager().trackables)
         {
             SetMaterial(plane);
         }
 
         // Subscribe to the plane added event
-        _planeManager.planesChanged += OnPlanesChanged;
+        _gamePlayController.GetARPlaneManager().planesChanged += OnPlanesChanged;
     }
 
     // Update is called once per frame
@@ -78,7 +81,7 @@ public class ShowDetectedPlanes : MonoBehaviour
         pointCloud.SetTrackablesActive(condition);
 
         // Update the material for all currently tracked planes
-        foreach (ARPlane plane in _planeManager.trackables)
+        foreach (ARPlane plane in _gamePlayController.GetARPlaneManager().trackables)
         {
             SetMaterial(plane);
 
@@ -98,30 +101,30 @@ public class ShowDetectedPlanes : MonoBehaviour
 
     public void StartStopScanning(Button button)
     {
-        button.interactable = false;
         isPlaneScan = !isPlaneScan;
-        _planeManager.enabled = isPlaneScan;
+        _gamePlayController.GetARPlaneManager().enabled = isPlaneScan;
 
-        StartCoroutine(EnabledBTNAfterSecond(button));
+        StartCoroutine(ButtonDelay.EnabledBTNAfterSecond(button));
     }
 
-    private IEnumerator EnabledBTNAfterSecond(Button button)
+    public void StartStopScanning(bool condition)
     {
-        yield return new WaitForSeconds(0.3f);
-        button.interactable = true;
+        isPlaneScan = condition;
+        _gamePlayController.GetARPlaneManager().enabled = isPlaneScan;
     }
 
     public void ResetPlane(Button button)
     {
-        button.interactable = false;
         ar_session.Reset();
+        isPlaneScan = true;
+        _gamePlayController.GetARPlaneManager().enabled = isPlaneScan;
 
-        StartCoroutine(EnabledBTNAfterSecond(button));
-    } 
+        StartCoroutine(ButtonDelay.EnabledBTNAfterSecond(button));
+    }
 
     public bool CheckARPlaneScanned()
     {
-        if (_planeManager.trackables.count > 0)
+        if (_gamePlayController.GetARPlaneManager().trackables.count > 0)
         {
             return true;
         }

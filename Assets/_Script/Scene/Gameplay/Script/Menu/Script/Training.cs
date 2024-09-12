@@ -28,6 +28,12 @@ namespace SIAairportSecurity.Training
         [SerializeField] private Animator _moveRotateAnim;
         [SerializeField] private Animator _rotateAdvanceAnim;
 
+        [Header("Loading")]
+        [SerializeField] private CanvasGroup _loadingCanvasGroup;
+
+        [Header("Information Panel")]
+        [SerializeField] private GameObject _infoPanel;
+
         private SubCanvasTraining _subMenu;
 
         //Specific for this state
@@ -134,6 +140,11 @@ namespace SIAairportSecurity.Training
         }
         #endregion
 
+        public void ShowHideInfoPanel(bool newCondition)
+        {
+            _infoPanel.SetActive(newCondition);
+        }
+
         public void QuitGame()
         {
             _menuCanvasController.FadeOutQuit();
@@ -141,7 +152,15 @@ namespace SIAairportSecurity.Training
 
         public void ResetPlane(Button button)
         {
-            _menuCanvasController.ResetPlane(button);
+            _loadingCanvasGroup.gameObject.SetActive(true);
+            LeanTween.alphaCanvas(_loadingCanvasGroup, to: 1, 1f).setOnComplete(() =>
+            {
+                _menuCanvasController.ResetPlane(button);
+                LeanTween.alphaCanvas(_loadingCanvasGroup, to: 0, 1f).setDelay(1f).setOnComplete(() =>
+                {
+                    _loadingCanvasGroup.gameObject.SetActive(false);
+                });
+            });
         }
 
         public bool CheckMenuToSpawn()

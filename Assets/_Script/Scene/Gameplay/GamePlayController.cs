@@ -34,7 +34,13 @@ namespace SIAairportSecurity.Training
 
         //ARF
         private ARSession arSession;
+        private GameObject arSessionParent;
         private ShowDetectedPlanes showDetectedPlanes;
+
+        //AR plane manager
+        private ARPlaneManager arPlaneManager;
+        private ARPlaneManager arPlaneManagerTemplate;
+        private GameObject arPlaneManagerParent;
 
         [Header("SFX")]
         [SerializeField] private AudioSource _audioSource;
@@ -59,8 +65,15 @@ namespace SIAairportSecurity.Training
 
             //get value
             arSession = FindObjectOfType<ARSession>();
+            arSessionParent = arSession.gameObject;
             showDetectedPlanes = FindObjectOfType<ShowDetectedPlanes>();
             _raycastController= GetComponent<RaycastSpawnObject>();
+
+            //get and setup arplane value
+            arPlaneManager = FindObjectOfType<ARPlaneManager>();
+            arPlaneManagerTemplate = new ARPlaneManager();
+            arPlaneManagerTemplate.planePrefab = arPlaneManager.planePrefab;
+            arPlaneManagerParent = arPlaneManager.gameObject;
         }
 
         #region SetData
@@ -134,6 +147,8 @@ namespace SIAairportSecurity.Training
         public void ResetPlane(Button button)
         {
             showDetectedPlanes.ResetPlane(button);
+
+            //ResetAllPlane();
         }
         #endregion
 
@@ -186,6 +201,12 @@ namespace SIAairportSecurity.Training
         public bool CheckMenuToSpawn()
         {
             return _gameCanvasController.CheckMenuToSpawn();
+        }
+
+        
+        public ARPlaneManager GetARPlaneManager()
+        {
+            return arPlaneManager;
         }
         #endregion
 
@@ -314,6 +335,23 @@ namespace SIAairportSecurity.Training
                 snappedValue += 90f;
             }
             return snappedValue;
+        }
+
+        public void ResetAllPlane()
+        {
+            arPlaneManager.ResetTrackables();
+            
+            StartCoroutine(DelayCreateManager());
+        }
+
+        private IEnumerator DelayCreateManager()
+        {
+            Destroy(arPlaneManager);
+            //Destroy(arSession);
+            yield return new WaitForSeconds(1f);
+            //arSession = arSessionParent.AddComponent<ARSession>();
+            arPlaneManager = arPlaneManagerParent.AddComponent<ARPlaneManager>();
+            arPlaneManager.planePrefab = arPlaneManagerTemplate.planePrefab;
         }
         #endregion
 
