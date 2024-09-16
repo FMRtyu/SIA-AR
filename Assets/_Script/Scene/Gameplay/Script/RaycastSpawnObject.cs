@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using static SIAairportSecurity.Training.GameCanvasController;
@@ -27,6 +28,29 @@ namespace SIAairportSecurity.Training
         private Vector2 lastTouchPosition;
         private bool isMovingObject = true;
         private bool isSurfaceDetected;
+        private static RaycastSpawnObject _instance;
+
+        public static RaycastSpawnObject Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new RaycastSpawnObject();
+                }
+                return _instance;
+            }
+        }
+
+        public static bool IsSurfaceDetected
+        {
+            get
+            {
+                return Instance.isSurfaceDetected;
+            }
+        }
+
+
 
         // Start is called before the first frame update
         void Start()

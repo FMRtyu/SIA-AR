@@ -33,10 +33,12 @@ namespace SIAairportSecurity.Training
 
         private int _itemSelected;
 
+        [SerializeField] private Training _training;
+
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
-             
+            _gamePlayController.onStateChange += ShowAllItemUI;
         }
 
         // Update is called once per frame
@@ -47,6 +49,13 @@ namespace SIAairportSecurity.Training
 
         #region SetData
 
+        public void OpenCloseInstructionTap(bool condition)
+        {
+            if (activeState.state == MenuState.Training)
+            {
+                activeState.GetComponent<Training>().OpenCloseInstructionTap(condition);
+            }
+        }
         public void InitState(GamePlayController gamePlayController)
         {
             this._gamePlayController = gamePlayController;
@@ -59,7 +68,7 @@ namespace SIAairportSecurity.Training
             _itemSelected = objectIndex;
         }
 
-        public void ShowConformedBTN(bool Condition)
+        public void ShowPlacedItemBTN(bool Condition)
         {
             if (activeState.state == MenuState.Training)
             {
@@ -102,7 +111,7 @@ namespace SIAairportSecurity.Training
 
         public void ConformObject()
         {
-            _gamePlayController.ConformObjectPosition();
+            _gamePlayController.ConfirmObjectPosition();
         }
 
         public void ShowMappingInstruction(bool showInstruction)
@@ -258,6 +267,14 @@ namespace SIAairportSecurity.Training
             _gamePlayController.SwitchToMove();
         }
 
+        public void EnabledMoveBTN()
+        {
+            if (activeState.state == MenuState.Training)
+            {
+                activeState.GetComponent<Training>().SwitchToMove();
+            }
+        }
+
         public void SwitchToRotate()
         {
             _gamePlayController.SwitchToRotate();
@@ -281,8 +298,23 @@ namespace SIAairportSecurity.Training
         {
             _gamePlayController.SnapObjectYAxis();
         }
+
+        public void ChangeButtonInteractable(bool newCondition)
+        {
+            if (activeState.state == MenuState.Training)
+            {
+                activeState.GetComponent<Training>().ChangeButtonInteractable(newCondition);
+            }
+        }
         #endregion
 
+        private void ShowAllItemUI(GameState gameState)
+        {
+            Training trainingState = activeState.GetComponent<Training>();
+
+            trainingState.ShowTopMenuPanel(gameState);
+            trainingState.SwitchRotateMoveToDefault();
+        }
         public void PlayButtonSound()
         {
             _gamePlayController.PlayButtonSound();

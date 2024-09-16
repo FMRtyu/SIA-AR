@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +21,14 @@ namespace SIAairportSecurity.Training
         [SerializeField] private Button _MoveBTN;
         [SerializeField] private Button _RotateBTN;
 
+        [Header("Move Rotate Icon")]
+        [SerializeField] private Image _MoveBTNIcon;
+        [SerializeField] private Image _RotateBTNIcon;
+        [SerializeField] private Sprite _moveActive;
+        [SerializeField] private Sprite _moveInactive;
+        [SerializeField] private Sprite _rotateActive;
+        [SerializeField] private Sprite _rotateInactive;
+
         [Header("RotateSprite")]
         [SerializeField] private Sprite _inactiveSprite;
         [SerializeField] private Sprite _activeSprite;
@@ -27,6 +36,7 @@ namespace SIAairportSecurity.Training
         [Header("RotateMoveBTN")]
         [SerializeField] private Animator _moveRotateAnim;
         [SerializeField] private Animator _rotateAdvanceAnim;
+        private bool isAlreadyOpen;
 
         [Header("Loading")]
         [SerializeField] private CanvasGroup _loadingCanvasGroup;
@@ -63,7 +73,15 @@ namespace SIAairportSecurity.Training
 
             ShowConformButton(false);
 
-            SwitchToMove();
+            if (isAlreadyOpen)
+            {
+                _moveRotateAnim.SetBool("AleadyOpen", true);
+                ChangeButtonInteractable(false);
+            }
+            {
+
+            }
+            //SwitchToMove();
         }
 
         private void MoveToBottom(bool isInit)
@@ -120,7 +138,19 @@ namespace SIAairportSecurity.Training
         public void ShowConformButton(bool Condition)
         {
             _conformBTN.SetActive(Condition);
-            _moveRotateAnim.SetBool("InitalOpen", Condition);
+        }
+
+        public void ShowTopMenuPanel(GameState gameState)
+        {
+            if (gameState == GameState.PlaceItem)
+            {
+                _moveRotateAnim.SetBool("InitalOpen", true);
+
+                if (!isAlreadyOpen)
+                {
+                    isAlreadyOpen = true;
+                }
+            }
         }
 
         public void ConformPosition()
@@ -143,6 +173,11 @@ namespace SIAairportSecurity.Training
         public void ShowHideInfoPanel(bool newCondition)
         {
             _infoPanel.SetActive(newCondition);
+
+            if (RaycastSpawnObject.IsSurfaceDetected)
+            {
+                ShowMappingInstruction(true);
+            }
         }
 
         public void QuitGame()
@@ -171,21 +206,61 @@ namespace SIAairportSecurity.Training
 
         #region MoveRotateBTN
 
+        public void SwitchRotateMoveToDefault()
+        {
+            _MoveBTN.GetComponent<Image>().sprite = _inactiveSprite;
+            _RotateBTN.GetComponent<Image>().sprite = _inactiveSprite;
+
+            _MoveBTNIcon.sprite = _moveInactive;
+            _RotateBTNIcon.sprite = _rotateInactive;
+        }
+
         public void SwitchToMove()
         {
-            _MoveBTN.interactable = false;
-            _RotateBTN.interactable = true;
+            _MoveBTN.GetComponent<Image>().sprite = _activeSprite;
             _RotateBTN.GetComponent<Image>().sprite = _inactiveSprite;
+
+            _MoveBTNIcon.sprite = _moveActive;
+            _RotateBTNIcon.sprite = _rotateInactive;
+
+            _MoveBTN.GetComponentInChildren<TMP_Text>().color = Color.black;
+            _RotateBTN.GetComponentInChildren<TMP_Text>().color = Color.white;
 
             _menuCanvasController.SwitchToMove();
             _rotateAdvanceAnim.SetBool("isOpen", false);
         }
 
+        public void ChangeButtonInteractable(bool newCondition)
+        {
+            if (newCondition)
+            {
+                _MoveBTNIcon.color = Color.white;
+                _RotateBTNIcon.color = Color.white;
+
+                _MoveBTN.GetComponentInChildren<TMP_Text>().color = Color.white;
+                _RotateBTN.GetComponentInChildren<TMP_Text>().color = Color.white;
+            }
+            else
+            {
+                _MoveBTNIcon.color = Color.gray;
+                _RotateBTNIcon.color = Color.gray;
+
+                _MoveBTN.GetComponentInChildren<TMP_Text>().color = Color.gray;
+                _RotateBTN.GetComponentInChildren<TMP_Text>().color = Color.gray;
+            }
+        }
+
         public void SwitchToRotate()
         {
-            _MoveBTN.interactable = true;
-
+            _MoveBTN.GetComponent<Image>().sprite = _inactiveSprite;
             _RotateBTN.GetComponent<Image>().sprite = _activeSprite;
+
+            _MoveBTNIcon.sprite = _moveInactive;
+            _RotateBTNIcon.sprite = _rotateActive;
+
+            _MoveBTN.GetComponentInChildren<TMP_Text>().color = Color.white;
+            _RotateBTN.GetComponentInChildren<TMP_Text>().color = Color.black;
+
             _menuCanvasController.SwitchToRotate();
 
             if (!_rotateAdvanceAnim.GetBool("isOpen"))
@@ -240,6 +315,10 @@ namespace SIAairportSecurity.Training
             _subMenu.ShowMappingInstruction(showInstruction);
         }
 
+        public void OpenCloseInstructionTap(bool condition)
+        {
+            _subMenu.OpenCloseInstructionTap(condition);
+        }
         #endregion
         public void PlayButtonSound()
         {

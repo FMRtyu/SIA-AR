@@ -26,12 +26,17 @@ namespace SIAairportSecurity.Training
             _mapInstructionInitScale = _mapInstruction.transform.localScale;
             _scanInstructionInitScale = _scanInstruction.transform.localScale;
 
+            _scanInstruction.SetActive(false);
             _mapInstruction.transform.localScale = Vector3.zero;
             _finishResetBTN.SetActive(false);
         }
 
         public void ShowMappingInstruction(bool showInstruction)
         {
+            if (!_scanInstruction.active)
+            {
+                _scanInstruction.SetActive(true);
+            }
             if (showInstruction)
             {
                 LeanTween.scale(_mapInstruction, to: _mapInstructionInitScale, 1f).setEase(LeanTweenType.easeInOutExpo);
@@ -54,6 +59,7 @@ namespace SIAairportSecurity.Training
         public void JumpToPlaceItem()
         {
             _trainingController.SetActiveState(GameState.PlaceItem);
+            _trainingController.GetGameplayController().RaiseStateChangeEvent(GameState.PlaceItem);
         }
 
     }

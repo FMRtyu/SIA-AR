@@ -47,9 +47,20 @@ namespace SIAairportSecurity.Training
         [SerializeField] private AudioClip _tapAudio;
         [SerializeField] private AudioClip _SpawnAudio;
 
+        [SerializeField] private Button _moveBtn;
+        [SerializeField] private Button _rotateBtn;
+
+        //Game State Event
+        private static GameState currentGameState = GameState.Scanning;
+
+        public delegate void OnGameStateChanged(GameState currentGameState);
+        public event OnGameStateChanged onStateChange;
+
         private void Awake()
         {
             init();
+
+            onStateChange += ChangeState;
         }
 
         private void Update()
@@ -78,6 +89,10 @@ namespace SIAairportSecurity.Training
 
         #region SetData
 
+        public void OpenCloseInstructionTap(bool condition)
+        {
+            _gameCanvasController.OpenCloseInstructionTap(condition);
+        }
         //Set object to spawn
         public void SetGameObject(int gameobjectIndex)
         {
@@ -100,6 +115,9 @@ namespace SIAairportSecurity.Training
 
             ShowHideMoveRotateBTN(true);
             _raycastController.ChangeState(ObjectManipulation.Move);
+            OpenCloseInstructionTap(true);
+
+            SwitchManipulationState(false);
         }
         public void DestroySpawnedObject()
         {
@@ -111,9 +129,9 @@ namespace SIAairportSecurity.Training
         }
 
         //confirm items placement after click place item
-        public void ConformObjectPosition()
+        public void ConfirmObjectPosition()
         {
-            _gameCanvasController.ShowConformedBTN(false);
+            _gameCanvasController.ShowPlacedItemBTN(false);
             showDetectedPlanes.ShowDotsPlane(false);
 
             //move down the object
@@ -154,6 +172,10 @@ namespace SIAairportSecurity.Training
 
         #region GetData
 
+        public static GameState GetCurrentGameState()
+        {
+            return currentGameState;
+        }
         //return current layer canvas
         public MenuState GetCurrentScreen()
         {
@@ -211,6 +233,11 @@ namespace SIAairportSecurity.Training
         #endregion
 
         #region Operation
+        private void SwitchManipulationState(bool newCondition)
+        {
+            _moveBtn.interactable = newCondition;
+            _rotateBtn.interactable = newCondition;
+        }
 
         //Spawn selected object
         public void SpawnObject(ARRaycastHit hit)
@@ -248,8 +275,11 @@ namespace SIAairportSecurity.Training
                     LeanTween.scale(_spawnedObjectRotateObject.gameObject, to: InitalScale, 1f).setEase(LeanTweenType.easeOutBack);
                     PlayPlaceSound();
 
-                    _gameCanvasController.ShowConformedBTN(true);
-
+                    _gameCanvasController.ChangeButtonInteractable(true);
+                    _gameCanvasController.ShowPlacedItemBTN(true);
+                    OpenCloseInstructionTap(false);
+                    SwitchManipulationState(true);
+                    _gameCanvasController.EnabledMoveBTN();
                 }
             }
         }
@@ -369,6 +399,7 @@ namespace SIAairportSecurity.Training
                 _spawnedObjectRotateObject.localPosition = _intialposition;
                 _spawnedObjectRotateObject.GetComponent<BoxCollider>().enabled = false;
                 isInitRotate = false;
+
             }
         }
         //switch to rotate object 1 finger
@@ -447,6 +478,24 @@ namespace SIAairportSecurity.Training
                 _spawnedObjectRotateObject.rotation.eulerAngles.z
                 );
         }
+        #endregion
+
+
+        #region Event
+
+        public void RaiseStateChangeEvent(GameState gameState)
+        {
+            if (onStateChange != null)
+            {
+                onStateChange(gameState);
+            }
+        }
+
+        private void ChangeState(GameState gameState)
+        {
+            currentGameState = gameState;
+        }
+
         #endregion
     }
 }

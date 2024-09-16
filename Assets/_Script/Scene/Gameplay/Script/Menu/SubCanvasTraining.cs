@@ -21,6 +21,8 @@ namespace SIAairportSecurity.Training
         {
             this._trainingMenu = _trainingMenu;
         }
+
+        private GamePlayController _gamePlayController;
         // Start is called before the first frame update
         void Awake()
         {
@@ -36,6 +38,10 @@ namespace SIAairportSecurity.Training
         private void init()
         {
             initMenuState();
+
+            _gamePlayController = FindAnyObjectByType<GamePlayController>();
+
+            _gamePlayController.onStateChange += ChangeInstructionPanel;
         }
 
         #region StateMenu
@@ -71,6 +77,11 @@ namespace SIAairportSecurity.Training
 
             //Activate the default menu
             SetActiveState(GameState.Scanning);
+        }
+
+        private void ChangeActiveMenu(GameState newState)
+        {
+            SetActiveState(newState);
         }
 
         public void JumpBack()
@@ -152,6 +163,24 @@ namespace SIAairportSecurity.Training
             }
         }
 
+        public void OpenCloseInstructionTap(bool condition)
+        {
+            if (activeState.state == GameState.PlaceItem)
+            {
+                activeState.GetComponent<PlaceItem>().OpenCloseInstructionTap(condition);
+            }
+        }
+
+        private void ChangeInstructionPanel(GameState gameState)
+        {
+
+            activeState.GetComponent<PlaceItem>().ChangeInstructionPanel(gameState);
+        }
         #endregion
+
+        public GamePlayController GetGameplayController()
+        {
+            return _gamePlayController;
+        }
     }
 }
