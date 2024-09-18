@@ -113,13 +113,11 @@ public class ShowDetectedPlanes : MonoBehaviour
         _gamePlayController.GetARPlaneManager().enabled = isPlaneScan;
     }
 
-    public void ResetPlane(Button button)
+    public void ResetPlane()
     {
         ar_session.Reset();
         isPlaneScan = true;
         _gamePlayController.GetARPlaneManager().enabled = isPlaneScan;
-
-        StartCoroutine(ButtonDelay.EnabledBTNAfterSecond(button));
     }
 
     public bool CheckARPlaneScanned()

@@ -29,7 +29,7 @@ namespace SIAairportSecurity.Training
         private Vector3 _intialposition;
         private BoxCollider _spawnedObjectCollider;
         private Rigidbody _spawnedObjectRigidbody;
-        private bool isSpawnConformed = false;
+        public bool isSpawnConformed { get; private set; }
         private bool isInitRotate = false;
 
         //ARF
@@ -51,16 +51,15 @@ namespace SIAairportSecurity.Training
         [SerializeField] private Button _rotateBtn;
 
         //Game State Event
-        private static GameState currentGameState = GameState.Scanning;
+        [SerializeField] private GameState currentGameState = GameState.Scanning;
 
         public delegate void OnGameStateChanged(GameState currentGameState);
         public event OnGameStateChanged onStateChange;
 
         private void Awake()
         {
-            init();
-
             onStateChange += ChangeState;
+            init();
         }
 
         private void Update()
@@ -88,11 +87,6 @@ namespace SIAairportSecurity.Training
         }
 
         #region SetData
-
-        public void OpenCloseInstructionTap(bool condition)
-        {
-            _gameCanvasController.OpenCloseInstructionTap(condition);
-        }
         //Set object to spawn
         public void SetGameObject(int gameobjectIndex)
         {
@@ -112,12 +106,11 @@ namespace SIAairportSecurity.Training
             _spawnedObjects = null;
 
             isSpawnConformed = false;
-
-            ShowHideMoveRotateBTN(true);
             _raycastController.ChangeState(ObjectManipulation.Move);
-            OpenCloseInstructionTap(true);
 
             SwitchManipulationState(false);
+
+            RaiseStateChangeEvent(GameState.PlaceItem);
         }
         public void DestroySpawnedObject()
         {
@@ -137,8 +130,6 @@ namespace SIAairportSecurity.Training
             //move down the object
             _spawnedObjectRotateObject.localPosition = _intialposition;
 
-            ShowHideMoveRotateBTN(false);
-
             //delete box collider in rotate object
             _spawnedObjectRotateObject.GetComponent<BoxCollider>().enabled = true;
             _spawnedObjects.GetComponent<BoxCollider>().enabled = false;
@@ -157,22 +148,21 @@ namespace SIAairportSecurity.Training
             isSpawnConformed = true;
         }
 
-        public void ShowMappingInstruction(bool showInstruction)
+        public void ResetPlane()
         {
-            _gameCanvasController.ShowMappingInstruction(showInstruction);
-        }
+            showDetectedPlanes.ResetPlane();
 
-        public void ResetPlane(Button button)
-        {
-            showDetectedPlanes.ResetPlane(button);
-
+            if (!isSpawnConformed)
+            {
+                DestroySpawnedObject();
+            }
             //ResetAllPlane();
         }
         #endregion
 
         #region GetData
 
-        public static GameState GetCurrentGameState()
+        public GameState GetCurrentGameState()
         {
             return currentGameState;
         }
@@ -218,11 +208,6 @@ namespace SIAairportSecurity.Training
         public bool CheckARPlaneExist()
         {
             return showDetectedPlanes.CheckARPlaneScanned();
-        }
-
-        public bool CheckMenuToSpawn()
-        {
-            return _gameCanvasController.CheckMenuToSpawn();
         }
 
         
@@ -277,9 +262,9 @@ namespace SIAairportSecurity.Training
 
                     _gameCanvasController.ChangeButtonInteractable(true);
                     _gameCanvasController.ShowPlacedItemBTN(true);
-                    OpenCloseInstructionTap(false);
                     SwitchManipulationState(true);
                     _gameCanvasController.EnabledMoveBTN();
+                    _gameCanvasController.DisableInstruction();
                 }
             }
         }
@@ -425,17 +410,9 @@ namespace SIAairportSecurity.Training
             }
         }
 
-        //show or hide move rotate panel
-        public void ShowHideMoveRotateBTN(bool Condition)
-        {
-            _gameCanvasController.ShowHideMoveRotateBTN(Condition);
-        }
-
         //reset move rotate panel
         public void ResetMoveRotate()
         {
-            isSpawnConformed = false;
-
             _raycastController.ChangeState(ObjectManipulation.Move);
             showDetectedPlanes.ShowDotsPlane(true);
             FindChildWithTag(_spawnedObjects.transform, "TouchIndicator").gameObject.SetActive(true);
@@ -479,7 +456,6 @@ namespace SIAairportSecurity.Training
                 );
         }
         #endregion
-
 
         #region Event
 

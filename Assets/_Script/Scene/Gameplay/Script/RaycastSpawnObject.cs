@@ -21,13 +21,11 @@ namespace SIAairportSecurity.Training
         private List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
         //scan surface UI
-        [SerializeField] private GameObject _scanSurface;
         [SerializeField] private LayerMask itemLayerMask;
 
         // Rotate the selected object based on touch movement
         private Vector2 lastTouchPosition;
         private bool isMovingObject = true;
-        private bool isSurfaceDetected;
         private static RaycastSpawnObject _instance;
 
         public static RaycastSpawnObject Instance
@@ -39,14 +37,6 @@ namespace SIAairportSecurity.Training
                     _instance = new RaycastSpawnObject();
                 }
                 return _instance;
-            }
-        }
-
-        public static bool IsSurfaceDetected
-        {
-            get
-            {
-                return Instance.isSurfaceDetected;
             }
         }
 
@@ -76,14 +66,12 @@ namespace SIAairportSecurity.Training
             raycastManager = FindObjectOfType<ARRaycastManager>();
 
             _arPlaneManager = FindAnyObjectByType<ARPlaneManager>();
-
-            _scanSurface.SetActive(true);
         }
 
         #region RayCast
         private void Raycast()
         {
-            if (_gamePlayController.GetCurrentScreen() != MenuState.Selection)
+            if (_gamePlayController.GetCurrentGameState() != GameState.MapArea)
             {
                 if (Input.touchCount > 0)
                 {
@@ -92,12 +80,12 @@ namespace SIAairportSecurity.Training
                     if (IsPointerOverUIObject(touch))
                         return;
 
-                    if (touch.phase == TouchPhase.Began && _gamePlayController.GetIsConfirmedPosition() == false)
+                    if (touch.phase == TouchPhase.Began && _gamePlayController.GetCurrentGameState() != GameState.Gameplay)
                     {
                         Ray ray = Camera.main.ScreenPointToRay(touch.position);
 
                         Debug.Log("spawning");
-                        if (!_gamePlayController.GetIfObjectSpawned() && _gamePlayController.CheckMenuToSpawn())
+                        if (!_gamePlayController.GetIfObjectSpawned())
                         {
                             SpawnItem(touch);
                         }
@@ -108,12 +96,12 @@ namespace SIAairportSecurity.Training
                     }
                     else if (touch.phase == TouchPhase.Moved && _selectedObject != null)
                     {
-                        if (_objectManipulation == ObjectManipulation.Move && _gamePlayController.CheckMenuToSpawn())
+                        if (_objectManipulation == ObjectManipulation.Move)
                         {
                             // Drag the selected object
                             DragObject(touch);
                         }
-                        else if (_objectManipulation == ObjectManipulation.Rotate && _gamePlayController.CheckMenuToSpawn())
+                        else if (_objectManipulation == ObjectManipulation.Rotate)
                         {
                             RotateObject(touch);
                         }
@@ -170,11 +158,9 @@ namespace SIAairportSecurity.Training
             Vector3 rayEmitPosition = new Vector3(Screen.width / 2, Screen.height / 2, 0);
             if (raycastManager.Raycast(rayEmitPosition, hits, TrackableType.PlaneWithinPolygon))
             {
-                if (!isSurfaceDetected)
+                if (_gamePlayController.GetCurrentGameState() == GameState.Scanning)
                 {
-                    _gamePlayController.ShowMappingInstruction(true);
-
-                    isSurfaceDetected = true;
+                    _gamePlayController.RaiseStateChangeEvent(GameState.MapArea);
                 }
             }
         }

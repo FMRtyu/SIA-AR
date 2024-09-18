@@ -19,7 +19,7 @@ namespace SIAairportSecurity.Training
         //The states we can choose from
         public enum MenuState
         {
-            Splash, Selection, Training
+           Selection, Training, Quit
         }
 
         //State-object dictionary to make it easier to activate a menu 
@@ -33,13 +33,6 @@ namespace SIAairportSecurity.Training
 
         private int _itemSelected;
 
-        [SerializeField] private Training _training;
-
-        // Start is called before the first frame update
-        void Awake()
-        {
-            _gamePlayController.onStateChange += ShowAllItemUI;
-        }
 
         // Update is called once per frame
         void Update()
@@ -48,19 +41,12 @@ namespace SIAairportSecurity.Training
         }
 
         #region SetData
-
-        public void OpenCloseInstructionTap(bool condition)
-        {
-            if (activeState.state == MenuState.Training)
-            {
-                activeState.GetComponent<Training>().OpenCloseInstructionTap(condition);
-            }
-        }
         public void InitState(GamePlayController gamePlayController)
         {
             this._gamePlayController = gamePlayController;
             initMenuState();
             FadeIn();
+            _gamePlayController.onStateChange += ChangeActiveSubUI;
         }
 
         public void SetObject(int objectIndex)
@@ -109,39 +95,37 @@ namespace SIAairportSecurity.Training
             _gamePlayController.ShowAllPlane();
         }
 
-        public void ConformObject()
+        public void ConfirmObject()
         {
             _gamePlayController.ConfirmObjectPosition();
         }
-
-        public void ShowMappingInstruction(bool showInstruction)
+        public void ResetPlane()
         {
-            if (activeState.state == MenuState.Training)
-            {
-                activeState.gameObject.GetComponent<Training>().ShowMappingInstruction(showInstruction);
-            }
-        }
-        public void ResetPlane(Button button)
-        {
-            _gamePlayController.ResetPlane(button);
+            _gamePlayController.ResetPlane();
         }
 
-        public bool CheckMenuToSpawn()
+        public void FinishScan()
         {
-            if (activeState.state == MenuState.Training)
-            {
-                return activeState.GetComponent<Training>().CheckMenuToSpawn();
-            }
-            else
-            {
-                return false;
-            }
+            _gamePlayController.RaiseStateChangeEvent(GameState.PlaceItem);
         }
 
+        public void ConfirmItemPlacement()
+        {
+            _gamePlayController.RaiseStateChangeEvent(GameState.Gameplay);
+        }
+
+        public void DisableInstruction()
+        {
+            activeState.GetComponent<Training>().DisableInstruction();
+        }
         #endregion
 
         #region GetData
 
+        public bool GetIfObjectConfirmed()
+        {
+            return _gamePlayController.isSpawnConformed;
+        }
         public Dictionary<int, (Sprite,string, bool, bool)> GetListData()
         {
             return _gamePlayController.GetSelectionData();
@@ -201,7 +185,7 @@ namespace SIAairportSecurity.Training
             //Activate the default menu
             SetActiveState(MenuState.Selection);
         }
-
+        // set activated
         public void SetActiveState(MenuState newState, bool isJumpingBack = false)
         {
 
@@ -214,7 +198,7 @@ namespace SIAairportSecurity.Training
             }
 
             //Deactivate the old state
-            if (activeState != null)
+            if (activeState != null && newState != MenuState.Quit)
             {
                 activeState.gameObject.SetActive(false);
             }
@@ -280,11 +264,6 @@ namespace SIAairportSecurity.Training
             _gamePlayController.SwitchToRotate();
         }
 
-        public void ShowHideMoveRotateBTN(bool Condition)
-        {
-            GetTrainingScript().ShowHideMoveRotateBTN(Condition);
-        }
-
         public void ResetMoveRotate()
         {
             _gamePlayController.ResetMoveRotate();
@@ -306,14 +285,32 @@ namespace SIAairportSecurity.Training
                 activeState.GetComponent<Training>().ChangeButtonInteractable(newCondition);
             }
         }
+
+
         #endregion
 
-        private void ShowAllItemUI(GameState gameState)
+        private void ChangeActiveSubUI(GameState gameState)
         {
-            Training trainingState = activeState.GetComponent<Training>();
-
-            trainingState.ShowTopMenuPanel(gameState);
-            trainingState.SwitchRotateMoveToDefault();
+            switch (gameState)
+            {
+                case GameState.Scanning:
+                    activeState.GetComponent<Training>().ShowScanningSurfaceAnimation();
+                    break;
+                case GameState.MapArea:
+                    activeState.GetComponent<Training>().ShowMapTheAreaInstruction();
+                    break;
+                case GameState.PlaceItem:
+                    activeState.GetComponent<Training>().ShowPlaceInstruction();
+                    break;
+                case GameState.Gameplay:
+                    activeState.GetComponent<Training>().ConfirmPosition();
+                    ConfirmObject();
+                    break;
+                default:
+                    Debug.LogError("Value was not set");
+                    break;
+            }
+            
         }
         public void PlayButtonSound()
         {
