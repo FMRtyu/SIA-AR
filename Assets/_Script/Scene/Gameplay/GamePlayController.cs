@@ -6,6 +6,7 @@ using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using static SIAairportSecurity.Training.GameCanvasController;
@@ -28,20 +29,36 @@ namespace SIAairportSecurity.Training
         private Vector3 _intialposition;
         private BoxCollider _spawnedObjectCollider;
         private Rigidbody _spawnedObjectRigidbody;
-        private bool isSpawnConformed = false;
+        public bool isSpawnConformed { get; private set; }
         private bool isInitRotate = false;
 
         //ARF
         private ARSession arSession;
+        private GameObject arSessionParent;
         private ShowDetectedPlanes showDetectedPlanes;
+
+        //AR plane manager
+        private ARPlaneManager arPlaneManager;
+        private ARPlaneManager arPlaneManagerTemplate;
+        private GameObject arPlaneManagerParent;
 
         [Header("SFX")]
         [SerializeField] private AudioSource _audioSource;
         [SerializeField] private AudioClip _tapAudio;
         [SerializeField] private AudioClip _SpawnAudio;
 
+        [SerializeField] private Button _moveBtn;
+        [SerializeField] private Button _rotateBtn;
+
+        //Game State Event
+        [SerializeField] private GameState currentGameState = GameState.Scanning;
+
+        public delegate void OnGameStateChanged(GameState currentGameState);
+        public event OnGameStateChanged onStateChange;
+
         private void Awake()
         {
+            onStateChange += ChangeState;
             init();
         }
 
@@ -58,12 +75,18 @@ namespace SIAairportSecurity.Training
 
             //get value
             arSession = FindObjectOfType<ARSession>();
+            arSessionParent = arSession.gameObject;
             showDetectedPlanes = FindObjectOfType<ShowDetectedPlanes>();
             _raycastController= GetComponent<RaycastSpawnObject>();
+
+            //get and setup arplane value
+            arPlaneManager = FindObjectOfType<ARPlaneManager>();
+            arPlaneManagerTemplate = new ARPlaneManager();
+            arPlaneManagerTemplate.planePrefab = arPlaneManager.planePrefab;
+            arPlaneManagerParent = arPlaneManager.gameObject;
         }
 
         #region SetData
-
         //Set object to spawn
         public void SetGameObject(int gameobjectIndex)
         {
@@ -83,21 +106,29 @@ namespace SIAairportSecurity.Training
             _spawnedObjects = null;
 
             isSpawnConformed = false;
+            _raycastController.ChangeState(ObjectManipulation.Move);
 
-            ShowHideMoveRotateBTN(true);
+            SwitchManipulationState(false);
+
+            RaiseStateChangeEvent(GameState.PlaceItem);
+        }
+        public void DestroySpawnedObject()
+        {
+            Destroy(_spawnedObjects);
+            _spawnedObjects = null;
+
+            isSpawnConformed = false;
             _raycastController.ChangeState(ObjectManipulation.Move);
         }
 
         //confirm items placement after click place item
-        public void ConformObjectPosition()
+        public void ConfirmObjectPosition()
         {
-            _gameCanvasController.ShowConformedBTN(false);
+            _gameCanvasController.ShowPlacedItemBTN(false);
             showDetectedPlanes.ShowDotsPlane(false);
 
             //move down the object
             _spawnedObjectRotateObject.localPosition = _intialposition;
-
-            ShowHideMoveRotateBTN(false);
 
             //delete box collider in rotate object
             _spawnedObjectRotateObject.GetComponent<BoxCollider>().enabled = true;
@@ -112,15 +143,29 @@ namespace SIAairportSecurity.Training
             _spawnedObjectRigidbody.freezeRotation = true;
 
             //delete rigidbody after a second
-            Invoke("DeleteRigidbody", 2.5f);
+            Invoke("DeleteRigidbody", 1.5f);
 
-            SetTapInstruction(false);
             isSpawnConformed = true;
+        }
+
+        public void ResetPlane()
+        {
+            showDetectedPlanes.ResetPlane();
+
+            if (!isSpawnConformed)
+            {
+                DestroySpawnedObject();
+            }
+            //ResetAllPlane();
         }
         #endregion
 
         #region GetData
 
+        public GameState GetCurrentGameState()
+        {
+            return currentGameState;
+        }
         //return current layer canvas
         public MenuState GetCurrentScreen()
         {
@@ -159,9 +204,25 @@ namespace SIAairportSecurity.Training
                 return true;
             }
         }
+
+        public bool CheckARPlaneExist()
+        {
+            return showDetectedPlanes.CheckARPlaneScanned();
+        }
+
+        
+        public ARPlaneManager GetARPlaneManager()
+        {
+            return arPlaneManager;
+        }
         #endregion
 
         #region Operation
+        private void SwitchManipulationState(bool newCondition)
+        {
+            _moveBtn.interactable = newCondition;
+            _rotateBtn.interactable = newCondition;
+        }
 
         //Spawn selected object
         public void SpawnObject(ARRaycastHit hit)
@@ -199,8 +260,11 @@ namespace SIAairportSecurity.Training
                     LeanTween.scale(_spawnedObjectRotateObject.gameObject, to: InitalScale, 1f).setEase(LeanTweenType.easeOutBack);
                     PlayPlaceSound();
 
-                    _gameCanvasController.ShowConformedBTN(true);
-
+                    _gameCanvasController.ChangeButtonInteractable(true);
+                    _gameCanvasController.ShowPlacedItemBTN(true);
+                    SwitchManipulationState(true);
+                    _gameCanvasController.EnabledMoveBTN();
+                    _gameCanvasController.DisableInstruction();
                 }
             }
         }
@@ -288,12 +352,21 @@ namespace SIAairportSecurity.Training
             return snappedValue;
         }
 
-        public void SetTapInstruction(bool condition)
+        public void ResetAllPlane()
         {
-            if (!isSpawnConformed)
-            {
-                _gameCanvasController.EnableDisableInstrruction(condition);
-            }
+            arPlaneManager.ResetTrackables();
+            
+            StartCoroutine(DelayCreateManager());
+        }
+
+        private IEnumerator DelayCreateManager()
+        {
+            Destroy(arPlaneManager);
+            //Destroy(arSession);
+            yield return new WaitForSeconds(1f);
+            //arSession = arSessionParent.AddComponent<ARSession>();
+            arPlaneManager = arPlaneManagerParent.AddComponent<ARPlaneManager>();
+            arPlaneManager.planePrefab = arPlaneManagerTemplate.planePrefab;
         }
         #endregion
 
@@ -311,6 +384,7 @@ namespace SIAairportSecurity.Training
                 _spawnedObjectRotateObject.localPosition = _intialposition;
                 _spawnedObjectRotateObject.GetComponent<BoxCollider>().enabled = false;
                 isInitRotate = false;
+
             }
         }
         //switch to rotate object 1 finger
@@ -336,18 +410,9 @@ namespace SIAairportSecurity.Training
             }
         }
 
-        //show or hide move rotate panel
-        public void ShowHideMoveRotateBTN(bool Condition)
-        {
-            _gameCanvasController.ShowHideMoveRotateBTN(Condition);
-        }
-
         //reset move rotate panel
         public void ResetMoveRotate()
         {
-            isSpawnConformed = false;
-            SetTapInstruction(true);
-
             _raycastController.ChangeState(ObjectManipulation.Move);
             showDetectedPlanes.ShowDotsPlane(true);
             FindChildWithTag(_spawnedObjects.transform, "TouchIndicator").gameObject.SetActive(true);
@@ -390,6 +455,23 @@ namespace SIAairportSecurity.Training
                 _spawnedObjectRotateObject.rotation.eulerAngles.z
                 );
         }
+        #endregion
+
+        #region Event
+
+        public void RaiseStateChangeEvent(GameState gameState)
+        {
+            if (onStateChange != null)
+            {
+                onStateChange(gameState);
+            }
+        }
+
+        private void ChangeState(GameState gameState)
+        {
+            currentGameState = gameState;
+        }
+
         #endregion
     }
 }

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace SIAairportSecurity.Training
 {
@@ -14,14 +16,10 @@ namespace SIAairportSecurity.Training
         //Drags = the different menus we have
         public _MenuState[] allMenus;
 
-        [SerializeField] private GameObject _tapInstruction;
-        Vector3 _inital;
-
-
         //The states we can choose from
         public enum MenuState
         {
-            Splash, Selection, Training
+           Selection, Training, Quit
         }
 
         //State-object dictionary to make it easier to activate a menu 
@@ -35,11 +33,6 @@ namespace SIAairportSecurity.Training
 
         private int _itemSelected;
 
-        // Start is called before the first frame update
-        void Start()
-        {
-             _inital = _tapInstruction.transform.localScale;
-        }
 
         // Update is called once per frame
         void Update()
@@ -48,12 +41,12 @@ namespace SIAairportSecurity.Training
         }
 
         #region SetData
-
         public void InitState(GamePlayController gamePlayController)
         {
             this._gamePlayController = gamePlayController;
             initMenuState();
             FadeIn();
+            _gamePlayController.onStateChange += ChangeActiveSubUI;
         }
 
         public void SetObject(int objectIndex)
@@ -61,7 +54,7 @@ namespace SIAairportSecurity.Training
             _itemSelected = objectIndex;
         }
 
-        public void ShowConformedBTN(bool Condition)
+        public void ShowPlacedItemBTN(bool Condition)
         {
             if (activeState.state == MenuState.Training)
             {
@@ -96,41 +89,43 @@ namespace SIAairportSecurity.Training
             }
         }
 
-        public void EnableDisableInstrruction(bool Intruction)
-        {
-
-            if (Intruction)
-            {
-                _tapInstruction.SetActive(Intruction);
-
-                _tapInstruction.transform.localScale = Vector3.zero;
-
-                LeanTween.scale(_tapInstruction, _inital, 0.5f).setEase(LeanTweenType.easeInOutExpo);
-            }
-            else
-            {
-                LeanTween.scale(_tapInstruction, Vector3.zero, 0.5f).setEase(LeanTweenType.easeInOutExpo).setOnComplete(() =>
-                {
-                    _tapInstruction.SetActive(Intruction);
-                });
-            }
-        }
-
         public void ResetObject()
         {
             _gamePlayController.ResetObject();
             _gamePlayController.ShowAllPlane();
         }
 
-        public void ConformObject()
+        public void ConfirmObject()
         {
-            _gamePlayController.ConformObjectPosition();
+            _gamePlayController.ConfirmObjectPosition();
+        }
+        public void ResetPlane()
+        {
+            _gamePlayController.ResetPlane();
         }
 
+        public void FinishScan()
+        {
+            _gamePlayController.RaiseStateChangeEvent(GameState.PlaceItem);
+        }
+
+        public void ConfirmItemPlacement()
+        {
+            _gamePlayController.RaiseStateChangeEvent(GameState.Gameplay);
+        }
+
+        public void DisableInstruction()
+        {
+            activeState.GetComponent<Training>().DisableInstruction();
+        }
         #endregion
 
         #region GetData
 
+        public bool GetIfObjectConfirmed()
+        {
+            return _gamePlayController.isSpawnConformed;
+        }
         public Dictionary<int, (Sprite,string, bool, bool)> GetListData()
         {
             return _gamePlayController.GetSelectionData();
@@ -149,6 +144,10 @@ namespace SIAairportSecurity.Training
             return trainingMenu;
         }
 
+        public bool CheckARPlaneExist()
+        {
+            return _gamePlayController.CheckARPlaneExist();
+        }
         #endregion
 
         #region MenuState
@@ -186,7 +185,7 @@ namespace SIAairportSecurity.Training
             //Activate the default menu
             SetActiveState(MenuState.Selection);
         }
-
+        // set activated
         public void SetActiveState(MenuState newState, bool isJumpingBack = false)
         {
 
@@ -199,7 +198,7 @@ namespace SIAairportSecurity.Training
             }
 
             //Deactivate the old state
-            if (activeState != null)
+            if (activeState != null && newState != MenuState.Quit)
             {
                 activeState.gameObject.SetActive(false);
             }
@@ -252,14 +251,17 @@ namespace SIAairportSecurity.Training
             _gamePlayController.SwitchToMove();
         }
 
+        public void EnabledMoveBTN()
+        {
+            if (activeState.state == MenuState.Training)
+            {
+                activeState.GetComponent<Training>().SwitchToMove();
+            }
+        }
+
         public void SwitchToRotate()
         {
             _gamePlayController.SwitchToRotate();
-        }
-
-        public void ShowHideMoveRotateBTN(bool Condition)
-        {
-            GetTrainingScript().ShowHideMoveRotateBTN(Condition);
         }
 
         public void ResetMoveRotate()
@@ -275,8 +277,41 @@ namespace SIAairportSecurity.Training
         {
             _gamePlayController.SnapObjectYAxis();
         }
+
+        public void ChangeButtonInteractable(bool newCondition)
+        {
+            if (activeState.state == MenuState.Training)
+            {
+                activeState.GetComponent<Training>().ChangeButtonInteractable(newCondition);
+            }
+        }
+
+
         #endregion
 
+        private void ChangeActiveSubUI(GameState gameState)
+        {
+            switch (gameState)
+            {
+                case GameState.Scanning:
+                    activeState.GetComponent<Training>().ShowScanningSurfaceAnimation();
+                    break;
+                case GameState.MapArea:
+                    activeState.GetComponent<Training>().ShowMapTheAreaInstruction();
+                    break;
+                case GameState.PlaceItem:
+                    activeState.GetComponent<Training>().ShowPlaceInstruction();
+                    break;
+                case GameState.Gameplay:
+                    activeState.GetComponent<Training>().ConfirmPosition();
+                    ConfirmObject();
+                    break;
+                default:
+                    Debug.LogError("Value was not set");
+                    break;
+            }
+            
+        }
         public void PlayButtonSound()
         {
             _gamePlayController.PlayButtonSound();
