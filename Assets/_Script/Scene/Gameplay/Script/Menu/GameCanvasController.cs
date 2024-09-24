@@ -16,12 +16,6 @@ namespace SIAairportSecurity.Training
         //Drags = the different menus we have
         public _MenuState[] allMenus;
 
-        //The states we can choose from
-        public enum MenuState
-        {
-           Selection, Training, Quit
-        }
-
         //State-object dictionary to make it easier to activate a menu 
         private Dictionary<MenuState, _MenuState> menuDictionary = new Dictionary<MenuState, _MenuState>();
 

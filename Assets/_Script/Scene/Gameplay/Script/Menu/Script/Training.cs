@@ -70,7 +70,7 @@ namespace SIAairportSecurity.Training
         {
             base.InitState(menuController);
 
-            state = GameCanvasController.MenuState.Training;
+            state = MenuState.Training;
             init();
         }
 
@@ -140,7 +140,7 @@ namespace SIAairportSecurity.Training
         #region operation
         public void JumpToQuit()
         {
-            _menuCanvasController.SetActiveState(GameCanvasController.MenuState.Quit);
+            _menuCanvasController.SetActiveState(MenuState.Quit);
         }
 
         public void ShowCloseMenuContainer()
@@ -159,7 +159,7 @@ namespace SIAairportSecurity.Training
         {
             _menuCanvasController.ResetObject();
 
-            _menuCanvasController.SetActiveState(GameCanvasController.MenuState.Selection);
+            _menuCanvasController.SetActiveState(MenuState.Selection); 
         }
 
         #region ShowHideMoveRotateBTN

@@ -12,3 +12,10 @@ public enum GameState
     PlaceItem,
     Gameplay
 }
+
+public enum MenuState
+{
+    Selection, 
+    Training, 
+    Quit
+}

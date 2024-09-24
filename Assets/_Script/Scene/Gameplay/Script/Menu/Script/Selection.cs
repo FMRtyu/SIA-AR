@@ -26,7 +26,7 @@ namespace SIAairportSecurity.Training
         {
             base.InitState(menuController);
 
-            state = GameCanvasController.MenuState.Selection;
+            state = MenuState.Selection;
         }
 
 
@@ -113,9 +113,11 @@ namespace SIAairportSecurity.Training
 
             if (_selectItemBTNTransform.localScale == Vector3.zero)
             {
-                LeanTween.scale(_selectItemBTNTransform, _initialScaleSelectItemBTN, 1f).setEase(LeanTweenType.easeOutBack);
+                LeanTween.scale(_selectItemBTNTransform, _initialScaleSelectItemBTN, 0.5f).setEase(LeanTweenType.easeOutBack).setOnComplete(() =>
+                {
+                    _selectItemBTN.interactable = true;
+                });
             }
-            _selectItemBTN.interactable = true;
 
             if (_selectedItem == null)
             {

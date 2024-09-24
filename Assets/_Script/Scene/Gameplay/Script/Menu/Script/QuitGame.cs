@@ -11,7 +11,7 @@ namespace SIAairportSecurity.Training
         {
             base.InitState(menuController);
 
-            state = GameCanvasController.MenuState.Quit;
+            state = MenuState.Quit;
         }
 
         public void QuitApp()
