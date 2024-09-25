@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,6 +34,10 @@ namespace SIAairportSecurity.Training
         private void OnEnable()
         {
             ShowAllItem();
+            if (_menuCanvasController != null)
+            {
+                _menuCanvasController.ResetItemValue();
+            }
         }
 
         private void Start()
@@ -96,6 +101,79 @@ namespace SIAairportSecurity.Training
 
                 _itemBTNList.Add(temp);
             }
+            LoadAllAssetBundle();
+        }
+
+        /// <summary>
+        /// Get all data from persistance data path
+        /// </summary>
+        /// <returns></returns>
+        private void LoadAllAssetBundle()
+        {
+            string directoryPath = Application.persistentDataPath;
+
+            if (Directory.Exists(directoryPath))
+            {
+                string[] files = Directory.GetFiles(directoryPath); // Get all files in the directory
+
+                foreach (string file in files)
+                {
+                    string fileName = Path.GetFileName(file); // Extract the file name
+
+                    GameObject temp = Instantiate(_itemBTNPrefabs, _itemBTNParent);
+
+                    ItemBTN tempItemBTN = temp.GetComponent<ItemBTN>();
+
+                    tempItemBTN.InitSelection(this, file);
+
+                    StartCoroutine(SetButtonIcon(Path.Combine(Application.persistentDataPath, fileName), tempItemBTN));
+                    tempItemBTN.SetItemName(fileName);
+
+                    _itemBTNList.Add(temp);
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"Directory does not exist: {directoryPath}");
+            }
+        }
+
+        private IEnumerator SetButtonIcon(string path, ItemBTN tempItemBTN)
+        {
+            AssetBundleCreateRequest bundleRequest = AssetBundle.LoadFromFileAsync(path);
+            yield return bundleRequest;
+
+            AssetBundle bundle = bundleRequest.assetBundle;
+
+            // List all assets in the Asset Bundle
+            string[] assetNames = bundle.GetAllAssetNames();
+            if (assetNames.Length == 0)
+            {
+                Debug.LogError("No assets found in AssetBundle.");
+                yield break;
+            }
+            foreach (string assetName in assetNames)
+            {
+                if (assetName.EndsWith(".png") || assetName.EndsWith(".jpg")) // Example criteria for sprites
+                {
+                    AssetBundleRequest spriteRequest = bundle.LoadAssetAsync<Sprite>(assetName);
+                    yield return spriteRequest;
+
+                    Sprite sprite = spriteRequest.asset as Sprite;
+                    if (sprite != null)
+                    {
+
+                        tempItemBTN.SetIcon(sprite);
+                        // Optionally, unload the Asset Bundle if no longer needed
+                        bundle.Unload(false);
+                        yield break;
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Failed to load sprite from AssetBundle: " + assetName);
+                    }
+                }
+            }
         }
 
         private void init()
@@ -107,17 +185,10 @@ namespace SIAairportSecurity.Training
             ShowAllItem();
         }
 
-        public void SetObject(int itemIndex , Button _selectedItemBTN)
+        public void SetObject(int itemIndex, Button _selectedItemBTN)
         {
             _menuCanvasController.SetObject(itemIndex);
-
-            if (_selectItemBTNTransform.localScale == Vector3.zero)
-            {
-                LeanTween.scale(_selectItemBTNTransform, _initialScaleSelectItemBTN, 0.5f).setEase(LeanTweenType.easeOutBack).setOnComplete(() =>
-                {
-                    _selectItemBTN.interactable = true;
-                });
-            }
+            _selectItemBTN.interactable = true;
 
             if (_selectedItem == null)
             {
@@ -129,10 +200,41 @@ namespace SIAairportSecurity.Training
             {
                 _selectedItem.interactable = true;
                 _selectedItem.GetComponent<ItemBTN>().ResetNameColor();
+
                 _selectedItemBTN.interactable = false;
 
                 _selectedItem = _selectedItemBTN;
             }
+
+            LeanTween.scale(_selectItemBTNTransform, _initialScaleSelectItemBTN, 0.5f).setEase(LeanTweenType.easeOutBack).setOnComplete(() =>
+            {
+                _selectItemBTN.interactable = true;
+            });
+        }
+
+        public void SetObject(string itemPath, Button _selectedItemBTN)
+        {
+            _menuCanvasController.SetObject(itemPath);
+            _selectItemBTN.interactable = true;
+
+            if (_selectedItem == null)
+            {
+                _selectedItemBTN.interactable = false;
+
+                _selectedItem = _selectedItemBTN;
+            }
+            else
+            {
+                _selectedItem.interactable = true;
+                _selectedItemBTN.interactable = false;
+
+                _selectedItem = _selectedItemBTN;
+            }
+
+            LeanTween.scale(_selectItemBTNTransform, _initialScaleSelectItemBTN, 0.5f).setEase(LeanTweenType.easeOutBack).setOnComplete(() =>
+            {
+                _selectItemBTN.interactable = true;
+            });
         }
         #endregion
         public void JumpToTraining()
@@ -147,6 +249,10 @@ namespace SIAairportSecurity.Training
             _menuCanvasController.JumpToTraining();
         }
 
+        public void JumpToEditScene()
+        {
+            _menuCanvasController.FadeOutChangeScene();
+        }
         public void PlayButtonSound()
         {
             _menuCanvasController.PlayButtonSound();

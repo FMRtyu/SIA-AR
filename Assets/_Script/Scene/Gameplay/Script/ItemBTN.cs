@@ -1,3 +1,4 @@
+using SIAairportSecurity.FileInsert;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,7 +10,8 @@ namespace SIAairportSecurity.Training
     public class ItemBTN : MonoBehaviour
     {
 
-        private int _itemIndex;
+        private int _itemIndex = -1;
+        private string _itemPath;
         [SerializeField] private Image _imageChild;
         [SerializeField] private TMP_Text _itemName;
         private Color _itemInitNameColor;
@@ -18,6 +20,13 @@ namespace SIAairportSecurity.Training
         private void Start()
         {
             init();
+        }
+
+        public void InitSelection(Selection _selectionMenu, string _itemPath)
+        {
+            this._selection = _selectionMenu;
+
+            this._itemPath = _itemPath;
         }
 
         public void InitSelection(Selection _selection, int _itemIndex)
@@ -39,8 +48,19 @@ namespace SIAairportSecurity.Training
 
         private void SetObject()
         {
-            _selection.SetObject(_itemIndex, GetComponent<Button>());
-            _itemName.color = Color.black;
+            if (_selection != null)
+            {
+                if (_itemIndex > -1)
+                {
+                    _selection.SetObject(_itemIndex, GetComponent<Button>());
+                }
+                else if (_itemPath != null)
+                {
+                    _selection.SetObject(_itemPath, GetComponent<Button>());
+                }
+
+                _itemName.color = Color.black;
+            }
         }
 
         public void SetIcon(Sprite sprite)

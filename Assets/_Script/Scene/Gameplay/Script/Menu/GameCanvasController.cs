@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace SIAairportSecurity.Training
@@ -25,7 +26,8 @@ namespace SIAairportSecurity.Training
 
         protected GamePlayController _gamePlayController;
 
-        private int _itemSelected;
+        private int _itemSelected = -1;
+        private string _itemSelectedPath;
 
 
         // Update is called once per frame
@@ -48,6 +50,11 @@ namespace SIAairportSecurity.Training
             _itemSelected = objectIndex;
         }
 
+        public void SetObject(string objectIndex)
+        {
+            _itemSelectedPath = objectIndex;
+        }
+
         public void ShowPlacedItemBTN(bool Condition)
         {
             if (activeState.state == MenuState.Training)
@@ -58,11 +65,16 @@ namespace SIAairportSecurity.Training
 
         public void JumpToTraining()
         {
-            _gamePlayController.SetGameObject(_itemSelected);
+            if (_itemSelected > -1)
+            {
+                _gamePlayController.SetGameObject(_itemSelected);
+            }
+            else if (_itemSelectedPath != null)
+            {
+                _gamePlayController.SetGameObject(_itemSelectedPath);
+            }
 
             SetActiveState(MenuState.Training);
-
-
         }
 
         //Jump back one step = what happens when we press escape or one of the back buttons
@@ -89,7 +101,13 @@ namespace SIAairportSecurity.Training
             _gamePlayController.ShowAllPlane();
         }
 
-        public void ConfirmObject()
+        public void ResetItemValue()
+        {
+            _itemSelected = -1;
+            _itemSelectedPath = "";
+    }
+
+    public void ConfirmObject()
         {
             _gamePlayController.ConfirmObjectPosition();
         }
@@ -233,6 +251,16 @@ namespace SIAairportSecurity.Training
             LeanTween.alphaCanvas(fadeImgObject, to: 1, fadeTime).setOnComplete(() =>
             {
                 Application.Quit();
+            });
+        }
+
+        public void FadeOutChangeScene()
+        {
+            fadeImgObject.blocksRaycasts = true;
+            fadeImgObject.interactable = true;
+            LeanTween.alphaCanvas(fadeImgObject, to: 1, fadeTime).setOnComplete(() =>
+            {
+                SceneManager.LoadScene(2);
             });
         }
 
