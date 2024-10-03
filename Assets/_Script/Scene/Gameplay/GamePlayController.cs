@@ -354,7 +354,7 @@ namespace SIAairportSecurity.Training
 
         public void ResetAllPlane()
         {
-            arPlaneManager.ResetTrackables();
+            //arPlaneManager.ResetTrackables();
             
             StartCoroutine(DelayCreateManager());
         }
