@@ -17,6 +17,8 @@ namespace SIAairportSecurity.Training
         private ARRaycastManager raycastManager;
         private ARPlaneManager _arPlaneManager;
 
+        [SerializeField] private Training _trainingObj;
+
         private GameObject _selectedObject;
         private List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
@@ -161,6 +163,7 @@ namespace SIAairportSecurity.Training
                 if (_gamePlayController.GetCurrentGameState() == GameState.Scanning)
                 {
                     _gamePlayController.RaiseStateChangeEvent(GameState.MapArea);
+                    _trainingObj.ShowHideInfoPanel(false);
                 }
             }
         }

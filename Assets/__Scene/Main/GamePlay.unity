@@ -735,6 +735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10cccc3fd6858eb4e9caddbb97ff5b9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _trainingObj: {fileID: 527799232}
   itemLayerMask:
     serializedVersion: 2
     m_Bits: 32768
@@ -5833,8 +5834,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8f52a23df5a6af4dbc47d6c753a84ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CameraManager: {fileID: 629518033}
-  m_BrightnessMod: 2
 --- !u!108 &1117788676
 Light:
   m_ObjectHideFlags: 0

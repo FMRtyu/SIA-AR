@@ -218,6 +218,11 @@ namespace SIAairportSecurity.Training
             }
         }
 
+        public void ShowHideInfoPanel(bool newCondition)
+        {
+            _infoPanel.SetActive(newCondition);
+        }
+
         public void QuitGame()
         {
             _menuCanvasController.FadeOutQuit();
