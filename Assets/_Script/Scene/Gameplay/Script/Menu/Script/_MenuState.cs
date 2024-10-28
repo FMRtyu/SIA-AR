@@ -7,7 +7,7 @@ namespace SIAairportSecurity.Training
     public class _MenuState : MonoBehaviour
     {
         //Which state is this?
-        public GameCanvasController.MenuState state { get; protected set; }
+        public MenuState state { get; protected set; }
 
 
         protected GameCanvasController _menuCanvasController;
