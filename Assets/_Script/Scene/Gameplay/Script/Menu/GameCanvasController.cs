@@ -27,7 +27,8 @@ namespace SIAairportSecurity.Training
 
         private int _itemSelected;
 
-
+        public bool currentMoveRotateBTNState {  get; private set; }
+        public bool isBacktoSelection {  get; private set; }
         // Update is called once per frame
         void Update()
         {
@@ -35,6 +36,15 @@ namespace SIAairportSecurity.Training
         }
 
         #region SetData
+        public void SetisBacktoSelection(bool newState)
+        {
+            isBacktoSelection = newState;
+        }
+
+        public void SetCurrentMoveRotateBTNState(bool newState)
+        {
+            currentMoveRotateBTNState = newState;
+        }
         public void InitState(GamePlayController gamePlayController)
         {
             this._gamePlayController = gamePlayController;
@@ -59,10 +69,19 @@ namespace SIAairportSecurity.Training
         public void JumpToTraining()
         {
             _gamePlayController.SetGameObject(_itemSelected);
+            _gamePlayController.SetIsConfirmedPosition(false);
 
             SetActiveState(MenuState.Training);
+        }
 
+        public void BackToTraining()
+        {
+            SetActiveState(MenuState.Training);
 
+            if (true)
+            {
+
+            }
         }
 
         //Jump back one step = what happens when we press escape or one of the back buttons
@@ -116,6 +135,10 @@ namespace SIAairportSecurity.Training
 
         #region GetData
 
+        public bool GetIsConfirmedPosition()
+        {
+            return _gamePlayController.GetIsConfirmedPosition();
+        }
         public bool GetIfObjectConfirmed()
         {
             return _gamePlayController.isSpawnConformed;
@@ -310,5 +333,7 @@ namespace SIAairportSecurity.Training
         {
             _gamePlayController.PlayButtonSound();
         }
+
+        public GamePlayController GetGamePlayController() { return _gamePlayController; }
     }
 }

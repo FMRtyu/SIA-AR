@@ -147,6 +147,11 @@ namespace SIAairportSecurity.Training
             _menuCanvasController.JumpToTraining();
         }
 
+        public void BackToTraining()
+        {
+            _menuCanvasController.BackToTraining();
+        }
+
         public void PlayButtonSound()
         {
             _menuCanvasController.PlayButtonSound();

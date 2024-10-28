@@ -87,6 +87,10 @@ namespace SIAairportSecurity.Training
         }
 
         #region SetData
+        public void SetIsConfirmedPosition(bool newState)
+        {
+            isSpawnConformed = newState;
+        }
         //Set object to spawn
         public void SetGameObject(int gameobjectIndex)
         {
@@ -102,6 +106,10 @@ namespace SIAairportSecurity.Training
         //reset training session
         public void ResetObject()
         {
+            if (_spawnedObjects == null)
+            {
+                return;
+            }
             Destroy(_spawnedObjects);
             _spawnedObjects = null;
 
@@ -114,8 +122,11 @@ namespace SIAairportSecurity.Training
         }
         public void DestroySpawnedObject()
         {
-            Destroy(_spawnedObjects);
-            _spawnedObjects = null;
+            if (_spawnedObjects != null)
+            {
+                Destroy(_spawnedObjects);
+                _spawnedObjects = null;
+            }
 
             isSpawnConformed = false;
             _raycastController.ChangeState(ObjectManipulation.Move);
@@ -152,10 +163,13 @@ namespace SIAairportSecurity.Training
         {
             showDetectedPlanes.ResetPlane();
 
-            if (!isSpawnConformed)
+            DestroySpawnedObject();
+
+            if (_spawnedObjects == null)
             {
-                DestroySpawnedObject();
+                _gameCanvasController.ShowPlacedItemBTN(false);
             }
+
             //ResetAllPlane();
         }
         #endregion
@@ -415,7 +429,7 @@ namespace SIAairportSecurity.Training
         {
             _raycastController.ChangeState(ObjectManipulation.Move);
             showDetectedPlanes.ShowDotsPlane(true);
-            FindChildWithTag(_spawnedObjects.transform, "TouchIndicator").gameObject.SetActive(true);
+            //FindChildWithTag(_spawnedObjects.transform, "TouchIndicator").gameObject.SetActive(true);
         }
 
         private void ChangeRotateOrientation(Transform rotatedObject)
