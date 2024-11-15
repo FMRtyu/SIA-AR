@@ -43,7 +43,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 143b8e01d0a73a84fa822b9bc666bbe8, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -192,6 +192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1189851980140412673}
   - component: {fileID: 9212689837679132152}
+  - component: {fileID: 1041106910058681742}
   m_Layer: 15
   m_Name: IED
   m_TagString: Interactable
@@ -238,6 +239,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.13, y: 0.13, z: 0.27}
   m_Center: {x: 0, y: 0.07, z: 0}
+--- !u!114 &1041106910058681742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8727053873111807127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f49f8d1f6775d2142ad6bc228955f278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioSource: {fileID: 6986448148819016409}
 --- !u!1001 &308298330153106994
 PrefabInstance:
   m_ObjectHideFlags: 0

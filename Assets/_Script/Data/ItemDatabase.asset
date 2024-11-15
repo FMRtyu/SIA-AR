@@ -26,7 +26,7 @@ MonoBehaviour:
     itemInfo: Pouch bag
     isObjectSmall: 0
   - itemID: 2
-    itemPrefabs: {fileID: 6780869807886001542, guid: 5f0f109202ced59438505079e43a0ce2, type: 3}
+    itemPrefabs: {fileID: 6780869807886001542, guid: 0f32b825c1515b846aa7af0728b3ed39, type: 3}
     itemSprite: {fileID: 21300000, guid: 5559901d4d733554783a2b74cab96018, type: 3}
     itemName: Shopping bag
     itemInfo: Shopping bag
@@ -66,4 +66,10 @@ MonoBehaviour:
     itemSprite: {fileID: 21300000, guid: c9dba6d80e0399c4bae735681cd1f786, type: 3}
     itemName: IED
     itemInfo: IED
+    isObjectSmall: 0
+  - itemID: 9
+    itemPrefabs: {fileID: 6780869807886001542, guid: 5f0f109202ced59438505079e43a0ce2, type: 3}
+    itemSprite: {fileID: 21300000, guid: 5f2c9df9c73d216448cf99f6f4b1c9be, type: 3}
+    itemName: Shopping bag & IED
+    itemInfo: Shopping bag & IED
     isObjectSmall: 0

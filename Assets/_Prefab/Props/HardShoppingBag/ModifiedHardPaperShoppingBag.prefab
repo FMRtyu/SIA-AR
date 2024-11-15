@@ -236,6 +236,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 5f7add9049cd810468263a171ecdf060, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b536edbd9ef2d1241a5450288f796f64, type: 2}
     - target: {fileID: 919132149155446097, guid: 5f7add9049cd810468263a171ecdf060, type: 3}
       propertyPath: m_Name
       value: HardPaperShoppingBag_V2

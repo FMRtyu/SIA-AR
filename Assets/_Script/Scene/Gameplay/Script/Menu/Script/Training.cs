@@ -67,7 +67,7 @@ namespace SIAairportSecurity.Training
         private bool _isButtonOn;
 
         //event
-        private GameState _gameState;
+        public GameState _gameState;
 
         //Specific for this state
         public override void InitState(GameCanvasController menuController)
@@ -310,6 +310,14 @@ namespace SIAairportSecurity.Training
             _menuCanvasController.FadeOutQuit();
         }
 
+        public void ResetMapArea()
+        {
+            _menuCanvasController.RaisedGameState(GameState.Scanning);
+            _scanInstruction.SetActive(true);
+            _finishResetBTN.SetActive(false);
+            ScaleUpAnimation(_instructionPanel, Vector3.zero);
+        }
+
         public void ResetPlane(Button button)
         {
             StartCoroutine(ButtonDelay.EnabledBTNAfterSecond(button));
@@ -323,7 +331,7 @@ namespace SIAairportSecurity.Training
                 ShowConformButton(true);
             }
             SwitchRotateMoveToDefault();
-            ScaleUpAnimation(_instructionPanel, _instructionPanelInitScale);
+            ScaleUpAnimation(_instructionPanel, Vector3.zero);
 
             LeanTween.alphaCanvas(_loadingCanvasGroup, to: 1, 1f).setOnComplete(() =>
             {
@@ -331,8 +339,19 @@ namespace SIAairportSecurity.Training
                 LeanTween.alphaCanvas(_loadingCanvasGroup, to: 0, 1f).setDelay(1f).setOnComplete(() =>
                 {
                     _loadingCanvasGroup.gameObject.SetActive(false);
+
                 });
             });
+        }
+
+        public void ShowInstructionUI()
+        {
+            ScaleUpAnimation(_instructionPanel, _instructionPanelInitScale);
+        }
+
+        public Vector3 GetCurrentInstructionUI()
+        {
+            return _instructionPanel.transform.localScale;
         }
         #endregion
 

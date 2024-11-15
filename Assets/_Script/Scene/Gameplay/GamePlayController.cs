@@ -161,6 +161,13 @@ namespace SIAairportSecurity.Training
 
         public void ResetPlane()
         {
+            StartCoroutine(ResetPlaneDelay());
+
+            //ResetAllPlane();
+        }
+
+        private IEnumerator ResetPlaneDelay()
+        {
             showDetectedPlanes.ResetPlane();
 
             DestroySpawnedObject();
@@ -169,8 +176,8 @@ namespace SIAairportSecurity.Training
             {
                 _gameCanvasController.ShowPlacedItemBTN(false);
             }
-
-            //ResetAllPlane();
+            yield return new WaitForSeconds(2f);
+            _raycastController.isDelayed = false;
         }
         #endregion
 
@@ -369,7 +376,7 @@ namespace SIAairportSecurity.Training
         public void ResetAllPlane()
         {
             //arPlaneManager.ResetTrackables();
-            
+
             StartCoroutine(DelayCreateManager());
         }
 
