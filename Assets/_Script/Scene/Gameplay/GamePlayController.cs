@@ -56,15 +56,45 @@ namespace SIAairportSecurity.Training
         public delegate void OnGameStateChanged(GameState currentGameState);
         public event OnGameStateChanged onStateChange;
 
+        //test plane
+        [SerializeField] private TMP_Text _textUI;
+        private int horizontalPlaneCount = 0; 
+        private int verticalPlaneCount = 0;
+        public Material horizontalPlaneMaterial;
+        public Material verticalPlaneMaterial;
+
         private void Awake()
         {
             onStateChange += ChangeState;
             init();
+
+            arPlaneManager.planesChanged += PlaneTextUpdater;
         }
 
-        private void Update()
+        //test plane
+        private void PlaneTextUpdater(ARPlanesChangedEventArgs eventArgs)
         {
+            // Reset counts
+            horizontalPlaneCount = 0; 
+            verticalPlaneCount = 0; 
+            foreach (var plane in arPlaneManager.trackables) {
+                if (plane.alignment == PlaneAlignment.HorizontalUp || plane.alignment == PlaneAlignment.HorizontalDown)
+                {
+                    // Increment horizontal plane count
+                    horizontalPlaneCount++;
 
+                    plane.GetComponent<MeshRenderer>().material = horizontalPlaneMaterial;
+                } 
+                else if (plane.alignment == PlaneAlignment.Vertical) 
+                { 
+                    // Increment verticalplane count
+                    verticalPlaneCount++;
+
+                    plane.GetComponent<MeshRenderer>().material = verticalPlaneMaterial;
+                }
+            } 
+            // Update the TMP text with counts
+            _textUI.text = $"Horizontal Planes: {horizontalPlaneCount}\nVertical Planes: {verticalPlaneCount}";
         }
 
         //initial operation
@@ -161,6 +191,13 @@ namespace SIAairportSecurity.Training
 
         public void ResetPlane()
         {
+            StartCoroutine(ResetPlaneDelay());
+
+            //ResetAllPlane();
+        }
+
+        private IEnumerator ResetPlaneDelay()
+        {
             showDetectedPlanes.ResetPlane();
 
             DestroySpawnedObject();
@@ -169,8 +206,8 @@ namespace SIAairportSecurity.Training
             {
                 _gameCanvasController.ShowPlacedItemBTN(false);
             }
-
-            //ResetAllPlane();
+            yield return new WaitForSeconds(2f);
+            _raycastController.isDelayed = false;
         }
         #endregion
 
@@ -369,7 +406,7 @@ namespace SIAairportSecurity.Training
         public void ResetAllPlane()
         {
             //arPlaneManager.ResetTrackables();
-            
+
             StartCoroutine(DelayCreateManager());
         }
 

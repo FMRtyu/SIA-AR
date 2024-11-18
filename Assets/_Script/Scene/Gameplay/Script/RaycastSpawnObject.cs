@@ -30,6 +30,8 @@ namespace SIAairportSecurity.Training
         private bool isMovingObject = true;
         private static RaycastSpawnObject _instance;
 
+        public bool isDelayed = false;
+
         public static RaycastSpawnObject Instance
         {
             get
@@ -157,6 +159,10 @@ namespace SIAairportSecurity.Training
 
         private void CheckPlaneScanned()
         {
+            if (isDelayed)
+            {
+                return;
+            }
             Vector3 rayEmitPosition = new Vector3(Screen.width / 2, Screen.height / 2, 0);
             if (raycastManager.Raycast(rayEmitPosition, hits, TrackableType.PlaneWithinPolygon))
             {
@@ -164,6 +170,9 @@ namespace SIAairportSecurity.Training
                 {
                     _gamePlayController.RaiseStateChangeEvent(GameState.MapArea);
                     _trainingObj.ShowHideInfoPanel(false);
+                }else if (_trainingObj.GetCurrentInstructionUI() == Vector3.zero && _gamePlayController.GetCurrentGameState() == GameState.PlaceItem && !_gamePlayController.GetIfObjectSpawned())
+                {
+                    _trainingObj.ShowInstructionUI();
                 }
             }
         }
@@ -179,6 +188,11 @@ namespace SIAairportSecurity.Training
         public void ChangeState(ObjectManipulation newState)
         {
             _objectManipulation = newState;
+        }
+
+        public void SetDelay(bool isDelayed)
+        {
+            this.isDelayed = isDelayed;
         }
     }
 }

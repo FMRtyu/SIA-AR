@@ -29,6 +29,10 @@ namespace SIAairportSecurity.Training
 
         public bool currentMoveRotateBTNState {  get; private set; }
         public bool isBacktoSelection {  get; private set; }
+
+        [SerializeField] private MenuState currentMenuState;
+        public delegate void OnMenuStateChanged(MenuState currentGameState);
+        public event OnMenuStateChanged onStateChange;
         // Update is called once per frame
         void Update()
         {
@@ -51,6 +55,7 @@ namespace SIAairportSecurity.Training
             initMenuState();
             FadeIn();
             _gamePlayController.onStateChange += ChangeActiveSubUI;
+            onStateChange += ChangeState;
         }
 
         public void SetObject(int objectIndex)
@@ -230,6 +235,8 @@ namespace SIAairportSecurity.Training
             {
                 stateHistory.Push(newState);
             }
+
+            RaiseStateChangeEvent(newState);
         }
 
         #endregion
@@ -306,6 +313,23 @@ namespace SIAairportSecurity.Training
 
         #endregion
 
+        #region Event
+
+        public void RaiseStateChangeEvent(MenuState menuState)
+        {
+            if (onStateChange != null)
+            {
+                onStateChange(menuState);
+            }
+        }
+
+        private void ChangeState(MenuState menuState)
+        {
+            currentMenuState = menuState;
+        }
+
+        #endregion
+
         private void ChangeActiveSubUI(GameState gameState)
         {
             switch (gameState)
@@ -335,5 +359,10 @@ namespace SIAairportSecurity.Training
         }
 
         public GamePlayController GetGamePlayController() { return _gamePlayController; }
+
+        public void RaisedGameState(GameState newState)
+        {
+            _gamePlayController.RaiseStateChangeEvent(newState);
+        }
     }
 }
