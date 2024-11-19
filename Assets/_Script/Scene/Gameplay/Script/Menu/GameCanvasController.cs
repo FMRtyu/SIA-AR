@@ -248,12 +248,14 @@ namespace SIAairportSecurity.Training
             LeanTween.alphaCanvas(fadeImgObject, to: 0, fadeTime).setOnComplete(() =>
             {
                 fadeImgObject.blocksRaycasts = false;
+                fadeImgObject.interactable = false;
             });
         }
 
         public void FadeOut()
         {
             fadeImgObject.blocksRaycasts = true;
+            fadeImgObject.interactable = true;
             LeanTween.alphaCanvas(fadeImgObject, to: 1, fadeTime);
         }
 

@@ -88,13 +88,15 @@ namespace SIAairportSecurity.Training
                     {
                         Ray ray = Camera.main.ScreenPointToRay(touch.position);
 
-                        Debug.Log("spawning");
+                        
                         if (!_gamePlayController.GetIfObjectSpawned() && _gamePlayController.GetCurrentGameState() != GameState.Scanning)
                         {
+                            Debug.Log("spawning");
                             SpawnItem(touch);
                         }
                         else
                         {
+                            Debug.Log("selecting");
                             SelectItem(ray);
                         }
                     }

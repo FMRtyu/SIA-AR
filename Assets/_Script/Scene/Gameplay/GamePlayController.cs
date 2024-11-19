@@ -56,12 +56,14 @@ namespace SIAairportSecurity.Training
         public delegate void OnGameStateChanged(GameState currentGameState);
         public event OnGameStateChanged onStateChange;
 
-        //test plane
-        [SerializeField] private TMP_Text _textUI;
         private int horizontalPlaneCount = 0; 
         private int verticalPlaneCount = 0;
-        public Material horizontalPlaneMaterial;
         public Material verticalPlaneMaterial;
+
+        public Material[] colorMaterials; 
+        private int colorIndex = 0;
+
+        private Dictionary<TrackableId, Material> planeColors = new Dictionary<TrackableId, Material>();
 
         private void Awake()
         {
@@ -77,24 +79,48 @@ namespace SIAairportSecurity.Training
             // Reset counts
             horizontalPlaneCount = 0; 
             verticalPlaneCount = 0; 
-            foreach (var plane in arPlaneManager.trackables) {
+            foreach (var plane in eventArgs.updated) {
+
                 if (plane.alignment == PlaneAlignment.HorizontalUp || plane.alignment == PlaneAlignment.HorizontalDown)
                 {
-                    // Increment horizontal plane count
-                    horizontalPlaneCount++;
-
-                    plane.GetComponent<MeshRenderer>().material = horizontalPlaneMaterial;
+                    if (colorIndex < colorMaterials.Length)
+                    {
+                        if (!planeColors.ContainsKey(plane.trackableId))
+                        {
+                            plane.GetComponent<MeshRenderer>().material = colorMaterials[colorIndex];
+                            planeColors[plane.trackableId] = colorMaterials[colorIndex];
+                            colorIndex++;
+                        }
+                    }
+                    else
+                    {
+                        if (!planeColors.ContainsKey(plane.trackableId))
+                        {
+                            colorIndex = 0;
+                            plane.GetComponent<MeshRenderer>().material = colorMaterials[colorIndex];
+                            planeColors[plane.trackableId] = colorMaterials[colorIndex];
+                            colorIndex++;
+                        }
+                    }
                 } 
                 else if (plane.alignment == PlaneAlignment.Vertical) 
                 { 
-                    // Increment verticalplane count
-                    verticalPlaneCount++;
 
                     plane.GetComponent<MeshRenderer>().material = verticalPlaneMaterial;
                 }
-            } 
-            // Update the TMP text with counts
-            _textUI.text = $"Horizontal Planes: {horizontalPlaneCount}\nVertical Planes: {verticalPlaneCount}";
+            }
+
+            foreach (var plane in arPlaneManager.trackables)
+            {
+                if (plane.alignment == PlaneAlignment.HorizontalUp || plane.alignment == PlaneAlignment.HorizontalDown)
+                {
+                    horizontalPlaneCount++;
+                }
+                else if(plane.alignment == PlaneAlignment.Vertical)
+                {
+                    verticalPlaneCount++;
+                }
+            }
         }
 
         //initial operation

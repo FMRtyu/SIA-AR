@@ -21,6 +21,8 @@ public class ShowDetectedPlanes : MonoBehaviour
     bool isPlaneScan = true;
 
     private GamePlayController _gamePlayController;
+
+    private Dictionary<TrackableId, Material> planeColors = new Dictionary<TrackableId, Material>();
     // Start is called before the first frame update
     void Awake()
     {
@@ -53,10 +55,10 @@ public class ShowDetectedPlanes : MonoBehaviour
     void OnPlanesChanged(ARPlanesChangedEventArgs args)
     {
         // Change the material of all newly detected planes
-        foreach (ARPlane plane in args.added)
+        foreach (ARPlane plane in args.updated)
         {
-            SetMaterial(plane);
-
+            //SetMaterial(plane);
+            planeColors[plane.trackableId] = plane.GetComponent<MeshRenderer>().material;
             //plane.GetComponent<DualSurfacePlane>().ChangeSecondSurfaceMaterial(useDotsMaterial ? dotsMaterial : shadowMaterial);
         }
     }
@@ -76,27 +78,45 @@ public class ShowDetectedPlanes : MonoBehaviour
     //switch between dots or shadow
     public void ShowDotsPlane(bool condition)
     {
-        // Toggle between the two materials
-        useDotsMaterial = condition;
-        pointCloud.SetTrackablesActive(condition);
-
-        // Update the material for all currently tracked planes
-        foreach (ARPlane plane in _gamePlayController.GetARPlaneManager().trackables)
+        int colorIndex = 0;
+        foreach (var plane in _gamePlayController.GetARPlaneManager().trackables)
         {
-            SetMaterial(plane);
+            if (plane.alignment == PlaneAlignment.HorizontalUp || plane.alignment == PlaneAlignment.HorizontalDown)
+            {
+                plane.GetComponent<MeshRenderer>().material = condition ? _gamePlayController.colorMaterials[colorIndex] : shadowMaterial;
+            }
+            else
+            {
+                plane.GetComponent<MeshRenderer>().material = condition ? _gamePlayController.verticalPlaneMaterial : shadowMaterial;
 
-            //if (!condition)
-            //{
-            //    plane.GetComponent<DualSurfacePlane>().CreateSecondSurface();
-            //}
-            //else
-            //{
-            //    foreach (Transform child in plane.gameObject.transform)
-            //    {
-            //        Destroy(child.gameObject);
-            //    }
-            //}
+            }
+            colorIndex++;
+            if (colorIndex >= _gamePlayController.colorMaterials.Length)
+            {
+                colorIndex = 0;
+            }
         }
+        //// Toggle between the two materials
+        //useDotsMaterial = condition;
+        //pointCloud.SetTrackablesActive(condition);
+
+        //// Update the material for all currently tracked planes
+        //foreach (ARPlane plane in _gamePlayController.GetARPlaneManager().trackables)
+        //{
+        //    SetMaterial(plane);
+
+        //    //if (!condition)
+        //    //{
+        //    //    plane.GetComponent<DualSurfacePlane>().CreateSecondSurface();
+        //    //}
+        //    //else
+        //    //{
+        //    //    foreach (Transform child in plane.gameObject.transform)
+        //    //    {
+        //    //        Destroy(child.gameObject);
+        //    //    }
+        //    //}
+        //}
     }
 
     public void StartStopScanning(Button button)
