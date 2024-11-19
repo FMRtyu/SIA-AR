@@ -75,18 +75,21 @@ namespace SIAairportSecurity.Training
         {
             _gamePlayController.SetGameObject(_itemSelected);
             _gamePlayController.SetIsConfirmedPosition(false);
+            LeanTween.alphaCanvas(fadeImgObject, to: 1, 0.3f).setOnComplete(() =>
+            {
 
-            SetActiveState(MenuState.Training);
+                SetActiveState(MenuState.Training);
+                LeanTween.alphaCanvas(fadeImgObject, to: 0, 2.5f);
+            });
         }
 
         public void BackToTraining()
         {
-            SetActiveState(MenuState.Training);
-
-            if (true)
+            LeanTween.alphaCanvas(fadeImgObject, to: 1, 0.3f).setOnComplete(() =>
             {
-
-            }
+                SetActiveState(MenuState.Training);
+                LeanTween.alphaCanvas(fadeImgObject, to: 0, 1.3f);
+            });
         }
 
         //Jump back one step = what happens when we press escape or one of the back buttons

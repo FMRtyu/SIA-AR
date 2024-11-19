@@ -1,154 +1,176 @@
-using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
-using static SIAairportSecurity.Training.GameCanvasController;
 
 namespace SIAairportSecurity.Training
 {
     public class RaycastSpawnObject : MonoBehaviour
     {
-        private ObjectManipulation _objectManipulation;
+        #region Fields and Properties
 
-        private GamePlayController _gamePlayController;
-        private ARRaycastManager raycastManager;
+        private ARRaycastManager _raycastManager;
         private ARPlaneManager _arPlaneManager;
+        private GamePlayController _gamePlayController;
 
         [SerializeField] private Training _trainingObj;
-
-        private GameObject _selectedObject;
-        private List<ARRaycastHit> hits = new List<ARRaycastHit>();
-
-        //scan surface UI
         [SerializeField] private LayerMask itemLayerMask;
+        [SerializeField] private TMP_Text _debugText;
 
-        // Rotate the selected object based on touch movement
-        private Vector2 lastTouchPosition;
-        private bool isMovingObject = true;
-        private static RaycastSpawnObject _instance;
+        private List<ARRaycastHit> _hits = new List<ARRaycastHit>();
+        private GameObject _selectedObject;
 
+        private Vector2 _lastTouchPosition;
+        private bool _isMovingObject = true;
         public bool isDelayed = false;
 
-        public static RaycastSpawnObject Instance
+        private string _nameChecker = "";
+        private string _horizontalVerticalPlane = "";
+
+        public static RaycastSpawnObject Instance { get; private set; }
+
+        private ObjectManipulation _currentManipulationState;
+
+        #endregion
+
+        #region Unity Callbacks
+
+        private void Awake()
         {
-            get
+            if (Instance == null)
             {
-                if (_instance == null)
-                {
-                    _instance = new RaycastSpawnObject();
-                }
-                return _instance;
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
             }
         }
 
-
-
-        // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
-            //get value
-            init();
+            Initialize();
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Update()
         {
-            //spawning object using raycast
-            if (raycastManager != null)
-            {
-                Raycast();
-                CheckPlaneScanned();
-            }
+            //UpdateDebugText();
+
+            if (_raycastManager == null) return;
+
+            HandleRaycast();
+            CheckPlaneScanned();
         }
 
-        private void init()
+        #endregion
+
+        #region Initialization
+
+        private void Initialize()
         {
             _gamePlayController = GetComponent<GamePlayController>();
-            raycastManager = FindObjectOfType<ARRaycastManager>();
-
-            _arPlaneManager = FindAnyObjectByType<ARPlaneManager>();
+            _raycastManager = FindObjectOfType<ARRaycastManager>();
+            _arPlaneManager = FindObjectOfType<ARPlaneManager>();
         }
 
-        #region RayCast
-        private void Raycast()
+        private void UpdateDebugText()
         {
-            if (_gamePlayController.GetCurrentGameState() != GameState.MapArea)
+            if (_debugText != null)
             {
-                if (Input.touchCount > 0)
+                _debugText.text = $"GameState: {_gamePlayController.GetCurrentGameState()}\n" +
+                                  $"Touch Count: {Input.touchCount}\n" +
+                                  $"Last Selected: {_nameChecker}\n" +
+                                  $"Spawn Raycast Plane: {_horizontalVerticalPlane}";
+            }
+        }
+
+        #endregion
+
+        #region Raycasting
+
+        private void HandleRaycast()
+        {
+            if (_gamePlayController.GetCurrentGameState() != GameState.MapArea && Input.touchCount > 0)
+            {
+                Touch touch = Input.GetTouch(0);
+
+                if (IsPointerOverUI(touch)) return;
+
+                if (touch.phase == TouchPhase.Began && _gamePlayController.GetCurrentGameState() != GameState.Gameplay)
                 {
-                    Touch touch = Input.GetTouch(0);
-
-                    if (IsPointerOverUIObject(touch))
-                        return;
-
-                    if (touch.phase == TouchPhase.Began && _gamePlayController.GetCurrentGameState() != GameState.Gameplay)
-                    {
-                        Ray ray = Camera.main.ScreenPointToRay(touch.position);
-
-                        
-                        if (!_gamePlayController.GetIfObjectSpawned() && _gamePlayController.GetCurrentGameState() != GameState.Scanning)
-                        {
-                            Debug.Log("spawning");
-                            SpawnItem(touch);
-                        }
-                        else
-                        {
-                            Debug.Log("selecting");
-                            SelectItem(ray);
-                        }
-                    }
-                    else if (touch.phase == TouchPhase.Moved && _selectedObject != null)
-                    {
-                        if (_objectManipulation == ObjectManipulation.Move)
-                        {
-                            // Drag the selected object
-                            DragObject(touch);
-                        }
-                        else if (_objectManipulation == ObjectManipulation.Rotate)
-                        {
-                            RotateObject(touch);
-                        }
-                    }
-                    else if (touch.phase == TouchPhase.Ended)
-                    {
-                        // Deselect the object
-                        _selectedObject = null;
-                    }
+                    HandleTouchBegan(touch);
+                }
+                else if (touch.phase == TouchPhase.Moved && _selectedObject != null)
+                {
+                    HandleTouchMoved(touch);
+                }
+                else if (touch.phase == TouchPhase.Ended)
+                {
+                    _selectedObject = null;
                 }
             }
         }
 
-        private void SelectItem(Ray ray)
+        private void HandleTouchBegan(Touch touch)
         {
-            RaycastHit hitObject;
+            Ray ray = Camera.main.ScreenPointToRay(touch.position);
 
-            // First, try to select an existing object
-            if (Physics.Raycast(ray, out hitObject, Mathf.Infinity, itemLayerMask))
+            if (!_gamePlayController.GetIfObjectSpawned() && _gamePlayController.GetCurrentGameState() != GameState.Scanning)
             {
-                _selectedObject = hitObject.transform.gameObject;
+                Debug.Log("Spawning object...");
+                SpawnObject(touch);
+            }
+            else
+            {
+                Debug.Log("Selecting object...");
+                SelectObject(ray);
             }
         }
 
-        private void SpawnItem(Touch touch)
+        private void HandleTouchMoved(Touch touch)
         {
-            TrackableId curId = hits[0].trackableId;
-            ARPlane plane = _arPlaneManager.GetPlane(curId);
-
-            if (plane.alignment != PlaneAlignment.Vertical)
+            if (_currentManipulationState == ObjectManipulation.Move)
             {
-                _gamePlayController.SpawnObject(hits[0]);
+                DragObject(touch);
+            }
+            else if (_currentManipulationState == ObjectManipulation.Rotate)
+            {
+                RotateObject(touch);
+            }
+        }
+
+        private void SelectObject(Ray ray)
+        {
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, itemLayerMask))
+            {
+                _selectedObject = hit.transform.gameObject;
+                _nameChecker = hit.transform.name;
+            }
+        }
+
+        private void SpawnObject(Touch touch)
+        {
+            if (_raycastManager.Raycast(touch.position, _hits, TrackableType.PlaneWithinPolygon))
+            {
+                ARPlane plane = _arPlaneManager.GetPlane(_hits[0].trackableId);
+
+                _nameChecker = plane.name;
+                _horizontalVerticalPlane = plane.alignment.ToString();
+
+                if (plane.alignment != PlaneAlignment.Vertical)
+                {
+                    _gamePlayController.SpawnObject(_hits[0]);
+                }
             }
         }
 
         private void DragObject(Touch touch)
         {
-            // Raycast to get the position in the AR world
-            if (raycastManager.Raycast(touch.position, hits, TrackableType.PlaneWithinBounds))
+            if (_raycastManager.Raycast(touch.position, _hits, TrackableType.PlaneWithinBounds))
             {
-                Pose hitPose = hits[0].pose;
+                Pose hitPose = _hits[0].pose;
                 _selectedObject.transform.position = hitPose.position;
             }
         }
@@ -157,44 +179,54 @@ namespace SIAairportSecurity.Training
         {
             _selectedObject.transform.Rotate(new Vector3(0, -touch.deltaPosition.x, 0) * 0.5f, Space.World);
         }
+
         #endregion
+
+        #region Plane Scanning
 
         private void CheckPlaneScanned()
         {
-            if (isDelayed)
+            if (isDelayed) return;
+
+            Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+
+            if (_raycastManager.Raycast(screenCenter, _hits, TrackableType.PlaneWithinPolygon) &&
+                _gamePlayController.GetCurrentGameState() == GameState.Scanning)
             {
-                return;
+                _gamePlayController.RaiseStateChangeEvent(GameState.MapArea);
+                _trainingObj.ShowHideInfoPanel(false);
             }
-            Vector3 rayEmitPosition = new Vector3(Screen.width / 2, Screen.height / 2, 0);
-            if (raycastManager.Raycast(rayEmitPosition, hits, TrackableType.PlaneWithinPolygon))
+            else if (_raycastManager.Raycast(screenCenter, _hits, TrackableType.PlaneWithinPolygon) && _trainingObj.GetCurrentInstructionUI() == Vector3.zero && _gamePlayController.GetCurrentGameState() == GameState.PlaceItem && !_gamePlayController.GetIfObjectSpawned())
             {
-                if (_gamePlayController.GetCurrentGameState() == GameState.Scanning)
-                {
-                    _gamePlayController.RaiseStateChangeEvent(GameState.MapArea);
-                    _trainingObj.ShowHideInfoPanel(false);
-                }else if (_trainingObj.GetCurrentInstructionUI() == Vector3.zero && _gamePlayController.GetCurrentGameState() == GameState.PlaceItem && !_gamePlayController.GetIfObjectSpawned())
-                {
-                    _trainingObj.ShowInstructionUI();
-                }
+                _trainingObj.ShowInstructionUI();
             }
         }
-        private bool IsPointerOverUIObject(Touch touch)
+
+        #endregion
+
+        #region Utility Methods
+
+        private bool IsPointerOverUI(Touch touch)
         {
-            PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
-            eventDataCurrentPosition.position = new Vector2(touch.position.x, touch.position.y);
+            PointerEventData eventData = new PointerEventData(EventSystem.current)
+            {
+                position = touch.position
+            };
             List<RaycastResult> results = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+            EventSystem.current.RaycastAll(eventData, results);
             return results.Count > 0;
         }
 
         public void ChangeState(ObjectManipulation newState)
         {
-            _objectManipulation = newState;
+            _currentManipulationState = newState;
         }
 
         public void SetDelay(bool isDelayed)
         {
             this.isDelayed = isDelayed;
         }
+
+        #endregion
     }
 }

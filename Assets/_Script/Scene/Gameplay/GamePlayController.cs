@@ -65,6 +65,8 @@ namespace SIAairportSecurity.Training
 
         private Dictionary<TrackableId, Material> planeColors = new Dictionary<TrackableId, Material>();
 
+        bool isInnit = false;
+
         private void Awake()
         {
             onStateChange += ChangeState;
@@ -152,9 +154,11 @@ namespace SIAairportSecurity.Training
         {
             _selectedObjectPrefab = _itemDatabase.items[gameobjectIndex].itemPrefabs;
 
-            if (!arSession.enabled)
+            if (!arPlaneManager.enabled && !isInnit)
             {
-                arSession.enabled = true;
+                arPlaneManager.enabled = true;
+
+                isInnit = true;
             }
             
         }
