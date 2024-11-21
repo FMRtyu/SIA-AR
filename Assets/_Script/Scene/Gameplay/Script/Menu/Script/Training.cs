@@ -326,10 +326,10 @@ namespace SIAairportSecurity.Training
             ChangeScanSurfaceSprite(true);
 
             ChangeButtonInteractable(false);
-            if (_gameState != GameState.MapArea && !_menuCanvasController.GetIsConfirmedPosition())
-            {
-                ShowConformButton(true);
-            }
+
+            _scanInstruction.SetActive(true);
+            _menuCanvasController.GetGamePlayController().RaiseStateChangeEvent(GameState.Scanning);
+
             SwitchRotateMoveToDefault();
             ScaleUpAnimation(_instructionPanel, Vector3.zero);
 
