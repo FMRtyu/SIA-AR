@@ -2334,6 +2334,7 @@ MonoBehaviour:
   - {fileID: 1711214280}
   - {fileID: 1594352440}
   currentMenuState: 0
+  _trainingScript: {fileID: 527799232}
 --- !u!1 &405474881
 GameObject:
   m_ObjectHideFlags: 0

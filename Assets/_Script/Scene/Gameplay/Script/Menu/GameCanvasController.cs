@@ -33,6 +33,8 @@ namespace SIAairportSecurity.Training
         [SerializeField] private MenuState currentMenuState;
         public delegate void OnMenuStateChanged(MenuState currentGameState);
         public event OnMenuStateChanged onStateChange;
+
+        [SerializeField] private Training _trainingScript;
         // Update is called once per frame
         void Update()
         {
@@ -137,7 +139,7 @@ namespace SIAairportSecurity.Training
 
         public void DisableInstruction()
         {
-            activeState.GetComponent<Training>().DisableInstruction();
+            _trainingScript.DisableInstruction();
         }
         #endregion
 
@@ -284,7 +286,7 @@ namespace SIAairportSecurity.Training
         {
             if (activeState.state == MenuState.Training)
             {
-                activeState.GetComponent<Training>().SwitchToMove();
+                _trainingScript.SwitchToMove();
             }
         }
 
@@ -311,7 +313,7 @@ namespace SIAairportSecurity.Training
         {
             if (activeState.state == MenuState.Training)
             {
-                activeState.GetComponent<Training>().ChangeButtonInteractable(newCondition);
+                _trainingScript.ChangeButtonInteractable(newCondition);
             }
         }
 
@@ -340,16 +342,16 @@ namespace SIAairportSecurity.Training
             switch (gameState)
             {
                 case GameState.Scanning:
-                    activeState.GetComponent<Training>().ShowScanningSurfaceAnimation();
+                    _trainingScript.ShowScanningSurfaceAnimation();
                     break;
                 case GameState.MapArea:
-                    activeState.GetComponent<Training>().ShowMapTheAreaInstruction();
+                    _trainingScript.ShowMapTheAreaInstruction();
                     break;
                 case GameState.PlaceItem:
-                    activeState.GetComponent<Training>().ShowPlaceInstruction();
+                    _trainingScript.ShowPlaceInstruction();
                     break;
                 case GameState.Gameplay:
-                    activeState.GetComponent<Training>().ConfirmPosition();
+                    _trainingScript.ConfirmPosition();
                     ConfirmObject();
                     break;
                 default:

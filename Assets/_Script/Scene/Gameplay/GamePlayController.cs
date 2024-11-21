@@ -170,8 +170,11 @@ namespace SIAairportSecurity.Training
             {
                 return;
             }
-            Destroy(_spawnedObjects);
-            _spawnedObjects = null;
+            if (_spawnedObjects)
+            {
+                Destroy(_spawnedObjects);
+                _spawnedObjects = null;
+            }
 
             isSpawnConformed = false;
             _raycastController.ChangeState(ObjectManipulation.Move);
@@ -385,8 +388,12 @@ namespace SIAairportSecurity.Training
         //delete rigidbody from spawned object after i second
         private void DeleteRigidbody()
         {
-            Destroy(_spawnedObjectRigidbody);
-            _spawnedObjects.GetComponent<BoxCollider>().enabled = true;
+            if (_spawnedObjectRigidbody != null)
+            {
+                Destroy(_spawnedObjectRigidbody);
+                _spawnedObjectRigidbody = null;
+                _spawnedObjects.GetComponent<BoxCollider>().enabled = true;
+            }
         }
 
         //play button SFX
@@ -496,6 +503,12 @@ namespace SIAairportSecurity.Training
         {
             _raycastController.ChangeState(ObjectManipulation.Move);
             showDetectedPlanes.ShowDotsPlane(true);
+
+            if (_spawnedObjectRigidbody != null)
+            {
+                Destroy(_spawnedObjectRigidbody);
+                _spawnedObjects.GetComponent<BoxCollider>().enabled = true;
+            }
             //FindChildWithTag(_spawnedObjects.transform, "TouchIndicator").gameObject.SetActive(true);
         }
 
