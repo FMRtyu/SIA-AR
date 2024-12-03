@@ -56,12 +56,16 @@ namespace SIAairportSecurity.Training
         public delegate void OnGameStateChanged(GameState currentGameState);
         public event OnGameStateChanged onStateChange;
 
-        //test plane
-        [SerializeField] private TMP_Text _textUI;
         private int horizontalPlaneCount = 0; 
         private int verticalPlaneCount = 0;
-        public Material horizontalPlaneMaterial;
         public Material verticalPlaneMaterial;
+
+        public Material[] colorMaterials; 
+        private int colorIndex = 0;
+
+        private Dictionary<TrackableId, Material> planeColors = new Dictionary<TrackableId, Material>();
+
+        bool isInnit = false;
 
         private void Awake()
         {
@@ -77,24 +81,48 @@ namespace SIAairportSecurity.Training
             // Reset counts
             horizontalPlaneCount = 0; 
             verticalPlaneCount = 0; 
-            foreach (var plane in arPlaneManager.trackables) {
+            foreach (var plane in eventArgs.updated) {
+
                 if (plane.alignment == PlaneAlignment.HorizontalUp || plane.alignment == PlaneAlignment.HorizontalDown)
                 {
-                    // Increment horizontal plane count
-                    horizontalPlaneCount++;
-
-                    plane.GetComponent<MeshRenderer>().material = horizontalPlaneMaterial;
+                    if (colorIndex < colorMaterials.Length)
+                    {
+                        if (!planeColors.ContainsKey(plane.trackableId))
+                        {
+                            plane.GetComponent<MeshRenderer>().material = colorMaterials[colorIndex];
+                            planeColors[plane.trackableId] = colorMaterials[colorIndex];
+                            colorIndex++;
+                        }
+                    }
+                    else
+                    {
+                        if (!planeColors.ContainsKey(plane.trackableId))
+                        {
+                            colorIndex = 0;
+                            plane.GetComponent<MeshRenderer>().material = colorMaterials[colorIndex];
+                            planeColors[plane.trackableId] = colorMaterials[colorIndex];
+                            colorIndex++;
+                        }
+                    }
                 } 
                 else if (plane.alignment == PlaneAlignment.Vertical) 
                 { 
-                    // Increment verticalplane count
-                    verticalPlaneCount++;
 
                     plane.GetComponent<MeshRenderer>().material = verticalPlaneMaterial;
                 }
-            } 
-            // Update the TMP text with counts
-            _textUI.text = $"Horizontal Planes: {horizontalPlaneCount}\nVertical Planes: {verticalPlaneCount}";
+            }
+
+            foreach (var plane in arPlaneManager.trackables)
+            {
+                if (plane.alignment == PlaneAlignment.HorizontalUp || plane.alignment == PlaneAlignment.HorizontalDown)
+                {
+                    horizontalPlaneCount++;
+                }
+                else if(plane.alignment == PlaneAlignment.Vertical)
+                {
+                    verticalPlaneCount++;
+                }
+            }
         }
 
         //initial operation
@@ -126,9 +154,11 @@ namespace SIAairportSecurity.Training
         {
             _selectedObjectPrefab = _itemDatabase.items[gameobjectIndex].itemPrefabs;
 
-            if (!arSession.enabled)
+            if (!arPlaneManager.enabled && !isInnit)
             {
-                arSession.enabled = true;
+                arPlaneManager.enabled = true;
+
+                isInnit = true;
             }
             
         }
@@ -140,8 +170,11 @@ namespace SIAairportSecurity.Training
             {
                 return;
             }
-            Destroy(_spawnedObjects);
-            _spawnedObjects = null;
+            if (_spawnedObjects)
+            {
+                Destroy(_spawnedObjects);
+                _spawnedObjects = null;
+            }
 
             isSpawnConformed = false;
             _raycastController.ChangeState(ObjectManipulation.Move);
@@ -355,8 +388,12 @@ namespace SIAairportSecurity.Training
         //delete rigidbody from spawned object after i second
         private void DeleteRigidbody()
         {
-            Destroy(_spawnedObjectRigidbody);
-            _spawnedObjects.GetComponent<BoxCollider>().enabled = true;
+            if (_spawnedObjectRigidbody != null)
+            {
+                Destroy(_spawnedObjectRigidbody);
+                _spawnedObjectRigidbody = null;
+                _spawnedObjects.GetComponent<BoxCollider>().enabled = true;
+            }
         }
 
         //play button SFX
@@ -466,6 +503,12 @@ namespace SIAairportSecurity.Training
         {
             _raycastController.ChangeState(ObjectManipulation.Move);
             showDetectedPlanes.ShowDotsPlane(true);
+
+            if (_spawnedObjectRigidbody != null)
+            {
+                Destroy(_spawnedObjectRigidbody);
+                _spawnedObjects.GetComponent<BoxCollider>().enabled = true;
+            }
             //FindChildWithTag(_spawnedObjects.transform, "TouchIndicator").gameObject.SetActive(true);
         }
 
