@@ -14,8 +14,6 @@ namespace SIAairportSecurity
             public GameObject itemPrefabs;
             public Sprite itemSprite;
             public string itemName;
-            public string itemInfo;
-            public bool isObjectSmall;
         }
 
         public ItemInfo[] items;
@@ -31,6 +29,14 @@ namespace SIAairportSecurity
                 }
             }
             return null; // If no item with the given ID is found
+        }
+
+        private void OnValidate()
+        {
+            for (int i = 0; i < items.Length; i++)
+            {
+                items[i].itemID = i;
+            }
         }
     }
 }

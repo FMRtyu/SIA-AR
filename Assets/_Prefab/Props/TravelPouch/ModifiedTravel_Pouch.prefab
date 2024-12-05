@@ -169,6 +169,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2836288564160554831}
   - component: {fileID: 5892073151561927657}
+  - component: {fileID: 5276534208282409018}
   m_Layer: 15
   m_Name: ModifiedTravel_Pouch
   m_TagString: Interactable
@@ -215,6 +216,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.46, y: 0.42, z: 0.24}
   m_Center: {x: -0.03, y: 0.2, z: 0.045}
+--- !u!114 &5276534208282409018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2704573545643323280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90c87ea99c350624eb47089470491cad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectAnchor: {fileID: 4852403603984608730}
 --- !u!1001 &4812621721716132480
 PrefabInstance:
   m_ObjectHideFlags: 0

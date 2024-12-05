@@ -145,35 +145,27 @@ namespace SIAairportSecurity.Training
 
         #region GetData
 
-        public bool GetIsConfirmedPosition()
-        {
-            return _gamePlayController.GetIsConfirmedPosition();
-        }
+        public Training Training => GetMenuComponent<Training>(MenuState.Training);
+
         public bool GetIfObjectConfirmed()
         {
             return _gamePlayController.isSpawnConformed;
         }
-        public Dictionary<int, (Sprite,string, bool, bool)> GetListData()
+        public Dictionary<int, (Sprite, string, bool)> GetListData()
         {
             return _gamePlayController.GetSelectionData();
         }
 
-        private Training GetTrainingScript()
+        public T GetMenuComponent<T>(MenuState state) where T : Component
         {
-            Training trainingMenu = null;
             foreach (_MenuState item in allMenus)
             {
-                if (item.state == MenuState.Training)
+                if (item.state == state)
                 {
-                    trainingMenu = item.GetComponent<Training>();
+                    return item.GetComponent<T>();
                 }
             }
-            return trainingMenu;
-        }
-
-        public bool CheckARPlaneExist()
-        {
-            return _gamePlayController.CheckARPlaneExist();
+            return null;
         }
         #endregion
 
@@ -279,7 +271,7 @@ namespace SIAairportSecurity.Training
 
         public void SwitchToMove()
         {
-            _gamePlayController.SwitchToMove();
+            _gamePlayController.itemProperty.SwitchToMove();
         }
 
         public void EnabledMoveBTN()
@@ -292,21 +284,21 @@ namespace SIAairportSecurity.Training
 
         public void SwitchToRotate()
         {
-            _gamePlayController.SwitchToRotate();
+            _gamePlayController.itemProperty.SwitchToRotate();
         }
 
         public void ResetMoveRotate()
         {
-            _gamePlayController.ResetMoveRotate();
+            _gamePlayController.itemProperty.ResetMoveRotate();
         }
 
         public void SnapXAxis()
         {
-            _gamePlayController.SnapObjectXAxis();
+            _gamePlayController.itemProperty.SnapObjectXAxis();
         }
         public void SnapYAxis()
         {
-            _gamePlayController.SnapObjectYAxis();
+            _gamePlayController.itemProperty.SnapObjectYAxis();
         }
 
         public void ChangeButtonInteractable(bool newCondition)
@@ -359,10 +351,6 @@ namespace SIAairportSecurity.Training
                     break;
             }
             
-        }
-        public void PlayButtonSound()
-        {
-            _gamePlayController.PlayButtonSound();
         }
 
         public GamePlayController GetGamePlayController() { return _gamePlayController; }

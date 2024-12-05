@@ -8,37 +8,28 @@ namespace SIAairportSecurity.Training
 {
     public class Training : _MenuState
     {
+        [Header("Database")]
+        [SerializeField] private SpriteDatabase _spriteDB;
+
         [Header("Menu Container")]
         [SerializeField] private RectTransform _menuContainer;
-        [SerializeField] private float _bottomOffset = 10f; // Offset from the bottom of the screen
-        [SerializeField] private float _moveSpeed = 1f; // movement speed to show menu container
-        [SerializeField] private GameObject _conformBTN;
-        private Vector2 _menuContainerInitialPos;
-        private bool _isMenuOpen = false;
         [SerializeField] private Animator _menuAnimator;
 
-        [Header("RotateMoveUI")]
-        [SerializeField] private GameObject _moveRotateParent;
-        [SerializeField] private Button _MoveBTN;
-        [SerializeField] private Button _RotateBTN;
+        [SerializeField] private float _bottomOffset = 10f; // Offset from the bottom of the screen
+        [SerializeField] private float _moveSpeed = 1f; // movement speed to show menu container
 
-        [Header("Move Rotate Icon")]
-        [SerializeField] private Image _MoveBTNIcon;
-        [SerializeField] private Image _RotateBTNIcon;
-        [SerializeField] private Sprite _moveActive;
-        [SerializeField] private Sprite _moveInactive;
-        [SerializeField] private Sprite _rotateActive;
-        [SerializeField] private Sprite _rotateInactive;
+        [SerializeField] private GameObject _conformBTN;
 
-        [Header("Information Icon")]
-        [SerializeField] private Sprite _infoInactiveIcon;
-        [SerializeField] private Sprite _infoActiveIcon;
+        private Vector2 _menuContainerInitialPos;
+        private bool _isMenuOpen = false;
 
-        [Header("ButtonSprite")]
-        [SerializeField] private Sprite _inactiveSprite;
-        [SerializeField] private Sprite _activeSprite;
+        [Header("Rotate and Move property")]
+        [SerializeField] private Button _moveBTN;
+        [SerializeField] private Button _rotateBTN;
+        
+        private Image _MoveBTNIcon;
+        private Image _RotateBTNIcon;
 
-        [Header("RotateMoveAnimation")]
         [SerializeField] private Animator _moveRotateAnim;
         [SerializeField] private Animator _rotateAdvanceAnim;
         private bool isAlreadyOpen;
@@ -56,16 +47,11 @@ namespace SIAairportSecurity.Training
         private Vector3 _instructionPanelInitScale;
         private Vector3 _scanInstructionInitScale;
 
-        [Header("Place Item")]
-        [SerializeField] private Image _onOfButtonImage;
-        [SerializeField] private Image _onOfButtonImageIcon;
-        [SerializeField] private Sprite _inactiveImageIcon;
-        [SerializeField] private Sprite _activeImageIcon;
-
-        [SerializeField] private Sprite _onSprite;
-        [SerializeField] private Sprite _offSprite;
+        [Header("Scan Button")]
+        [SerializeField] private Image _ScanButton;
         private bool _isButtonOn;
 
+        public Button soundButtonToggler;
         //event
         public GameState _gameState;
 
@@ -108,7 +94,7 @@ namespace SIAairportSecurity.Training
             if (_menuCanvasController.currentMoveRotateBTNState)
             {
                 ChangeButtonInteractable(_menuCanvasController.currentMoveRotateBTNState);
-                ShowConformButton(!_menuCanvasController.GetIsConfirmedPosition());
+                ShowConformButton(!_menuCanvasController.GetGamePlayController().isSpawnConformed);
                 if (_menuCanvasController.isBacktoSelection)
                 {
 
@@ -119,13 +105,15 @@ namespace SIAairportSecurity.Training
                 ChangeButtonInteractable(false);
                 ShowConformButton(false);
             }
-            //SwitchToMove();
         }
 
         private void init()
         {
             _instructionPanelInitScale = _instructionPanel.transform.localScale;
             _scanInstructionInitScale = _scanInstruction.transform.localScale;
+
+            _MoveBTNIcon = _moveBTN.transform.Find("IconIMG").GetComponent<Image>();
+            _RotateBTNIcon = _rotateBTN.transform.Find("IconIMG").GetComponent<Image>(); ;
 
             _instructionPanel.transform.localScale = Vector3.zero;
             _finishResetBTN.SetActive(false);
@@ -151,24 +139,6 @@ namespace SIAairportSecurity.Training
                     canvasGroup.interactable = false;
                 });
             }
-            //_menuContainer.gameObject.SetActive(true);
-
-            //// Get the height of the parent RectTransform
-            //RectTransform parentRectTransform = _menuContainer.parent.GetComponent<RectTransform>();
-
-            //// Calculate the new anchored position
-            //float bottomYPosition = -parentRectTransform.rect.height / 2 + _menuContainer.rect.height / 2 + _bottomOffset;
-            //Vector2 newPos = new Vector2(_menuContainer.anchoredPosition.x, bottomYPosition);
-
-            //if (isInit)
-            //{
-            //    // Set the anchored position
-            //    _menuContainer.anchoredPosition = newPos;
-            //}
-            //else
-            //{
-            //    LeanTween.move(_menuContainer, newPos, _moveSpeed).setEase(LeanTweenType.easeInOutQuad);
-            //}
         }
 
         private void MoveToUp()
@@ -188,21 +158,6 @@ namespace SIAairportSecurity.Training
                     canvasGroup.interactable = true;
                 });
             }
-            //Vector3 newPos = _menuContainerInitialPos;
-            //switch (_gameState)
-            //{
-            //    case GameState.MapArea:
-            //        newPos.y += 575f;
-            //        LeanTween.move(_menuContainer, newPos, _moveSpeed).setEase(LeanTweenType.easeInOutQuad);
-            //        break;
-            //    case GameState.PlaceItem:
-            //        newPos.y += 175f;
-            //        LeanTween.move(_menuContainer, newPos, _moveSpeed).setEase(LeanTweenType.easeInOutQuad);
-            //        break;
-            //    default:
-            //        LeanTween.move(_menuContainer, newPos, _moveSpeed).setEase(LeanTweenType.easeInOutQuad);
-            //        break;
-            //}
         }
 
         private void OnGameStateChange(GameState newGameState)
@@ -268,7 +223,6 @@ namespace SIAairportSecurity.Training
 
             ScaleUpAnimation(_instructionPanel, Vector3.zero);
             SwitchRotateMoveToDefault();
-            PlayButtonSound();
         }
 
         public void ReopenMoveRotateBTN()
@@ -280,6 +234,7 @@ namespace SIAairportSecurity.Training
 
             _menuCanvasController.FinishScan();
         }
+
         #endregion
 
         public void ShowHideInfoPanel(Button button)
@@ -287,15 +242,15 @@ namespace SIAairportSecurity.Training
             if (_infoPanel.active)
             {
                 _infoPanel.SetActive(false);
-                button.GetComponent<Image>().sprite = _inactiveSprite;
-                button.transform.Find("IconIMG").GetComponent<Image>().sprite = _infoInactiveIcon;
+                button.GetComponent<Image>().sprite = _spriteDB.RoundButton.defaultSprite;
+                button.transform.Find("IconIMG").GetComponent<Image>().sprite = _spriteDB.Info.defaultSprite;
                 button.gameObject.GetComponentInChildren<TMP_Text>().color = Color.white;
             }
             else
             {
                 _infoPanel.SetActive(true);
-                button.GetComponent<Image>().sprite = _activeSprite;
-                button.transform.Find("IconIMG").GetComponent<Image>().sprite = _infoActiveIcon;
+                button.GetComponent<Image>().sprite = _spriteDB.RoundButton.activatedSprite;
+                button.transform.Find("IconIMG").GetComponent<Image>().sprite = _spriteDB.Info.activatedSprite;
                 button.gameObject.GetComponentInChildren<TMP_Text>().color = Color.black;
             }
         }
@@ -320,7 +275,6 @@ namespace SIAairportSecurity.Training
 
         public void ResetPlane(Button button)
         {
-            StartCoroutine(ButtonDelay.EnabledBTNAfterSecond(button));
             _loadingCanvasGroup.gameObject.SetActive(true);
 
             ChangeScanSurfaceSprite(true);
@@ -357,67 +311,40 @@ namespace SIAairportSecurity.Training
 
         #region MoveRotateBTN
 
+        private void SetButtonState(GameObject button, Image icon, Sprite buttonSprite, Sprite iconSprite, Color textColor)
+        {
+            button.GetComponent<Image>().sprite = buttonSprite;
+            icon.sprite = iconSprite;
+            button.GetComponentInChildren<TMP_Text>().color = textColor;
+        }
+
         public void SwitchRotateMoveToDefault()
         {
             _rotateAdvanceAnim.SetBool("isOpen", false);
 
-            _MoveBTN.GetComponent<Image>().sprite = _inactiveSprite;
-            _RotateBTN.GetComponent<Image>().sprite = _inactiveSprite;
-
-            _MoveBTNIcon.sprite = _moveInactive;
-            _RotateBTNIcon.sprite = _rotateInactive;
+            SetButtonState(_moveBTN.gameObject, _MoveBTNIcon, _spriteDB.RoundButton.defaultSprite, _spriteDB.Move.defaultSprite, Color.white);
+            SetButtonState(_rotateBTN.gameObject, _RotateBTNIcon, _spriteDB.RoundButton.defaultSprite, _spriteDB.Rotate.defaultSprite, Color.white);
         }
 
         public void SwitchToMove()
         {
-            _MoveBTN.GetComponent<Image>().sprite = _activeSprite;
-            _RotateBTN.GetComponent<Image>().sprite = _inactiveSprite;
-
-            _MoveBTNIcon.sprite = _moveActive;
-            _RotateBTNIcon.sprite = _rotateInactive;
-
-            _MoveBTN.GetComponentInChildren<TMP_Text>().color = Color.black;
-            _RotateBTN.GetComponentInChildren<TMP_Text>().color = Color.white;
+            SetButtonState(_moveBTN.gameObject, _MoveBTNIcon, _spriteDB.RoundButton.activatedSprite, _spriteDB.Move.activatedSprite, Color.black);
+            SetButtonState(_rotateBTN.gameObject, _RotateBTNIcon, _spriteDB.RoundButton.defaultSprite, _spriteDB.Rotate.defaultSprite, Color.white);
 
             _menuCanvasController.SwitchToMove();
             _rotateAdvanceAnim.SetBool("isOpen", false);
         }
 
-        public void ChangeButtonInteractable(bool newCondition)
+        public void SwitchManipulationState(bool newCondition)
         {
-            _menuCanvasController.SetCurrentMoveRotateBTNState(newCondition);
-            Debug.Log("changing to " + newCondition);
-            _MoveBTN.interactable = newCondition;
-            _RotateBTN.interactable = newCondition;
-
-            if (newCondition)
-            {
-                _MoveBTNIcon.color = Color.white;
-                _RotateBTNIcon.color = Color.white;
-
-                _MoveBTN.GetComponentInChildren<TMP_Text>().color = Color.white;
-                _RotateBTN.GetComponentInChildren<TMP_Text>().color = Color.white;
-            }
-            else
-            {
-                _MoveBTNIcon.color = Color.gray;
-                _RotateBTNIcon.color = Color.gray;
-
-                _MoveBTN.GetComponentInChildren<TMP_Text>().color = Color.gray;
-                _RotateBTN.GetComponentInChildren<TMP_Text>().color = Color.gray;
-            }
+            _moveBTN.interactable = newCondition;
+            _rotateBTN.interactable = newCondition;
         }
 
         public void SwitchToRotate()
         {
-            _MoveBTN.GetComponent<Image>().sprite = _inactiveSprite;
-            _RotateBTN.GetComponent<Image>().sprite = _activeSprite;
-
-            _MoveBTNIcon.sprite = _moveInactive;
-            _RotateBTNIcon.sprite = _rotateActive;
-
-            _MoveBTN.GetComponentInChildren<TMP_Text>().color = Color.white;
-            _RotateBTN.GetComponentInChildren<TMP_Text>().color = Color.black;
+            SetButtonState(_moveBTN.gameObject, _MoveBTNIcon, _spriteDB.RoundButton.defaultSprite, _spriteDB.Move.defaultSprite, Color.white);
+            SetButtonState(_rotateBTN.gameObject, _RotateBTNIcon, _spriteDB.RoundButton.activatedSprite, _spriteDB.Rotate.activatedSprite, Color.black);
 
             _menuCanvasController.SwitchToRotate();
 
@@ -426,6 +353,33 @@ namespace SIAairportSecurity.Training
                 _rotateAdvanceAnim.SetBool("isOpen", true);
             }
         }
+
+
+        public void ChangeButtonInteractable(bool newCondition)
+        {
+            _menuCanvasController.SetCurrentMoveRotateBTNState(newCondition);
+            Debug.Log("changing to " + newCondition);
+            _moveBTN.interactable = newCondition;
+            _rotateBTN.interactable = newCondition;
+
+            if (newCondition)
+            {
+                _MoveBTNIcon.color = Color.white;
+                _RotateBTNIcon.color = Color.white;
+
+                _moveBTN.GetComponentInChildren<TMP_Text>().color = Color.white;
+                _rotateBTN.GetComponentInChildren<TMP_Text>().color = Color.white;
+            }
+            else
+            {
+                _MoveBTNIcon.color = Color.gray;
+                _RotateBTNIcon.color = Color.gray;
+
+                _moveBTN.GetComponentInChildren<TMP_Text>().color = Color.gray;
+                _rotateBTN.GetComponentInChildren<TMP_Text>().color = Color.gray;
+            }
+        }
+
         public void HideMoveRotateBTN()
         {
             _moveRotateAnim.SetBool("Back", true);
@@ -444,20 +398,12 @@ namespace SIAairportSecurity.Training
         {
             _menuCanvasController.SnapXAxis();
             button.interactable = false;
-            StartCoroutine(EnabledBTNAfterSecond(button));
         }
 
         public void SnapYRotation(Button button)
         {
             _menuCanvasController.SnapYAxis();
             button.interactable = false;
-            StartCoroutine(EnabledBTNAfterSecond(button));
-        }
-
-        private IEnumerator EnabledBTNAfterSecond(Button button)
-        {
-            yield return new WaitForSeconds(0.3f);
-            button.interactable = true;
         }
         #endregion
 
@@ -520,49 +466,38 @@ namespace SIAairportSecurity.Training
 
         public void ChangeScanSurfaceSprite()
         {
+            // Toggle the state when called by the button
             _isButtonOn = !_isButtonOn;
-            TMP_Text tempTXT = _onOfButtonImage.GetComponentInChildren<TMP_Text>();
-
-            if (_isButtonOn)
-            {
-                _onOfButtonImageIcon.sprite = _activeImageIcon;
-                _onOfButtonImage.sprite = _onSprite;
-                tempTXT.text = "Scan\nOn";
-                tempTXT.color = Color.black;
-            }
-            else
-            {
-                _onOfButtonImageIcon.sprite = _inactiveImageIcon;
-                _onOfButtonImage.sprite = _offSprite;
-                tempTXT.text = "Scan\nOff";
-                tempTXT.color = Color.white;
-            }
+            UpdateScanSurfaceSprite();
         }
 
         public void ChangeScanSurfaceSprite(bool condition)
         {
+            // Set the state directly when called by the script
             _isButtonOn = condition;
-            TMP_Text tempTXT = _onOfButtonImage.GetComponentInChildren<TMP_Text>();
+            UpdateScanSurfaceSprite();
+        }
+
+        private void UpdateScanSurfaceSprite()
+        {
+            TMP_Text tempTXT = _ScanButton.GetComponentInChildren<TMP_Text>();
 
             if (_isButtonOn)
             {
-                _onOfButtonImageIcon.sprite = _activeImageIcon;
-                _onOfButtonImage.sprite = _onSprite;
+                _ScanButton.transform.Find("IconIMG").GetComponent<Image>().sprite = _spriteDB.Scan.activatedSprite;
+                _ScanButton.sprite = _spriteDB.RoundButton.activatedSprite;
                 tempTXT.text = "Scan\nOn";
                 tempTXT.color = Color.black;
             }
             else
             {
-                _onOfButtonImageIcon.sprite = _inactiveImageIcon;
-                _onOfButtonImage.sprite = _offSprite;
+                _ScanButton.transform.Find("IconIMG").GetComponent<Image>().sprite = _spriteDB.Scan.defaultSprite;
+                _ScanButton.sprite = _spriteDB.RoundButton.defaultSprite;
                 tempTXT.text = "Scan\nOff";
                 tempTXT.color = Color.white;
             }
         }
+
         #endregion
-        public void PlayButtonSound()
-        {
-            _menuCanvasController.PlayButtonSound();
-        }
     }
 }

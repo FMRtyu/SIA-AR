@@ -48,11 +48,6 @@ namespace SIAairportSecurity.Training
             _imageChild.sprite = sprite;
         }
 
-        public void PlayButtonSound()
-        {
-            _selection.PlayButtonSound();
-        }
-
         public void SetItemName(string itemName)
         {
             _itemName.text = itemName;

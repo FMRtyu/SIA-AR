@@ -11,16 +11,14 @@ namespace SIAairportSecurity.Training
         [SerializeField] private GameObject _itemBTNPrefabs;
         [SerializeField] private RectTransform _itemBTNParent;
         [SerializeField] private Button _selectItemBTN;
+        [SerializeField] private SpriteDatabase _spriteDB;
 
         private RectTransform _selectItemBTNTransform;
         private Vector3 _initialScaleSelectItemBTN;
 
         private List<GameObject> _itemBTNList = new List<GameObject>();
         private Button _selectedItem;
-
-        [SerializeField] private Sprite _tempSprite;
-
-        protected Dictionary<int, (Sprite, string, bool, bool)> _itemDatabase;
+        protected Dictionary<int, (Sprite, string, bool)> _itemDatabase;
         //Specific for this state
         public override void InitState(GameCanvasController menuController)
         {
@@ -62,7 +60,7 @@ namespace SIAairportSecurity.Training
 
                 tempItemBTN.InitSelection(this, item.Key);
 
-                (Sprite itemIcon, string itemName, bool isObjectAvaible, bool isObjectSmall) = item.Value;
+                (Sprite itemIcon, string itemName, bool isObjectAvaible) = item.Value;
 
                 tempItemBTN.SetIcon(itemIcon);
                 tempItemBTN.SetItemName(itemName);
@@ -70,7 +68,7 @@ namespace SIAairportSecurity.Training
                 //check if 3D object available
                 if (!isObjectAvaible)
                 {
-                    tempItemBTN.GetComponent<Image>().sprite = _tempSprite;
+                    tempItemBTN.GetComponent<Image>().sprite = _spriteDB.SquareButton.activatedSprite;
 
                     Color color = tempItemBTN.GetComponent<Image>().color;
                     Color color2 = tempItemBTN.GetComponentInChildren<Image>().color;
@@ -83,19 +81,9 @@ namespace SIAairportSecurity.Training
                     Destroy(tempItemBTN.GetComponent<Button>());
                 }
 
-                //resize the icon
-                if (isObjectSmall)
-                {
-                    RectTransform iconIMG = temp.transform.Find("IconBTN").GetComponent<RectTransform>();
-
-                    Debug.Log(iconIMG.name);
-
-                    iconIMG.offsetMin = new Vector2(100f, iconIMG.offsetMin.y);  // Left offset
-                    iconIMG.offsetMax = new Vector2(-100, iconIMG.offsetMax.y); // Right offset
-                }
-
                 _itemBTNList.Add(temp);
             }
+            _menuCanvasController.GetGamePlayController().SetButtonSFX();
         }
 
         private void init()
@@ -150,11 +138,6 @@ namespace SIAairportSecurity.Training
         public void BackToTraining()
         {
             _menuCanvasController.BackToTraining();
-        }
-
-        public void PlayButtonSound()
-        {
-            _menuCanvasController.PlayButtonSound();
         }
     }
 }

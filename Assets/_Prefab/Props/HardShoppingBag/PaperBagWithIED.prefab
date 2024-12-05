@@ -193,6 +193,7 @@ GameObject:
   - component: {fileID: 8386222044664981818}
   - component: {fileID: 8552512025127284826}
   - component: {fileID: 2837851837424864735}
+  - component: {fileID: 1721206458980766049}
   m_Layer: 15
   m_Name: PaperBagWithIED
   m_TagString: Interactable
@@ -252,6 +253,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 3044564260829577687}
+  _spriteDB: {fileID: 11400000, guid: 71c78b6059e915649b891c74504bc39b, type: 2}
+--- !u!114 &1721206458980766049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6780869807886001542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90c87ea99c350624eb47089470491cad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectAnchor: {fileID: 2725604188182686065}
 --- !u!1001 &468363880836653132
 PrefabInstance:
   m_ObjectHideFlags: 0
