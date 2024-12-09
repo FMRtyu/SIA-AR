@@ -873,7 +873,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _arSession: {fileID: 576127033}
   _planeManager: {fileID: 2078929936}
-  shadowMaterial: {fileID: 2100000, guid: 9936856a8cc182b4997562aebdb1e57d, type: 2}
+  shadowMaterial: {fileID: 2100000, guid: 7dbb442b57484ca4d82a46d201cc8ae2, type: 2}
   dotsMaterial: {fileID: 2100000, guid: 553e54d8b83f74846a55585d2b28a262, type: 2}
   colorMaterials:
   - {fileID: 2100000, guid: 553e54d8b83f74846a55585d2b28a262, type: 2}
@@ -1445,18 +1445,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 527799232}
         m_TargetAssemblyTypeName: SIAairportSecurity.Training.Training, SIA
-        m_MethodName: PlayButtonSound
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 527799232}
-        m_TargetAssemblyTypeName: SIAairportSecurity.Training.Training, SIA
         m_MethodName: FinishScan
         m_Mode: 1
         m_Arguments:
@@ -1467,21 +1455,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ShowDetectedPlanes, SIA
+      - m_Target: {fileID: 133239663}
+        m_TargetAssemblyTypeName: SurfaceManager, SIA
         m_MethodName: StartStopScanning
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 527799232}
-        m_TargetAssemblyTypeName: SIAairportSecurity.Training.Training, SIA
-        m_MethodName: ChangeScanSurfaceSprite
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5805,16 +5781,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.10196079, g: 0.13333334, b: 0.1764706, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 943a08142686f9941a6f2df9c264269d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5f35f10c80be7364dab0cfd365230a35, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -9670,7 +9646,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000015259, y: -40}
+  m_AnchoredPosition: {x: 0, y: -45}
   m_SizeDelta: {x: 190, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1600029980
@@ -9704,8 +9680,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -9722,8 +9698,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33
-  m_fontSizeBase: 33
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10682,30 +10658,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 527799232}
         m_TargetAssemblyTypeName: SIAairportSecurity.Training.Training, SIA
-        m_MethodName: PlayButtonSound
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ShowDetectedPlanes, SIA
-        m_MethodName: StartStopScanning
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1765846526}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 527799232}
-        m_TargetAssemblyTypeName: SIAairportSecurity.Training.Training, SIA
         m_MethodName: ChangeScanSurfaceSprite
         m_Mode: 1
         m_Arguments:
@@ -10715,6 +10667,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 133239663}
+        m_TargetAssemblyTypeName: SurfaceManager, SIA
+        m_MethodName: StartStopScanning
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1765846527
 MonoBehaviour:
@@ -13248,8 +13212,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ShowDetectedPlanes, SIA
+      - m_Target: {fileID: 133239663}
+        m_TargetAssemblyTypeName: SurfaceManager, SIA
         m_MethodName: StartStopScanning
         m_Mode: 6
         m_Arguments:

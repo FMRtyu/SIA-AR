@@ -26,6 +26,7 @@ namespace SIAairportSecurity.Training
         public SpriteIconGroup Info => GetIconItemByType(SpriteIconType.Info);
         public SpriteIconGroup Reset => GetIconItemByType(SpriteIconType.Reset);
         public SpriteIconGroup Scan => GetIconItemByType(SpriteIconType.Scan);
+        public SpriteIconGroup Sound => GetIconItemByType(SpriteIconType.Sound);
 
         public SpriteButtonGroup RoundButton => GetButtonItemByType(SpriteButtonType.Round);
         public SpriteButtonGroup SquareButton => GetButtonItemByType(SpriteButtonType.Square);

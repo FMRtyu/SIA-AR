@@ -150,8 +150,17 @@ namespace SIAairportSecurity.Training
         {
             if (_raycastManager.Raycast(touch.position, _hits, TrackableType.PlaneWithinBounds))
             {
-                Pose hitPose = _hits[0].pose;
-                _selectedObject.transform.position = hitPose.position;
+                ARPlane plane = _arPlaneManager.GetPlane(_hits[0].trackableId);
+
+                _nameChecker = plane.name;
+                _horizontalVerticalPlane = plane.alignment.ToString();
+
+                if (plane.alignment != PlaneAlignment.Vertical)
+                {
+                    Pose hitPose = _hits[0].pose;
+
+                    _selectedObject.transform.position = hitPose.position;
+                }
             }
         }
 

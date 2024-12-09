@@ -137,7 +137,7 @@ public class SurfaceManager : MonoBehaviour
         }
     }
 
-    public void StartStopScanning(Button button)
+    public void StartStopScanning()
     {
         isPlaneScan = !isPlaneScan;
         _planeManager.enabled = isPlaneScan;

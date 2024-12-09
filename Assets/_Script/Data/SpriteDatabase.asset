@@ -28,6 +28,9 @@ MonoBehaviour:
   - spriteType: 4
     activatedSprite: {fileID: 21300000, guid: 523f0b8d83c8ea2459d0be54d83b9e81, type: 3}
     defaultSprite: {fileID: 21300000, guid: 170582a24bef1ba42b71f80edffcc4a7, type: 3}
+  - spriteType: 5
+    activatedSprite: {fileID: 21300000, guid: 5f35f10c80be7364dab0cfd365230a35, type: 3}
+    defaultSprite: {fileID: 21300000, guid: f78f5af02accb0748bfdb616f218e756, type: 3}
   spriteButtonItems:
   - spriteType: 0
     activatedSprite: {fileID: 21300000, guid: 682c72604582d044fbd76e34c6ed19f8, type: 3}

@@ -462,41 +462,58 @@ namespace SIAairportSecurity.Training
         public void FinishScan()
         {
             _menuCanvasController.FinishScan();
-        }
 
-        public void ChangeScanSurfaceSprite()
-        {
-            // Toggle the state when called by the button
-            _isButtonOn = !_isButtonOn;
-            UpdateScanSurfaceSprite();
+            ChangeScanSurfaceSprite(false);
         }
-
-        public void ChangeScanSurfaceSprite(bool condition)
+        public void ChangeScanSurfaceSprite() 
+        { 
+            ChangeScanSurfaceSpriteInternal(null); 
+        }
+        public void ChangeScanSurfaceSprite(bool condition) 
+        { 
+            ChangeScanSurfaceSpriteInternal(condition); 
+        }
+        private void ChangeScanSurfaceSpriteInternal(bool? condition = null)
         {
-            // Set the state directly when called by the script
-            _isButtonOn = condition;
+            // Toggle the state if no condition is provided
+            if (condition.HasValue)
+            {
+                _isButtonOn = condition.Value;
+            }
+            else
+            {
+                _isButtonOn = !_isButtonOn;
+            }
+
             UpdateScanSurfaceSprite();
         }
 
         private void UpdateScanSurfaceSprite()
         {
             TMP_Text tempTXT = _ScanButton.GetComponentInChildren<TMP_Text>();
+            Image iconImage = _ScanButton.transform.Find("IconIMG").GetComponent<Image>();
 
             if (_isButtonOn)
             {
-                _ScanButton.transform.Find("IconIMG").GetComponent<Image>().sprite = _spriteDB.Scan.activatedSprite;
-                _ScanButton.sprite = _spriteDB.RoundButton.activatedSprite;
-                tempTXT.text = "Scan\nOn";
-                tempTXT.color = Color.black;
+                SetButtonState(_spriteDB.Scan.activatedSprite, _spriteDB.RoundButton.activatedSprite, "Scan\nOn", Color.black);
             }
             else
             {
-                _ScanButton.transform.Find("IconIMG").GetComponent<Image>().sprite = _spriteDB.Scan.defaultSprite;
-                _ScanButton.sprite = _spriteDB.RoundButton.defaultSprite;
-                tempTXT.text = "Scan\nOff";
-                tempTXT.color = Color.white;
+                SetButtonState(_spriteDB.Scan.defaultSprite, _spriteDB.RoundButton.defaultSprite, "Scan\nOff", Color.white);
             }
         }
+
+        private void SetButtonState(Sprite iconSprite, Sprite buttonSprite, string text, Color textColor)
+        {
+            Image iconImage = _ScanButton.transform.Find("IconIMG").GetComponent<Image>();
+            TMP_Text tempTXT = _ScanButton.GetComponentInChildren<TMP_Text>();
+
+            iconImage.sprite = iconSprite;
+            _ScanButton.sprite = buttonSprite;
+            tempTXT.text = text;
+            tempTXT.color = textColor;
+        }
+
 
         #endregion
     }

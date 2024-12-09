@@ -22,7 +22,7 @@ public enum MenuState
 
 public enum SpriteIconType 
 { 
-    Move , Rotate, Info, Reset, Scan
+    Move , Rotate, Info, Reset, Scan, Sound
 } 
 
 public enum SpriteButtonType 
