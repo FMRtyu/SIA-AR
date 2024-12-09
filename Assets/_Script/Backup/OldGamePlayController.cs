@@ -23,7 +23,7 @@ namespace SIAairportSecurity
         private GameObject selectedGameobject;
         private List<GameObject> spawnedObjects;
         private Dictionary<GameObject, bool> spawnedObjectsDictionary;
-        private ShowDetectedPlanes showDetectedPlanes;
+        private SurfaceManager showDetectedPlanes;
         private bool isMenuOn;
 
         public TMP_Text test;
@@ -43,7 +43,7 @@ namespace SIAairportSecurity
             arSession = FindObjectOfType<ARSession>();
             arSessionOrigin = FindObjectOfType<ARSessionOrigin>();
             //multipleObject = FindObjectOfType<MultipleObjectPlacement>();
-            showDetectedPlanes = FindObjectOfType<ShowDetectedPlanes>();
+            showDetectedPlanes = FindObjectOfType<SurfaceManager>();
             raycastManager = FindObjectOfType<ARRaycastManager>();
         }
 

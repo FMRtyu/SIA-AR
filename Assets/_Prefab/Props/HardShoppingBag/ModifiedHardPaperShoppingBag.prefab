@@ -64,6 +64,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8386222044664981818}
   - component: {fileID: 8552512025127284826}
+  - component: {fileID: 6942377365365278037}
   m_Layer: 15
   m_Name: ModifiedHardPaperShoppingBag
   m_TagString: Interactable
@@ -110,6 +111,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.44, y: 0.34, z: 0.12}
   m_Center: {x: 0, y: 0.17, z: 0}
+--- !u!114 &6942377365365278037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6780869807886001542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90c87ea99c350624eb47089470491cad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectAnchor: {fileID: 2725604188182686065}
 --- !u!1001 &468363880836653132
 PrefabInstance:
   m_ObjectHideFlags: 0

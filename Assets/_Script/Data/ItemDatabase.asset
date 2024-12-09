@@ -17,59 +17,39 @@ MonoBehaviour:
     itemPrefabs: {fileID: 1399929785073785355, guid: 9e050d667badf04489882a4d798c2048, type: 3}
     itemSprite: {fileID: 21300000, guid: e4f2e9e3672ebe84dae4859d5999dcdb, type: 3}
     itemName: Handbag
-    itemInfo: handbag
-    isObjectSmall: 0
   - itemID: 1
     itemPrefabs: {fileID: 2704573545643323280, guid: 4ca1ac9c293e1744c84dbfc4fa709999, type: 3}
     itemSprite: {fileID: 21300000, guid: b274255dc6681cd43a81c5207ce5d631, type: 3}
     itemName: Pouch Bag
-    itemInfo: Pouch Bag
-    isObjectSmall: 0
   - itemID: 2
     itemPrefabs: {fileID: 6780869807886001542, guid: 0f32b825c1515b846aa7af0728b3ed39, type: 3}
     itemSprite: {fileID: 21300000, guid: 5559901d4d733554783a2b74cab96018, type: 3}
     itemName: Shopping Bag
-    itemInfo: Shopping Bag
-    isObjectSmall: 0
   - itemID: 3
     itemPrefabs: {fileID: 2871587354579089985, guid: a0251822f6613b64ba68f87d5cf6aa5b, type: 3}
     itemSprite: {fileID: 21300000, guid: aa3ce440e7e82174c922d979c01041bb, type: 3}
     itemName: Laptop Bag
-    itemInfo: Laptop Bag
-    isObjectSmall: 0
   - itemID: 4
     itemPrefabs: {fileID: 8727053873111807127, guid: 89fb5c645d235694695fc23f90174154, type: 3}
     itemSprite: {fileID: 21300000, guid: 75de07fd8c2ad894bbca9173561d03d8, type: 3}
     itemName: Courier Package
-    itemInfo: Courier Package
-    isObjectSmall: 0
   - itemID: 5
     itemPrefabs: {fileID: 8727053873111807127, guid: c35da65e576b18d449c9ce1f4648b88a, type: 3}
     itemSprite: {fileID: 21300000, guid: 6de43cc52dcfe0b499658b5ed911d135, type: 3}
     itemName: Carton Box
-    itemInfo: Carton Box
-    isObjectSmall: 0
   - itemID: 6
     itemPrefabs: {fileID: 8727053873111807127, guid: 733096658ad0c2e408778e7154fe1fa1, type: 3}
     itemSprite: {fileID: 21300000, guid: 119ff30b337b5ce49ad0e13ed3d5b854, type: 3}
     itemName: Soda Can
-    itemInfo: Soda Can
-    isObjectSmall: 0
   - itemID: 7
     itemPrefabs: {fileID: 8727053873111807127, guid: b04037a97fabc7f4a87197c1a52a1191, type: 3}
     itemSprite: {fileID: 21300000, guid: 3defd6193e51f9d4cbb7fd3e2c3b3dc2, type: 3}
     itemName: Letter
-    itemInfo: Letter
-    isObjectSmall: 0
   - itemID: 8
     itemPrefabs: {fileID: 8727053873111807127, guid: 343339756077bde45a5c92c34c73f59a, type: 3}
     itemSprite: {fileID: 21300000, guid: c9dba6d80e0399c4bae735681cd1f786, type: 3}
     itemName: IED
-    itemInfo: IED
-    isObjectSmall: 0
   - itemID: 9
     itemPrefabs: {fileID: 6780869807886001542, guid: 5f0f109202ced59438505079e43a0ce2, type: 3}
     itemSprite: {fileID: 21300000, guid: 5f2c9df9c73d216448cf99f6f4b1c9be, type: 3}
-    itemName: Shopping Bag & IED
-    itemInfo: Shopping Bag & IED
-    isObjectSmall: 0
+    itemName: Test Object

@@ -1,22 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
-public static class ButtonDelay
+public class ButtonDelay : MonoBehaviour
 {
-    /// <summary>
-    /// start coroutine to delay button
-    /// </summary>
-    /// <param name="button">button to delay</param>
-    /// <returns></returns>
-    public static IEnumerator EnabledBTNAfterSecond(Button button)
+    public static void EnableButtonAfterDelay(Button button, float delay, MonoBehaviour caller)
     {
-        if (button.interactable == true)
+        caller.StartCoroutine(EnableButtonAfterDelayCoroutine(button, delay));
+    }
+
+    private static IEnumerator EnableButtonAfterDelayCoroutine(Button button, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        button.interactable = true;
+    }
+
+    public static void ApplyDelayToAllButtons(float delay, MonoBehaviour caller)
+    {
+        Button[] allButtons = Resources.FindObjectsOfTypeAll<Button>();
+        foreach (Button button in allButtons)
         {
-            button.interactable = false;
-            yield return new WaitForSeconds(0.5f);
-            button.interactable = true;
+            Button currentButton = button;
+            currentButton.onClick.AddListener(() => {
+                currentButton.interactable = false;
+                EnableButtonAfterDelay(currentButton, delay, caller);
+            });
         }
     }
 }

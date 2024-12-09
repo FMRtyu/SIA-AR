@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 813399969320128794}
   - component: {fileID: 1151059615237874579}
+  - component: {fileID: 9036757121413585552}
   m_Layer: 15
   m_Name: ModifiedLaptopBag 1
   m_TagString: Interactable
@@ -56,6 +57,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.44, y: 0.37, z: 0.22}
   m_Center: {x: 0, y: 0.18, z: 0}
+--- !u!114 &9036757121413585552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2871587354579089985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90c87ea99c350624eb47089470491cad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectAnchor: {fileID: 6683500665701159246}
 --- !u!1 &4868519641747029019
 GameObject:
   m_ObjectHideFlags: 0

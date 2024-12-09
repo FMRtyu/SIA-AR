@@ -2,7 +2,7 @@ public enum ObjectManipulation
 {
     Move,
     Rotate,
-    Confirmed
+    None
 }
 
 public enum GameState
@@ -18,4 +18,14 @@ public enum MenuState
     Selection, 
     Training, 
     Quit
+}
+
+public enum SpriteIconType 
+{ 
+    Move , Rotate, Info, Reset, Scan, Sound
+} 
+
+public enum SpriteButtonType 
+{ 
+    Round, Square, 
 }

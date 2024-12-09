@@ -9,15 +9,12 @@ namespace SIAairportSecurity.Training
 {
     public class RaycastSpawnObject : MonoBehaviour
     {
-        #region Fields and Properties
-
         private ARRaycastManager _raycastManager;
         private ARPlaneManager _arPlaneManager;
         private GamePlayController _gamePlayController;
 
         [SerializeField] private Training _trainingObj;
         [SerializeField] private LayerMask itemLayerMask;
-        [SerializeField] private TMP_Text _debugText;
 
         private List<ARRaycastHit> _hits = new List<ARRaycastHit>();
         private GameObject _selectedObject;
@@ -30,10 +27,6 @@ namespace SIAairportSecurity.Training
         private string _horizontalVerticalPlane = "";
 
         public static RaycastSpawnObject Instance { get; private set; }
-
-        private ObjectManipulation _currentManipulationState;
-
-        #endregion
 
         #region Unity Callbacks
 
@@ -56,8 +49,6 @@ namespace SIAairportSecurity.Training
 
         private void Update()
         {
-            //UpdateDebugText();
-
             if (_raycastManager == null) return;
 
             HandleRaycast();
@@ -73,17 +64,6 @@ namespace SIAairportSecurity.Training
             _gamePlayController = GetComponent<GamePlayController>();
             _raycastManager = FindObjectOfType<ARRaycastManager>();
             _arPlaneManager = FindObjectOfType<ARPlaneManager>();
-        }
-
-        private void UpdateDebugText()
-        {
-            if (_debugText != null)
-            {
-                _debugText.text = $"GameState: {_gamePlayController.GetCurrentGameState()}\n" +
-                                  $"Touch Count: {Input.touchCount}\n" +
-                                  $"Last Selected: {_nameChecker}\n" +
-                                  $"Spawn Raycast Plane: {_horizontalVerticalPlane}";
-            }
         }
 
         #endregion
@@ -131,11 +111,11 @@ namespace SIAairportSecurity.Training
 
         private void HandleTouchMoved(Touch touch)
         {
-            if (_currentManipulationState == ObjectManipulation.Move)
+            if (_gamePlayController.GetCurrentObjectManipulation() == ObjectManipulation.Move)
             {
                 DragObject(touch);
             }
-            else if (_currentManipulationState == ObjectManipulation.Rotate)
+            else if (_gamePlayController.GetCurrentObjectManipulation() == ObjectManipulation.Rotate)
             {
                 RotateObject(touch);
             }
@@ -170,8 +150,17 @@ namespace SIAairportSecurity.Training
         {
             if (_raycastManager.Raycast(touch.position, _hits, TrackableType.PlaneWithinBounds))
             {
-                Pose hitPose = _hits[0].pose;
-                _selectedObject.transform.position = hitPose.position;
+                ARPlane plane = _arPlaneManager.GetPlane(_hits[0].trackableId);
+
+                _nameChecker = plane.name;
+                _horizontalVerticalPlane = plane.alignment.ToString();
+
+                if (plane.alignment != PlaneAlignment.Vertical)
+                {
+                    Pose hitPose = _hits[0].pose;
+
+                    _selectedObject.transform.position = hitPose.position;
+                }
             }
         }
 
@@ -215,11 +204,6 @@ namespace SIAairportSecurity.Training
             List<RaycastResult> results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(eventData, results);
             return results.Count > 0;
-        }
-
-        public void ChangeState(ObjectManipulation newState)
-        {
-            _currentManipulationState = newState;
         }
 
         public void SetDelay(bool isDelayed)
