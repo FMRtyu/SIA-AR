@@ -1283,7 +1283,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit
+  m_text: Home
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: aa445d90bc34c0648b17d8cf80647433, type: 2}
   m_sharedMaterial: {fileID: 5262349705519963428, guid: aa445d90bc34c0648b17d8cf80647433, type: 2}
@@ -2959,7 +2959,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 175, y: 82}
+  m_AnchoredPosition: {x: 175, y: 70}
   m_SizeDelta: {x: 280, y: 110}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &453161240
@@ -5201,7 +5201,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -175, y: 82}
+  m_AnchoredPosition: {x: -175, y: 70}
   m_SizeDelta: {x: 280, y: 110}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &729279152
@@ -9460,8 +9460,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 18.785, y: 68.999985}
-  m_SizeDelta: {x: 431.573, y: 116.944}
+  m_AnchoredPosition: {x: -0.555, y: 90}
+  m_SizeDelta: {x: 743.698, y: 116.944}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1573967052
 MonoBehaviour:
@@ -9483,9 +9483,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Are you sure you
-
-    want to quit?'
+  m_text: "Are you sure you want \nto return to the main page?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: aa445d90bc34c0648b17d8cf80647433, type: 2}
   m_sharedMaterial: {fileID: 5262349705519963428, guid: aa445d90bc34c0648b17d8cf80647433, type: 2}
@@ -9512,8 +9510,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 51.4
-  m_fontSizeBase: 51.4
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
