@@ -73,6 +73,26 @@ namespace SIAairportSecurity.Training
 
         }
 
+        private void OnDestroy()
+        {
+            _menuCanvasController.GetGamePlayController().onStateChange -= OnGameStateChange;
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (_menuCanvasController.GetGamePlayController().GetCurrentScreen() != MenuState.Quit)
+                {
+                    JumpToQuit();
+                }
+                else
+                {
+                    _menuCanvasController.SetActiveState(MenuState.Training);
+                }
+            }
+        }
+
         private void OnEnable()
         {
             //move menu container down
@@ -290,12 +310,18 @@ namespace SIAairportSecurity.Training
             LeanTween.alphaCanvas(_loadingCanvasGroup, to: 1, 1f).setOnComplete(() =>
             {
                 _menuCanvasController.ResetPlane();
+                ResetMapArea();
                 LeanTween.alphaCanvas(_loadingCanvasGroup, to: 0, 1f).setDelay(1f).setOnComplete(() =>
                 {
                     _loadingCanvasGroup.gameObject.SetActive(false);
-
                 });
             });
+        }
+
+        public void ObjectChangedUpdater()
+        {
+            ChangeScanSurfaceSprite(true);
+            _menuCanvasController.GetGamePlayController()._surfaceManager.StartStopScanning(true);
         }
 
         public void ShowInstructionUI()
@@ -416,6 +442,7 @@ namespace SIAairportSecurity.Training
 
         public void ShowMapTheAreaInstruction()
         {
+            LeanTween.cancel(_scanInstruction);
             ScaleUpAnimation(_scanInstruction, Vector3.zero);
             _instructionPanel.GetComponentInChildren<TMP_Text>().text = "Map The Area";
 

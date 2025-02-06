@@ -55,6 +55,12 @@ namespace SIAairportSecurity.Training
             init();
         }
 
+        private void OnDestroy()
+        {
+            onStateChange -= ChangeState;
+            onObjectManipulationChange -= ChangeObjectManipulation;
+        }
+
         //initial operation
         private void init()
         {

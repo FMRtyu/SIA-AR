@@ -46,6 +46,11 @@ public class PlaneColorRandomize : MonoBehaviour
         planeManager.planesChanged += PlaneTextUpdater;
     }
 
+    private void OnDestroy()
+    {
+        planeManager.planesChanged -= PlaneTextUpdater;
+    }
+
     private void PlaneTextUpdater(ARPlanesChangedEventArgs eventArgs)
     {
         foreach (var plane in eventArgs.updated)

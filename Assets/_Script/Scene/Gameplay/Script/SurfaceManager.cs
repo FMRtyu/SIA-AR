@@ -52,6 +52,11 @@ public class SurfaceManager : MonoBehaviour
         _planeManager.planesChanged += PlaneTextUpdater;
     }
 
+    private void OnDestroy()
+    {
+        _planeManager.planesChanged -= PlaneTextUpdater;
+    }
+
     private void PlaneTextUpdater(ARPlanesChangedEventArgs eventArgs)
     {
         // Reset counts

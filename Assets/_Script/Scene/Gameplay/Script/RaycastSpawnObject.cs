@@ -15,6 +15,7 @@ namespace SIAairportSecurity.Training
 
         [SerializeField] private Training _trainingObj;
         [SerializeField] private LayerMask itemLayerMask;
+        [SerializeField] private Vector2 requiredSize = new Vector2(1.0f, 1.0f); // required size in meters
 
         private List<ARRaycastHit> _hits = new List<ARRaycastHit>();
         private GameObject _selectedObject;
@@ -52,7 +53,7 @@ namespace SIAairportSecurity.Training
             if (_raycastManager == null) return;
 
             HandleRaycast();
-            CheckPlaneScanned();
+            //CheckPlaneScanned();
         }
 
         #endregion
@@ -64,6 +65,16 @@ namespace SIAairportSecurity.Training
             _gamePlayController = GetComponent<GamePlayController>();
             _raycastManager = FindObjectOfType<ARRaycastManager>();
             _arPlaneManager = FindObjectOfType<ARPlaneManager>();
+
+            _arPlaneManager.planesChanged += PlanesSizeChecker;
+
+        }
+
+        void OnDestroy()
+        {
+            // Unsubscribe to avoid memory leaks
+            if (_arPlaneManager != null)
+                _arPlaneManager.planesChanged -= PlanesSizeChecker;
         }
 
         #endregion
@@ -141,7 +152,13 @@ namespace SIAairportSecurity.Training
 
                 if (plane.alignment != PlaneAlignment.Vertical)
                 {
-                    _gamePlayController.SpawnObject(_hits[0]);
+                    Debug.Log($"Plane Size: {plane.size.x}m x {plane.size.y}m");
+
+                    if (plane.size.x >= requiredSize.x && plane.size.y >= requiredSize.y)
+                    {
+                        // Plane is big enough
+                        _gamePlayController.SpawnObject(_hits[0]);
+                    }
                 }
             }
         }
@@ -172,6 +189,44 @@ namespace SIAairportSecurity.Training
         #endregion
 
         #region Plane Scanning
+
+        private void PlanesSizeChecker(ARPlanesChangedEventArgs args)
+        {
+            // Check newly added planes
+            foreach (ARPlane plane in args.added)
+            {
+                CheckPlane(plane);
+            }
+
+            // Check updated planes
+            foreach (ARPlane plane in args.updated)
+            {
+                CheckPlane(plane);
+            }
+        }
+
+        void CheckPlane(ARPlane plane)
+        {
+            // Only consider non-vertical (horizontal) planes
+            if (plane.alignment != PlaneAlignment.Vertical)
+            {
+
+                if (plane.size.x >= requiredSize.x && plane.size.y >= requiredSize.y)
+                {
+                    if (_gamePlayController.GetCurrentGameState() == GameState.Scanning)
+                    {
+                        Debug.Log($"Plane {plane.trackableId} meets the requirement!");
+
+                        _gamePlayController.RaiseStateChangeEvent(GameState.MapArea);
+                        _trainingObj.ShowHideInfoPanel(false);
+                    }
+                }
+                else
+                {
+                    //_trainingObj.ShowInstructionUI();
+                }
+            }
+        }
 
         private void CheckPlaneScanned()
         {

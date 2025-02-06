@@ -61,6 +61,12 @@ namespace SIAairportSecurity.Training
             onStateChange += ChangeState;
         }
 
+        private void OnDestroy()
+        {
+            _gamePlayController.onStateChange -= ChangeActiveSubUI;
+            onStateChange -= ChangeState;
+        }
+
         public void SetObject(int objectIndex)
         {
             _itemSelected = objectIndex;
