@@ -80,17 +80,17 @@ namespace SIAairportSecurity.Training
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                if (_menuCanvasController.GetGamePlayController().GetCurrentScreen() != MenuState.Quit)
-                {
-                    JumpToQuit();
-                }
-                else
-                {
-                    _menuCanvasController.SetActiveState(MenuState.Training);
-                }
-            }
+            //if (Input.GetKeyDown(KeyCode.Escape))
+            //{
+            //    if (_menuCanvasController.GetGamePlayController().GetCurrentScreen() != MenuState.Quit)
+            //    {
+            //        JumpToQuit();
+            //    }
+            //    else
+            //    {
+            //        _menuCanvasController.SetActiveState(MenuState.Training);
+            //    }
+            //}
         }
 
         private void OnEnable()
@@ -437,20 +437,31 @@ namespace SIAairportSecurity.Training
 
         public void ShowScanningSurfaceAnimation()
         {
+            //_scanInstruction.SetActive(true);
             ScaleUpAnimation(_scanInstruction, _scanInstructionInitScale);
         }
 
         public void ShowMapTheAreaInstruction()
         {
+            //_scanInstruction.SetActive(false);
             LeanTween.cancel(_scanInstruction);
             ScaleUpAnimation(_scanInstruction, Vector3.zero);
             _instructionPanel.GetComponentInChildren<TMP_Text>().text = "Map The Area";
 
             RectTransform rectTransform = _instructionPanel.GetComponent<RectTransform>();
 
+            // Set anchor to bottom-stretch (full width, bottom-anchored)
+            rectTransform.anchorMin = new Vector2(0, 0);
+            rectTransform.anchorMax = new Vector2(1, 0);
+            rectTransform.pivot = new Vector2(0.5f, 0);
+
             Vector2 newPosition = rectTransform.anchoredPosition;
             newPosition.y = 865;
             rectTransform.anchoredPosition = newPosition;
+
+            // Set left and right stretch values
+            rectTransform.offsetMin = new Vector2(0, rectTransform.offsetMin.y);
+            rectTransform.offsetMax = new Vector2(0, rectTransform.offsetMax.y);
 
             ScaleUpAnimation(_instructionPanel, _instructionPanelInitScale);
             _finishResetBTN.SetActive(true);
@@ -460,14 +471,24 @@ namespace SIAairportSecurity.Training
         {
             if (!_menuCanvasController.GetIfObjectConfirmed())
             {
+                //_scanInstruction.SetActive(false);
                 _instructionPanel.transform.localScale = Vector3.zero;
                 _instructionPanel.GetComponentInChildren<TMP_Text>().text = "Tap to Place Item";
 
                 RectTransform rectTransform = _instructionPanel.GetComponent<RectTransform>();
 
+                // Set anchor to top-stretch (full width, top-anchored)
+                rectTransform.anchorMin = new Vector2(0, 1);
+                rectTransform.anchorMax = new Vector2(1, 1);
+                rectTransform.pivot = new Vector2(0.5f, 1);
+
                 Vector2 newPosition = rectTransform.anchoredPosition;
-                newPosition.y = 620;
+                newPosition.y = -516;
                 rectTransform.anchoredPosition = newPosition;
+
+                // Set left and right stretch values
+                rectTransform.offsetMin = new Vector2(0, rectTransform.offsetMin.y);
+                rectTransform.offsetMax = new Vector2(0, rectTransform.offsetMax.y);
 
                 ScaleUpAnimation(_instructionPanel, _instructionPanelInitScale);
             }

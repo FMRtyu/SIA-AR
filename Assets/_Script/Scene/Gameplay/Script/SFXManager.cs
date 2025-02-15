@@ -15,6 +15,8 @@ namespace SIAairportSecurity.Training
         private Color _soundInitialIconColor;
         [SerializeField] private AudioSource _audioSource;
         [SerializeField] private SpriteDatabase _spriteDB;
+
+        bool BombSound = true;
         // Start is called before the first frame update
         void Start()
         {
@@ -52,7 +54,14 @@ namespace SIAairportSecurity.Training
                 _audioSource.Stop();
             }else
             {
-                _audioSource.Play();
+                if (BombSound)
+                {
+                    _audioSource.Play();
+                }
+                else
+                {
+                    _audioSource.Stop();
+                }
             }
         }
 
@@ -67,6 +76,7 @@ namespace SIAairportSecurity.Training
                 tempTXT.text = "Sound\nOff";
                 tempTXT.color = Color.white;
                 _audioSource.Stop();
+                BombSound = false;
             }
             else
             {
@@ -76,6 +86,7 @@ namespace SIAairportSecurity.Training
                 tempTXT.text = "Sound\nOn";
                 tempTXT.color = Color.black;
                 _audioSource.Play();
+                BombSound = true;
             }
         }
     }
