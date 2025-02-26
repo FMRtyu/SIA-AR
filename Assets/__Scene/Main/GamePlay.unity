@@ -9707,7 +9707,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Tap to Place Item
+  m_text: 'Scan All Objects / Area
+
+    Required For Training'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: aa445d90bc34c0648b17d8cf80647433, type: 2}
   m_sharedMaterial: {fileID: 5262349705519963428, guid: aa445d90bc34c0648b17d8cf80647433, type: 2}
@@ -9734,8 +9736,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -16939,7 +16941,9 @@ MonoBehaviour:
   - Scan the Surface
   - Make sure the area is well lit and it's not on reflective surface
   - Move slowly and adjust your distance to the area you want to scan
-  hintTimeCycle: 45
+  - Scan a surface that is at least 70 cm x 70 cm to continue
+  - scan all object / area that need as occlusion
+  hintTimeCycle: 20
 --- !u!95 &5471450640307454929
 Animator:
   serializedVersion: 5
