@@ -27,5 +27,5 @@ public enum SpriteIconType
 
 public enum SpriteButtonType 
 { 
-    Round, Square, 
+    Round, Square
 }

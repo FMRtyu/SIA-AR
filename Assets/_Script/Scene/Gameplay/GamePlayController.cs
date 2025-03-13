@@ -46,7 +46,7 @@ namespace SIAairportSecurity.Training
         public delegate void OnObjectManipulationChange(ObjectManipulation currentObjectManipulation);
         public event OnObjectManipulationChange onObjectManipulationChange;
 
-        bool isInnit = false;
+        bool isARPlaneAlreadyOpen = false;
 
         private void Awake()
         {
@@ -95,12 +95,12 @@ namespace SIAairportSecurity.Training
         {
             _selectedObjectPrefab = _itemDatabase.items[gameobjectIndex].itemPrefabs;
 
-            if (!arPlaneManager.enabled && !isInnit)
-            {
-                arPlaneManager.enabled = true;
+            //if (!arPlaneManager.enabled && !isInnit)
+            //{
+            //    arPlaneManager.enabled = true;
 
-                isInnit = true;
-            }
+            //    isInnit = true;
+            //}
             
         }
 
@@ -141,6 +141,7 @@ namespace SIAairportSecurity.Training
         {
             itemProperty.ConfirmObjectPosition();
             _gameCanvasController.ShowPlacedItemBTN(false);
+            _gameCanvasController.Training.ActivatedDeactivatedEditButton(true);
             _surfaceManager.ShowDotsPlane(false);
 
             RaiseManipulationObjectChangeEvent(ObjectManipulation.None);
@@ -163,7 +164,9 @@ namespace SIAairportSecurity.Training
             {
                 _gameCanvasController.ShowPlacedItemBTN(false);
             }
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(3f);
+            _surfaceManager.EnabledARManager();
+            yield return new WaitForSeconds(1f);
             _raycastController.isDelayed = false;
         }
         #endregion
@@ -215,6 +218,15 @@ namespace SIAairportSecurity.Training
 
         #region Operation
 
+        public void EnableARPlane(bool newCondition)
+        {
+            if (!arPlaneManager.enabled && !isARPlaneAlreadyOpen)
+            {
+                _surfaceManager.StartStopScanning(newCondition);
+
+                isARPlaneAlreadyOpen = true;
+            }
+        }
         //Spawn selected object
         public void SpawnObject(ARRaycastHit hit)
         {
@@ -251,6 +263,8 @@ namespace SIAairportSecurity.Training
                     _gameCanvasController.Training.SwitchManipulationState(true);
                     _gameCanvasController.EnabledMoveBTN();
                     _gameCanvasController.DisableInstruction();
+
+                    _gameCanvasController.Training.ShowMoveRotate();
                 }
             }
         }

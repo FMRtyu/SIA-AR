@@ -38,3 +38,6 @@ MonoBehaviour:
   - spriteType: 1
     activatedSprite: {fileID: 21300000, guid: 5a931b90a0519e2428476547977fedf8, type: 3}
     defaultSprite: {fileID: 21300000, guid: 6c664eaa00b48624ab60894b9f2ab3a4, type: 3}
+  - spriteType: 2
+    activatedSprite: {fileID: 21300000, guid: 5a931b90a0519e2428476547977fedf8, type: 3}
+    defaultSprite: {fileID: 21300000, guid: 6c664eaa00b48624ab60894b9f2ab3a4, type: 3}

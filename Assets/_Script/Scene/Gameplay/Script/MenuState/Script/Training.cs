@@ -13,15 +13,14 @@ namespace SIAairportSecurity.Training
 
         [Header("Menu Container")]
         [SerializeField] private RectTransform _menuContainer;
-        [SerializeField] private Animator _menuAnimator;
-
-        [SerializeField] private float _bottomOffset = 10f; // Offset from the bottom of the screen
         [SerializeField] private float _moveSpeed = 1f; // movement speed to show menu container
-
-        [SerializeField] private GameObject _conformBTN;
+        [SerializeField] private GameObject _confirmGroup;
+        [SerializeField] private GameObject _rescanGroup;
+        [SerializeField] private Vector2 _menuPanelOpenPos;
+        [SerializeField] private Button editButton;
 
         private Vector2 _menuContainerInitialPos;
-        private bool _isMenuOpen = false;
+        private bool _meneStateOpen = false;
 
         [Header("Rotate and Move property")]
         [SerializeField] private Button _moveBTN;
@@ -40,6 +39,12 @@ namespace SIAairportSecurity.Training
         [Header("Information Panel")]
         [SerializeField] private GameObject _infoPanel;
         [SerializeField] private GameObject _instructionPanel;
+
+        [SerializeField] private GameObject[] _tutorialGroup;
+        [SerializeField] private TMP_Text _indexTutorialText;
+        [SerializeField] private Button _nextButton;
+        [SerializeField] private Button _previousButton;
+        private int _tutorialIndex;
 
         [Header("Scan Surface")]
         [SerializeField] private GameObject _scanInstruction;
@@ -96,9 +101,10 @@ namespace SIAairportSecurity.Training
         private void OnEnable()
         {
             //move menu container down
-            MoveToBottom(true);
+            _menuContainer.anchoredPosition = _menuPanelOpenPos;
+            _meneStateOpen = false;
 
-            if(isAlreadyOpen)
+            if (isAlreadyOpen)
             {
                 if (_menuCanvasController.isBacktoSelection && _menuCanvasController.GetIfObjectConfirmed())
                 {
@@ -129,6 +135,7 @@ namespace SIAairportSecurity.Training
 
         private void init()
         {
+
             _instructionPanelInitScale = _instructionPanel.transform.localScale;
             _scanInstructionInitScale = _scanInstruction.transform.localScale;
 
@@ -138,55 +145,50 @@ namespace SIAairportSecurity.Training
             _instructionPanel.transform.localScale = Vector3.zero;
             _finishResetBTN.SetActive(false);
             _scanInstruction.SetActive(false);
+
+            _previousButton.onClick.AddListener(PreviousTutorial);
+            _nextButton.onClick.AddListener(NextTutorial);
+
+            TutorialUIUpdater();
         }
 
         #region Menupanel
-        private void MoveToBottom(bool isInit)
+        public void ActivatedDeactivatedEditButton(bool Condition)
         {
-            _isMenuOpen = false;
+            editButton.interactable = Condition;
+        }
+        public void CloseMenuGroup()
+        {
+            _meneStateOpen = false;
 
-
-            if (_menuAnimator)
+            CanvasGroup canvasGroup = _menuContainer.GetComponent<CanvasGroup>();
+            Vector2 pos = new Vector2(-90f, 600f);
+            LeanTween.move(_menuContainer, to: _menuPanelOpenPos, _moveSpeed).setEase(LeanTweenType.easeInOutQuad).setOnComplete(() =>
             {
-                _menuAnimator.SetBool("IsMenuOpen", _isMenuOpen);
-            }
-            else
-            {
-                CanvasGroup canvasGroup = _menuContainer.GetComponent<CanvasGroup>();
-                LeanTween.alphaCanvas(canvasGroup, to: 0f, 0.5f).setEase(LeanTweenType.easeInOutQuad).setOnComplete(() =>
-                {
-                    canvasGroup.blocksRaycasts = false;
-                    canvasGroup.interactable = false;
-                });
-            }
+                canvasGroup.blocksRaycasts = false;
+                canvasGroup.interactable = false;
+            });
         }
 
-        private void MoveToUp()
+        public void OpenMenuGroup()
         {
-            _isMenuOpen = true;
+            _meneStateOpen = true;
 
-            if (_menuAnimator)
+            CanvasGroup canvasGroup = _menuContainer.GetComponent<CanvasGroup>();
+            LeanTween.move(_menuContainer, to: _menuContainerInitialPos, _moveSpeed).setEase(LeanTweenType.easeInOutQuad).setOnComplete(() =>
             {
-                _menuAnimator.SetBool("IsMenuOpen", _isMenuOpen);
-            }
-            else
-            {
-                CanvasGroup canvasGroup = _menuContainer.GetComponent<CanvasGroup>();
-                LeanTween.alphaCanvas(canvasGroup, to: 1f, 0.5f).setEase(LeanTweenType.easeInOutQuad).setOnComplete(() =>
-                {
-                    canvasGroup.blocksRaycasts = true;
-                    canvasGroup.interactable = true;
-                });
-            }
+                canvasGroup.blocksRaycasts = true;
+                canvasGroup.interactable = true;
+            });
         }
 
         private void OnGameStateChange(GameState newGameState)
         {
             _gameState = newGameState;
 
-            if (_isMenuOpen)
+            if (_meneStateOpen)
             {
-                MoveToUp();
+                OpenMenuGroup();
             }
         }
         #endregion
@@ -200,14 +202,13 @@ namespace SIAairportSecurity.Training
 
         public void ShowCloseMenuContainer()
         {
-            if (_isMenuOpen)
+            if (_meneStateOpen)
             {
-                MoveToBottom(false);
+                CloseMenuGroup();
             }
             else
             {
-                MoveToUp();
-                _isMenuOpen = true;
+                OpenMenuGroup();
             }
         }
         public void JumpToSelection()
@@ -222,7 +223,7 @@ namespace SIAairportSecurity.Training
         #region ShowHideMoveRotateBTN
         public void ShowConformButton(bool Condition)
         {
-            _conformBTN.SetActive(Condition);
+            _confirmGroup.SetActive(Condition);
         }
 
         public void ShowTopMenuPanel()
@@ -446,17 +447,12 @@ namespace SIAairportSecurity.Training
             //_scanInstruction.SetActive(false);
             LeanTween.cancel(_scanInstruction);
             ScaleUpAnimation(_scanInstruction, Vector3.zero);
-            _instructionPanel.GetComponentInChildren<TMP_Text>().text = "Map The Area";
+            ChangeInstructionText("Scan all required areas and object");
 
             RectTransform rectTransform = _instructionPanel.GetComponent<RectTransform>();
 
-            // Set anchor to bottom-stretch (full width, bottom-anchored)
-            rectTransform.anchorMin = new Vector2(0, 0);
-            rectTransform.anchorMax = new Vector2(1, 0);
-            rectTransform.pivot = new Vector2(0.5f, 0);
-
             Vector2 newPosition = rectTransform.anchoredPosition;
-            newPosition.y = 865;
+            newPosition.y = 700;
             rectTransform.anchoredPosition = newPosition;
 
             // Set left and right stretch values
@@ -473,17 +469,12 @@ namespace SIAairportSecurity.Training
             {
                 //_scanInstruction.SetActive(false);
                 _instructionPanel.transform.localScale = Vector3.zero;
-                _instructionPanel.GetComponentInChildren<TMP_Text>().text = "Tap to Place Item";
+                ChangeInstructionText("Tap to Place Item");
 
                 RectTransform rectTransform = _instructionPanel.GetComponent<RectTransform>();
 
-                // Set anchor to top-stretch (full width, top-anchored)
-                rectTransform.anchorMin = new Vector2(0, 1);
-                rectTransform.anchorMax = new Vector2(1, 1);
-                rectTransform.pivot = new Vector2(0.5f, 1);
-
                 Vector2 newPosition = rectTransform.anchoredPosition;
-                newPosition.y = -516;
+                newPosition.y = 700;
                 rectTransform.anchoredPosition = newPosition;
 
                 // Set left and right stretch values
@@ -493,10 +484,14 @@ namespace SIAairportSecurity.Training
                 ScaleUpAnimation(_instructionPanel, _instructionPanelInitScale);
             }
 
-            ShowTopMenuPanel();
+            //ShowTopMenuPanel();
             _finishResetBTN.SetActive(false);
         }
 
+        public void ChangeInstructionText(string newInstruction)
+        {
+            _instructionPanel.GetComponentInChildren<TMP_Text>().text = newInstruction;
+        }
         public void DisableInstruction()
         {
             ScaleUpAnimation(_instructionPanel, Vector3.zero);
@@ -515,7 +510,13 @@ namespace SIAairportSecurity.Training
         }
         public void ChangeScanSurfaceSprite() 
         { 
-            ChangeScanSurfaceSpriteInternal(null); 
+            ChangeScanSurfaceSpriteInternal(null);
+
+            if (_menuCanvasController.GetGamePlayController().GetIfObjectSpawned())
+            {
+                _confirmGroup.SetActive(!_isButtonOn);
+                _rescanGroup.SetActive(_isButtonOn);
+            }
         }
         public void ChangeScanSurfaceSprite(bool condition) 
         { 
@@ -562,6 +563,87 @@ namespace SIAairportSecurity.Training
             tempTXT.color = textColor;
         }
 
+
+        #endregion
+
+        #region Tutorial
+        public void ResetTutorials()
+        {
+            _tutorialIndex = 0;
+
+            foreach (var tutorial in _tutorialGroup)
+            {
+                tutorial.SetActive(false);
+            }
+
+            _tutorialGroup[0].SetActive(true);
+            TutorialUIUpdater();
+        }
+
+        public void NextTutorial()
+        {
+            if (_tutorialIndex < _tutorialGroup.Length - 1)
+            {
+                _tutorialGroup[_tutorialIndex].SetActive(false);
+                _tutorialIndex += 1;
+                _tutorialGroup[_tutorialIndex].SetActive(true);
+
+                // Check and update the Next button state
+                if (_tutorialIndex >= _tutorialGroup.Length - 1)
+                {
+                    _nextButton.interactable = false;
+                    Debug.Log("At end tutorial. next button disabled.");
+                }
+                else
+                {
+                    _previousButton.interactable = true;
+                    Debug.Log("Not at end tutorial. next button enabled.");
+                }
+            }
+
+            TutorialUIUpdater();
+        }
+
+        public void PreviousTutorial()
+        {
+            if (_tutorialIndex > 0)
+            {
+                _tutorialGroup[_tutorialIndex].SetActive(false);
+                _tutorialIndex -= 1;
+                _tutorialGroup[_tutorialIndex].SetActive(true);
+
+                // Check and update the Previous button state
+                if (_tutorialIndex <= 0)
+                {
+                    _previousButton.interactable = false;
+                    Debug.Log("At first tutorial. Previous button disabled.");
+                }
+                else
+                {
+                    //_previousButton.interactable = true;
+                    Debug.Log("Not at first tutorial. Previous button enabled.");
+                }
+            }
+
+            TutorialUIUpdater();
+        }
+
+        private void TutorialUIUpdater()
+        {
+            int totalTutorials = _tutorialGroup.Length;
+
+            int temp = _tutorialIndex + 1;
+            _indexTutorialText.text = temp + "/" + totalTutorials;
+
+            StartCoroutine(ForceUpdateButtons());
+        }
+
+        private IEnumerator ForceUpdateButtons()
+        {
+            yield return null; // Wait for one frame
+            _previousButton.interactable = _tutorialIndex > 0;
+            _nextButton.interactable = _tutorialIndex < _tutorialGroup.Length - 1;
+        }
 
         #endregion
     }

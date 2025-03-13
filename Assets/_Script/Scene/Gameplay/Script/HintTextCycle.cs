@@ -7,6 +7,8 @@ using UnityEngine;
 public class HintTextCycle : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
+    public GameObject debugText;
+    public bool testHint;
     public string[] messages;
     private int index = 0;
     private Coroutine textChangeCoroutine;
@@ -14,6 +16,19 @@ public class HintTextCycle : MonoBehaviour
 
     private void Start()
     {
+        if (testHint)
+        {
+            hintTimeCycle = 3;
+            debugText.SetActive(true);
+            Debug.Log("set as debug");
+            StopTextCycle();
+            StartTextCycle();
+        }
+        else
+        {
+            debugText.SetActive(false);
+        }
+
         GamePlayController gamePlayController = FindAnyObjectByType<GamePlayController>();
         if (gamePlayController != null)
         {
