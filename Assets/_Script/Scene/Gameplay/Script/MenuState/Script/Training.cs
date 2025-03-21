@@ -18,9 +18,10 @@ namespace SIAairportSecurity.Training
         [SerializeField] private GameObject _rescanGroup;
         [SerializeField] private Vector2 _menuPanelOpenPos;
         [SerializeField] private Button editButton;
+        [SerializeField] private GameObject[] hideUI;
 
         private Vector2 _menuContainerInitialPos;
-        private bool _meneStateOpen = false;
+        private bool _menuStateOpen = false;
 
         [Header("Rotate and Move property")]
         [SerializeField] private Button _moveBTN;
@@ -32,6 +33,7 @@ namespace SIAairportSecurity.Training
         [SerializeField] private Animator _moveRotateAnim;
         [SerializeField] private Animator _rotateAdvanceAnim;
         private bool isAlreadyOpen;
+        private bool isEditPanelOpen;
 
         [Header("Loading")]
         [SerializeField] private CanvasGroup _loadingCanvasGroup;
@@ -102,7 +104,7 @@ namespace SIAairportSecurity.Training
         {
             //move menu container down
             _menuContainer.anchoredPosition = _menuPanelOpenPos;
-            _meneStateOpen = false;
+            _menuStateOpen = false;
 
             if (isAlreadyOpen)
             {
@@ -121,15 +123,17 @@ namespace SIAairportSecurity.Training
             {
                 ChangeButtonInteractable(_menuCanvasController.currentMoveRotateBTNState);
                 ShowConformButton(!_menuCanvasController.GetGamePlayController().isSpawnConformed);
-                if (_menuCanvasController.isBacktoSelection)
-                {
-
-                }
             }
             else
             {
                 ChangeButtonInteractable(false);
                 ShowConformButton(false);
+            }
+
+            if (isEditPanelOpen)
+            {
+                ReopenMoveRotateBTN();
+                SwitchToMove();
             }
         }
 
@@ -159,7 +163,7 @@ namespace SIAairportSecurity.Training
         }
         public void CloseMenuGroup()
         {
-            _meneStateOpen = false;
+            _menuStateOpen = false;
 
             CanvasGroup canvasGroup = _menuContainer.GetComponent<CanvasGroup>();
             Vector2 pos = new Vector2(-90f, 600f);
@@ -172,7 +176,7 @@ namespace SIAairportSecurity.Training
 
         public void OpenMenuGroup()
         {
-            _meneStateOpen = true;
+            _menuStateOpen = true;
 
             CanvasGroup canvasGroup = _menuContainer.GetComponent<CanvasGroup>();
             LeanTween.move(_menuContainer, to: _menuContainerInitialPos, _moveSpeed).setEase(LeanTweenType.easeInOutQuad).setOnComplete(() =>
@@ -186,7 +190,7 @@ namespace SIAairportSecurity.Training
         {
             _gameState = newGameState;
 
-            if (_meneStateOpen)
+            if (_menuStateOpen)
             {
                 OpenMenuGroup();
             }
@@ -202,12 +206,31 @@ namespace SIAairportSecurity.Training
 
         public void ShowCloseMenuContainer()
         {
-            if (_meneStateOpen)
+            if (_menuStateOpen)
             {
+                foreach (GameObject UIs in hideUI)
+                {
+                    UIs.SetActive(true);
+                }
+
+                if (isEditPanelOpen)
+                {
+                    ReopenMoveRotateBTN();
+                }
+
+                if (_rescanGroup.activeInHierarchy)
+                {
+                    _confirmGroup.SetActive(false);
+                }
+
                 CloseMenuGroup();
             }
             else
             {
+                foreach (GameObject UIs in hideUI)
+                {
+                    UIs.SetActive(false);
+                }
                 OpenMenuGroup();
             }
         }
@@ -217,7 +240,15 @@ namespace SIAairportSecurity.Training
 
             //SwitchRotateMoveToDefault();
 
-            _menuCanvasController.SetActiveState(MenuState.Selection); 
+            if (_rescanGroup.activeInHierarchy)
+            {
+                _menuCanvasController.GetGamePlayController()._surfaceManager.StartStopScanning(false);
+                ChangeScanSurfaceSprite(false);
+                _confirmGroup.SetActive(true);
+                _rescanGroup.SetActive(false);
+            }
+
+            _menuCanvasController.SetActiveState(MenuState.Selection);
         }
 
         #region ShowHideMoveRotateBTN
@@ -228,6 +259,7 @@ namespace SIAairportSecurity.Training
 
         public void ShowTopMenuPanel()
         {
+            isEditPanelOpen = true;
             _moveRotateAnim.SetBool("InitalOpen", true);
 
             if (!isAlreadyOpen)
@@ -238,6 +270,7 @@ namespace SIAairportSecurity.Training
 
         public void ConfirmPosition()
         {
+            isEditPanelOpen = false;
             ShowConformButton(false);
             _moveRotateAnim.SetBool("Open", false);
             _rotateAdvanceAnim.SetBool("isOpen", false);
@@ -248,6 +281,7 @@ namespace SIAairportSecurity.Training
 
         public void ReopenMoveRotateBTN()
         {
+            isEditPanelOpen = true;
             _moveRotateAnim.SetBool("Open", true);
             ShowConformButton(true);
             _menuCanvasController.ResetMoveRotate();
@@ -417,6 +451,7 @@ namespace SIAairportSecurity.Training
 
         public void ShowMoveRotate()
         {
+            isEditPanelOpen = true;
             _moveRotateAnim.SetBool("Back", false);
                 _moveRotateAnim.SetBool("Open", true);
         }
