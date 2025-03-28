@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace SIAairportSecurity.Training
@@ -58,6 +59,12 @@ namespace SIAairportSecurity.Training
             FadeIn();
             _gamePlayController.onStateChange += ChangeActiveSubUI;
             onStateChange += ChangeState;
+        }
+
+        private void OnDestroy()
+        {
+            _gamePlayController.onStateChange -= ChangeActiveSubUI;
+            onStateChange -= ChangeState;
         }
 
         public void SetObject(int objectIndex)
@@ -261,7 +268,7 @@ namespace SIAairportSecurity.Training
             fadeImgObject.blocksRaycasts = true;
             LeanTween.alphaCanvas(fadeImgObject, to: 1, fadeTime).setOnComplete(() =>
             {
-                Application.Quit();
+                SceneManager.LoadScene(0);
             });
         }
 

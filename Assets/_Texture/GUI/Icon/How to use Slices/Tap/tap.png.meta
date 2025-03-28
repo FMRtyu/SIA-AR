@@ -1,0 +1,2054 @@
+fileFormatVersion: 2
+guid: 9307f17f6caacec44abcc08fc85927e2
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: tap_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 10761
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1829ba5b544b452428b4bf3a4c14d3c2
+      internalID: -777683226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_1
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 10761
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42dc8060ef8183947b672b244bd170d7
+      internalID: -1856563291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_2
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 10761
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a2043115ea74f34a8905c31a3d1651e
+      internalID: -143991755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_3
+      rect:
+        serializedVersion: 2
+        x: 1881
+        y: 10761
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cee4abd8152fc1448b7e00816241a677
+      internalID: 522076059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_4
+      rect:
+        serializedVersion: 2
+        x: 2508
+        y: 10761
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae348a6b70bcd824b9b574584534031e
+      internalID: -765790938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 10128
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d983dd593843d89468cf266f0eb4a67c
+      internalID: -1532978876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_6
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 10128
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a79e4056e566c394abf392d488c36e8a
+      internalID: -1101698170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_7
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 10128
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 457257533b1c4954a904054f73e90d41
+      internalID: 1088565738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_8
+      rect:
+        serializedVersion: 2
+        x: 1881
+        y: 10128
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5eca2622714031f44a006764afc03584
+      internalID: -932856152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_9
+      rect:
+        serializedVersion: 2
+        x: 2508
+        y: 10128
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a7c00e04a183ec43b516ff57af98e32
+      internalID: 528560000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 9495
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5373e2d7d5da54408340057f7f5aeda
+      internalID: 2059593330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_11
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 9495
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55036f0ff40c6d94d9f16e656279e9bb
+      internalID: 1964044409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_12
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 9495
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d52b712b9390e04cb78f51688e50d74
+      internalID: -67240635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_13
+      rect:
+        serializedVersion: 2
+        x: 1881
+        y: 9495
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba4b6928281de0e4391c8ba703841c8b
+      internalID: -1071489246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_14
+      rect:
+        serializedVersion: 2
+        x: 2508
+        y: 9495
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c9b7d108eca4d6449a5dd1092806296
+      internalID: -559805477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 8862
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f4f9d0fe0a9555428eaf39e83039039
+      internalID: 535496006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_16
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 8862
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d39a3c54e11ce9c439cfb6f77a7568e8
+      internalID: -1237588337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_17
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 8862
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da99934a05b1bb84da3f3a4d033898a9
+      internalID: -1125776520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_18
+      rect:
+        serializedVersion: 2
+        x: 1881
+        y: 8862
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b51d9662d3c03404db395cfbe4a3f417
+      internalID: -1947910763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_19
+      rect:
+        serializedVersion: 2
+        x: 2508
+        y: 8862
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 094a88409f8c3b24dbdb7dc80339d958
+      internalID: 333909944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 8229
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ee7c4e6c0c12b248bba74164b925c81
+      internalID: -867379392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_21
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 8229
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c59ec7b5b6ff1174aa5ba23537f53ff2
+      internalID: -2043575410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_22
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 8229
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 001947576ee03634eb5593d2dfe14809
+      internalID: 1106612269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_23
+      rect:
+        serializedVersion: 2
+        x: 1881
+        y: 8229
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cdee1d32e1223e47b3a27b489006cfa
+      internalID: 971111053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_24
+      rect:
+        serializedVersion: 2
+        x: 2508
+        y: 8229
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 636967594558f354fb68e10f515779d1
+      internalID: -1499607764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7596
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d3f8fda9a07b6b4aa69b8f91f4be431
+      internalID: -698159295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_26
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 7596
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65dbba47799b25a4d89b8f51091c3004
+      internalID: 443262024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_27
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 7596
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 745aeca574a1da54c9848fb08e720c1c
+      internalID: -167587176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_28
+      rect:
+        serializedVersion: 2
+        x: 1881
+        y: 7596
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea9804106fc2f2e4ea296968e9403128
+      internalID: -745135576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_29
+      rect:
+        serializedVersion: 2
+        x: 2508
+        y: 7596
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b88574243a5b4124d838def7c59db12a
+      internalID: 1185372705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6963
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd43cc7f4a521ab429c53158ef7d0f2a
+      internalID: 595927244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_31
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 6963
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4240cd868bfa8ba4aaa6928027cbe3d8
+      internalID: 1617474732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_32
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 6963
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99f53d509949ea7438e3048d635d4b8e
+      internalID: 1238916949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_33
+      rect:
+        serializedVersion: 2
+        x: 1881
+        y: 6963
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1eb86bea80141e7468cd41cfb7cedc19
+      internalID: -895718528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_34
+      rect:
+        serializedVersion: 2
+        x: 2508
+        y: 6963
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad0d7607294096d4ebae0791d479e6ff
+      internalID: 1245442411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6330
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 070a7b98850be53459c7837317364570
+      internalID: 482737992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_36
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 6330
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e5d0b6bea51a314ab32384542eec1cb
+      internalID: -1696376249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_37
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 6330
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ca21981ef487b0408b9515ed43b867c
+      internalID: 715551718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_38
+      rect:
+        serializedVersion: 2
+        x: 1881
+        y: 6330
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8682306812c0b934c98b476b7f313aad
+      internalID: 501670850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_39
+      rect:
+        serializedVersion: 2
+        x: 2508
+        y: 6330
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fa86a017210784469735ac4be9827c5
+      internalID: 944265033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5697
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 347b559832d4c2247b3339b5b01dfe48
+      internalID: -227207700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_41
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 5697
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 180d4fad32dcba84894f76c9db7b0ece
+      internalID: 645876939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_42
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 5697
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f09ed29e5403a64e9a41cd39e734c64
+      internalID: -1372312625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_43
+      rect:
+        serializedVersion: 2
+        x: 1881
+        y: 5697
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db11f0dafbee38e48a6abbf71626ffda
+      internalID: 1352249455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_44
+      rect:
+        serializedVersion: 2
+        x: 2508
+        y: 5697
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a14ef7e6e0aa4b241a349c42229abc99
+      internalID: 1862934027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_45
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5064
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2d265e23346491458c2172be40945ef
+      internalID: -192419173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_46
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 5064
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0be008c4a8fd194c94bdb11e97ce54c
+      internalID: -615842988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_47
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 5064
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 736943e5ab0c46649a00d763e5c55901
+      internalID: -1527814310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_48
+      rect:
+        serializedVersion: 2
+        x: 1881
+        y: 5064
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bba54869d69a3c741b42be96ef773554
+      internalID: -45460383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_49
+      rect:
+        serializedVersion: 2
+        x: 2508
+        y: 5064
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c3dd421d8ccad8439245a1156072eb8
+      internalID: -1830702889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_50
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4431
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d4c99d125be8bc43a96c7b824700f5d
+      internalID: 1782924605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_51
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 4431
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8be60668ed37e3645836331ce0e9cc1d
+      internalID: -1174737343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_52
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 4431
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6f12bb5e2c96234785ff452f4e00603
+      internalID: 1646245133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_53
+      rect:
+        serializedVersion: 2
+        x: 1881
+        y: 4431
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 005535d914841644383ab2110e896fb4
+      internalID: -696491498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_54
+      rect:
+        serializedVersion: 2
+        x: 2508
+        y: 4431
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bee107fa1a3bd264fa9d3fdd52a0f457
+      internalID: -1535267936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_55
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3798
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf8cc7b15b25d314e8ca8e1f71e31d72
+      internalID: -1062943733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_56
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 3798
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ba01f3a0b726e2438c9088319f96342
+      internalID: 1890133214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_57
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 3798
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9d99a6a6d7355a41826de7209fa966e
+      internalID: 895243041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_58
+      rect:
+        serializedVersion: 2
+        x: 1881
+        y: 3798
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c07f4687fb6e164f8588b73099d7142
+      internalID: 559414465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_59
+      rect:
+        serializedVersion: 2
+        x: 2508
+        y: 3798
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99dbe4e113411344998683944aef4574
+      internalID: -815707011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_60
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3165
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f250512020d28247b7d27aa44e0cc93
+      internalID: 1268019321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_61
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 3165
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efa08600b65dbac4681f28daebc7a116
+      internalID: -1855252131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_62
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 3165
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07b4672853b00834992d084c2ab83f45
+      internalID: -1951082918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_63
+      rect:
+        serializedVersion: 2
+        x: 1881
+        y: 3165
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5d6cf5f96035a243a15ea089968aaf7
+      internalID: 2083550980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_64
+      rect:
+        serializedVersion: 2
+        x: 2508
+        y: 3165
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f8658067665a9749ad2e22674600037
+      internalID: 95120784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_65
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2532
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b586d3cd470e2fb449c3e5e9be11992a
+      internalID: 598126932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_66
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 2532
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05ff92cd743d2af41bc87cf55a2c4354
+      internalID: 866898743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_67
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 2532
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4aac253f4daeb0e4c89acb43dffdef06
+      internalID: 430473313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_68
+      rect:
+        serializedVersion: 2
+        x: 1881
+        y: 2532
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d9da2f7043957e41980bbfa75b5de59
+      internalID: -965265920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_69
+      rect:
+        serializedVersion: 2
+        x: 2508
+        y: 2532
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 642bb13eaa251534caad9f1c8146c58d
+      internalID: -728780032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_70
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1899
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 968fb61f44927f14eac864df8e01a0f3
+      internalID: 1494041023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_71
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 1899
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9873efe16dca5b14a915f3099f9be302
+      internalID: -1301294144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_72
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 1899
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b88699c6be105904fa434acac9d6a83d
+      internalID: 919658339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_73
+      rect:
+        serializedVersion: 2
+        x: 1881
+        y: 1899
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02b91bcd9e89b3e439f5bc10097ade98
+      internalID: -393189122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_74
+      rect:
+        serializedVersion: 2
+        x: 2508
+        y: 1899
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1954ec66993ea142a667a11b63dbe15
+      internalID: -1038831711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_75
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1266
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5b0709c03bc7f0469587978e406cb47
+      internalID: 427547782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_76
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 1266
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f8caab69322fef41ba952068468b60e
+      internalID: 1801989769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_77
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 1266
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7cea0fdb77213340a2242a3bba2f31c
+      internalID: 1569559210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_78
+      rect:
+        serializedVersion: 2
+        x: 1881
+        y: 1266
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c3a527680033b54097c5ecb510574a3
+      internalID: -2036852505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_79
+      rect:
+        serializedVersion: 2
+        x: 2508
+        y: 1266
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a6b4ca67150c9342b441fc5358c446b
+      internalID: -1143047703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_80
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 633
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97fc51184fbc63d4e88a7cffb2dcae16
+      internalID: -1689754020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_81
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 633
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 533ed36281e5c364fb93bd3bd0c8066b
+      internalID: -398392273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_82
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 633
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 717325cb3756f8b45a5f311a0c6c34dc
+      internalID: -1025384711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_83
+      rect:
+        serializedVersion: 2
+        x: 1881
+        y: 633
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4bb17b6ccde8e244926adc248b7c08d
+      internalID: 1650305194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_84
+      rect:
+        serializedVersion: 2
+        x: 2508
+        y: 633
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 613b4a914fa563b448771323711b9999
+      internalID: -153920199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_85
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6025ab32b0f4d27458ba35222b874f20
+      internalID: -1851047930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tap_86
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 0
+        width: 627
+        height: 633
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 294a8ef9c8abc1f43afc77c50c3fe584
+      internalID: -1569823511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 9d05085a45ebf574694d8b0811aa6a99
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      tap_0: -777683226
+      tap_1: -1856563291
+      tap_10: 2059593330
+      tap_11: 1964044409
+      tap_12: -67240635
+      tap_13: -1071489246
+      tap_14: -559805477
+      tap_15: 535496006
+      tap_16: -1237588337
+      tap_17: -1125776520
+      tap_18: -1947910763
+      tap_19: 333909944
+      tap_2: -143991755
+      tap_20: -867379392
+      tap_21: -2043575410
+      tap_22: 1106612269
+      tap_23: 971111053
+      tap_24: -1499607764
+      tap_25: -698159295
+      tap_26: 443262024
+      tap_27: -167587176
+      tap_28: -745135576
+      tap_29: 1185372705
+      tap_3: 522076059
+      tap_30: 595927244
+      tap_31: 1617474732
+      tap_32: 1238916949
+      tap_33: -895718528
+      tap_34: 1245442411
+      tap_35: 482737992
+      tap_36: -1696376249
+      tap_37: 715551718
+      tap_38: 501670850
+      tap_39: 944265033
+      tap_4: -765790938
+      tap_40: -227207700
+      tap_41: 645876939
+      tap_42: -1372312625
+      tap_43: 1352249455
+      tap_44: 1862934027
+      tap_45: -192419173
+      tap_46: -615842988
+      tap_47: -1527814310
+      tap_48: -45460383
+      tap_49: -1830702889
+      tap_5: -1532978876
+      tap_50: 1782924605
+      tap_51: -1174737343
+      tap_52: 1646245133
+      tap_53: -696491498
+      tap_54: -1535267936
+      tap_55: -1062943733
+      tap_56: 1890133214
+      tap_57: 895243041
+      tap_58: 559414465
+      tap_59: -815707011
+      tap_6: -1101698170
+      tap_60: 1268019321
+      tap_61: -1855252131
+      tap_62: -1951082918
+      tap_63: 2083550980
+      tap_64: 95120784
+      tap_65: 598126932
+      tap_66: 866898743
+      tap_67: 430473313
+      tap_68: -965265920
+      tap_69: -728780032
+      tap_7: 1088565738
+      tap_70: 1494041023
+      tap_71: -1301294144
+      tap_72: 919658339
+      tap_73: -393189122
+      tap_74: -1038831711
+      tap_75: 427547782
+      tap_76: 1801989769
+      tap_77: 1569559210
+      tap_78: -2036852505
+      tap_79: -1143047703
+      tap_8: -932856152
+      tap_80: -1689754020
+      tap_81: -398392273
+      tap_82: -1025384711
+      tap_83: 1650305194
+      tap_84: -153920199
+      tap_85: -1851047930
+      tap_86: -1569823511
+      tap_9: 528560000
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

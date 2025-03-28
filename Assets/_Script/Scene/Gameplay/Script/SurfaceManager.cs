@@ -21,6 +21,9 @@ public class SurfaceManager : MonoBehaviour
     [SerializeField] private Material[] colorMaterials;
     [SerializeField] private Material verticalPlaneMaterial;
 
+    [Header("UI")]
+    [SerializeField] private CanvasGroup _scanningPanel;
+
     private int horizontalPlaneCount = 0;
     private int verticalPlaneCount = 0;
 
@@ -50,6 +53,11 @@ public class SurfaceManager : MonoBehaviour
         }
 
         _planeManager.planesChanged += PlaneTextUpdater;
+    }
+
+    private void OnDestroy()
+    {
+        _planeManager.planesChanged -= PlaneTextUpdater;
     }
 
     private void PlaneTextUpdater(ARPlanesChangedEventArgs eventArgs)
@@ -141,18 +149,38 @@ public class SurfaceManager : MonoBehaviour
     {
         isPlaneScan = !isPlaneScan;
         _planeManager.enabled = isPlaneScan;
+
+        ShowScanningIndicator(isPlaneScan);
     }
 
     public void StartStopScanning(bool condition)
     {
         isPlaneScan = condition;
         _planeManager.enabled = isPlaneScan;
+
+        ShowScanningIndicator(isPlaneScan);
     }
 
     public void ResetPlane()
     {
         _arSession.Reset();
+    }
+
+    public void EnabledARManager()
+    {
         isPlaneScan = true;
-        _planeManager.enabled = isPlaneScan;
+        StartStopScanning(isPlaneScan);
+    }
+
+    private void ShowScanningIndicator(bool newCondition)
+    {
+        if (newCondition)
+        {
+            LeanTween.alphaCanvas(_scanningPanel, to: 1, 1f).setEase(LeanTweenType.easeInOutQuad);
+        }
+        else
+        {
+            LeanTween.alphaCanvas(_scanningPanel, to: 0, 1f).setEase(LeanTweenType.easeInOutQuad);
+        }
     }
 }

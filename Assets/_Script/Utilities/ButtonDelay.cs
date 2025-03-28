@@ -12,7 +12,11 @@ public class ButtonDelay : MonoBehaviour
     private static IEnumerator EnableButtonAfterDelayCoroutine(Button button, float delay)
     {
         yield return new WaitForSeconds(delay);
-        button.interactable = true;
+        // Ensure button should be enabled based on tutorial index
+        if (button.name != "NextBTN" && button.name != "PreviousBTN")
+        {
+            button.interactable = true;
+        }
     }
 
     public static void ApplyDelayToAllButtons(float delay, MonoBehaviour caller)

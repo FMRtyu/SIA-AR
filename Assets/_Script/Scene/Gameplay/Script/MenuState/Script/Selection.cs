@@ -132,6 +132,11 @@ namespace SIAairportSecurity.Training
 
             _selectItemBTNTransform.localScale = Vector3.zero;
 
+            if (_menuCanvasController.GetGamePlayController().GetCurrentGameState() == GameState.PlaceItem || _menuCanvasController.GetGamePlayController().GetCurrentGameState() == GameState.Gameplay)
+            {
+                _menuCanvasController.Training.ObjectChangedUpdater();
+            }
+
             _menuCanvasController.JumpToTraining();
         }
 

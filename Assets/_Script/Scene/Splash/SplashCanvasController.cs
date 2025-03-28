@@ -20,11 +20,21 @@ namespace SIAairportSecurity.MainMenu
 
         public void ChangeToTraining()
         {
-            fadeImgObject.interactable = false;
-            fadeImgObject.blocksRaycasts = false;
+            fadeImgObject.interactable = true;
+            fadeImgObject.blocksRaycasts = true;
             LeanTween.alphaCanvas(fadeImgObject, to:1, fadeTime).setOnComplete(() =>
             {
                 splashController.StartTrainingScene(1);
+            });
+        }
+
+        public void QuitApp()
+        {
+            fadeImgObject.interactable = true;
+            fadeImgObject.blocksRaycasts = true;
+            LeanTween.alphaCanvas(fadeImgObject, to: 1, fadeTime).setOnComplete(() =>
+            {
+                Application.Quit();
             });
         }
 

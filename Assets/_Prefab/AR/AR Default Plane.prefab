@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 2341176725010986608}
   - component: {fileID: 828941761527927604}
   - component: {fileID: 3446541876236460719}
-  - component: {fileID: 6983034599091144098}
   - component: {fileID: 6256711097883135415}
   m_Layer: 0
   m_Name: AR Default Plane
@@ -138,20 +137,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6983034599091144098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 288771193644054204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db4b3819756696a4cb1be95d368010f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _surfaceOffset: 0.07
-  _shadowMat: {fileID: 2100000, guid: 9d0c339a38cd6aa49900a5e5e3f847fe, type: 2}
 --- !u!114 &6256711097883135415
 MonoBehaviour:
   m_ObjectHideFlags: 0

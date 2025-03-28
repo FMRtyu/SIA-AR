@@ -22,6 +22,8 @@ namespace SIAairportSecurity.MainMenu
             }
         }
 
+        
+
         public void PlayButtonSound()
         {
             if (_audioSource.isPlaying)

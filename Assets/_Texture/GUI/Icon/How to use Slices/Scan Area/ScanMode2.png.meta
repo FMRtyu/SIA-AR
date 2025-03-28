@@ -1,0 +1,1878 @@
+fileFormatVersion: 2
+guid: c565f48e99470994ebd521fe276946fd
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ScanMode2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 10500
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7085ecdbebbebdd4184cbd81a993e889
+      internalID: 157670202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_1
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 10500
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20c0a466833725d4dab1acca61879354
+      internalID: -1090934083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_2
+      rect:
+        serializedVersion: 2
+        x: 1916
+        y: 10500
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40969f307923dae4688f4611bdb176b1
+      internalID: 1508467222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_3
+      rect:
+        serializedVersion: 2
+        x: 2874
+        y: 10500
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 021dc6323ba58cc498c2b8563e3b9789
+      internalID: -926416635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_4
+      rect:
+        serializedVersion: 2
+        x: 3832
+        y: 10500
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bd2136621838eb4ba9654ec6d5e5d58
+      internalID: 1873021437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 9800
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3d5abdedbc3752428e41148fa1e278f
+      internalID: -1686147855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_6
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 9800
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de599b821fe0dbf449f0cebffca55a8a
+      internalID: 399054547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_7
+      rect:
+        serializedVersion: 2
+        x: 1916
+        y: 9800
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4f4f42c0bb0c0d4ea29a82fd87e8e80
+      internalID: -1157158759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_8
+      rect:
+        serializedVersion: 2
+        x: 2874
+        y: 9800
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4dbf53566ef99d343b382d03e1364da6
+      internalID: -812395541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_9
+      rect:
+        serializedVersion: 2
+        x: 3832
+        y: 9800
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c8c3c48432205b42adb0cb417a8c749
+      internalID: 75572607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 9100
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28f96ac2d65145844aef16e471632a4b
+      internalID: -24385676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_11
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 9100
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9773c31c7ee8aaa4baf9e744e121d207
+      internalID: 162234531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_12
+      rect:
+        serializedVersion: 2
+        x: 1916
+        y: 9100
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4669e210a483b7943896dfeb69b44b5e
+      internalID: -1561084521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_13
+      rect:
+        serializedVersion: 2
+        x: 2874
+        y: 9100
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2da116381927b224789c193d6919384a
+      internalID: -1776246770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_14
+      rect:
+        serializedVersion: 2
+        x: 3832
+        y: 9100
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98b384910d579244eba09fb6735e235f
+      internalID: -1534252188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 8400
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e4347e4f6c662946b22c430811ff974
+      internalID: -493028495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_16
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 8400
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa1287f27f0f07e45922e10111c44fc1
+      internalID: -730796724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_17
+      rect:
+        serializedVersion: 2
+        x: 1916
+        y: 8400
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce379c77250cb7a4ca84b0a0392a0784
+      internalID: 621744289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_18
+      rect:
+        serializedVersion: 2
+        x: 2874
+        y: 8400
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 560837809ea1f3a488a9df2c67fc594d
+      internalID: -241277994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_19
+      rect:
+        serializedVersion: 2
+        x: 3832
+        y: 8400
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b97e9a24e77e3c64483abc527abe3398
+      internalID: -2102744654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7700
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5228e4506e617a34b857a384c5ff7945
+      internalID: -136690996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_21
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 7700
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62d66b2388054bd4fac9aa7ae8542c09
+      internalID: 520779907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_22
+      rect:
+        serializedVersion: 2
+        x: 1916
+        y: 7700
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5c38bc1ec98f194194435abe00db3c5
+      internalID: -1617567012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_23
+      rect:
+        serializedVersion: 2
+        x: 2874
+        y: 7700
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04463e7d56fa2184a8df3d44b16ea02f
+      internalID: -1171050892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_24
+      rect:
+        serializedVersion: 2
+        x: 3832
+        y: 7700
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d0b190dafebb064a840e54be71ee995
+      internalID: 2092289173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7000
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c319700d517b6bc429c614be024b7984
+      internalID: 895613387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_26
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 7000
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f402d8dbc356b84c865fa5ed9b9f75b
+      internalID: 356436228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_27
+      rect:
+        serializedVersion: 2
+        x: 1916
+        y: 7000
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bae1bf737c808543ba58db06f63e1dc
+      internalID: 184761663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_28
+      rect:
+        serializedVersion: 2
+        x: 2874
+        y: 7000
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9e4c495edd515a43b6586e0b0dc8f57
+      internalID: -1762603347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_29
+      rect:
+        serializedVersion: 2
+        x: 3832
+        y: 7000
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfcf7441770e3be4f96128a8bdde5895
+      internalID: 564117563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6300
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3de74c690fd8bef4f9302450a852cb0b
+      internalID: 1119900862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_31
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 6300
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83c7cc6b76e117347a1fed413117ff89
+      internalID: -1883400297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_32
+      rect:
+        serializedVersion: 2
+        x: 1916
+        y: 6300
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f75a1b226a31c6547a4e0efdda232c95
+      internalID: 1336354131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_33
+      rect:
+        serializedVersion: 2
+        x: 2874
+        y: 6300
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5677112e2cf19a14a987d23770396374
+      internalID: -784354562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_34
+      rect:
+        serializedVersion: 2
+        x: 3832
+        y: 6300
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4eaf0336219ad3b4ab77ab7410740035
+      internalID: -1423231259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5600
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63735a4f41e55904cb2c64aa4a8658ce
+      internalID: 911705890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_36
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 5600
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf1bd7da7d2ba8a4fbe9f20f57d94f41
+      internalID: -1020923499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_37
+      rect:
+        serializedVersion: 2
+        x: 1916
+        y: 5600
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e352f60965ac81c44b2d2e7fe7f35ed6
+      internalID: 461415242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_38
+      rect:
+        serializedVersion: 2
+        x: 2874
+        y: 5600
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdea5c38b713533479f5ad93f4fa8b33
+      internalID: 439627356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_39
+      rect:
+        serializedVersion: 2
+        x: 3832
+        y: 5600
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b51dbcbfb7aa2d042a2cd5ecbdb3e11a
+      internalID: -1941625627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4900
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d432d46851dc071428247aff25821860
+      internalID: -389859292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_41
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 4900
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc92c66d5d98e384cad26f2797b060ff
+      internalID: 1760474876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_42
+      rect:
+        serializedVersion: 2
+        x: 1916
+        y: 4900
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b8bee90eebc0064dbf78ea451f65ff8
+      internalID: 1480886815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_43
+      rect:
+        serializedVersion: 2
+        x: 2874
+        y: 4900
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4643704a468e0e6469fb73b7cc3b27d9
+      internalID: 68060706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_44
+      rect:
+        serializedVersion: 2
+        x: 3832
+        y: 4900
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8f14fa72a5d2254cabfb3102a8f1f78
+      internalID: 579739237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_45
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4200
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fc905a6be0656d44b0eccd73ff0357b
+      internalID: -68470284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_46
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 4200
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6748ed2d7b37f4048b3a09f861ee8ad6
+      internalID: 2003174847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_47
+      rect:
+        serializedVersion: 2
+        x: 1916
+        y: 4200
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 109c412e813793849b63168ce7d8e93f
+      internalID: -2017114122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_48
+      rect:
+        serializedVersion: 2
+        x: 2874
+        y: 4200
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cc9070b0a81f3f4f8fd2bbcf6e91c57
+      internalID: 458219732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_49
+      rect:
+        serializedVersion: 2
+        x: 3832
+        y: 4200
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27c33ec71d4ad9a468cd7713487d5c5f
+      internalID: 427521153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_50
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3500
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f0acce2f0c054649b55a0f68a376b6c
+      internalID: 269471990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_51
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 3500
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0e2290d0c8b28645bc022848868e6a6
+      internalID: 667412423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_52
+      rect:
+        serializedVersion: 2
+        x: 1916
+        y: 3500
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfbd48af8bf86aa4b8f27b96f1bc2d20
+      internalID: -700771012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_53
+      rect:
+        serializedVersion: 2
+        x: 2874
+        y: 3500
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3d50be5c70c1b544abbb13baf51956f
+      internalID: 1165367108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_54
+      rect:
+        serializedVersion: 2
+        x: 3832
+        y: 3500
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d13f23998e69f040b22eff78d9d4650
+      internalID: -868951324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_55
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2800
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c4fafbb81e3a5d498777e731cc72950
+      internalID: -1265456156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_56
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 2800
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a9fe9ee999d6cf4ba3caa8486179278
+      internalID: -689707874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_57
+      rect:
+        serializedVersion: 2
+        x: 1916
+        y: 2800
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41b41f3cdba36914fa182498306f979f
+      internalID: 1964347329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_58
+      rect:
+        serializedVersion: 2
+        x: 2874
+        y: 2800
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5af452aad6046b4fa76015989b51bf6
+      internalID: -1423270139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_59
+      rect:
+        serializedVersion: 2
+        x: 3832
+        y: 2800
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 246035f01c0183c45a6ef3b30bee647a
+      internalID: 1606570754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_60
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2100
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d46093fbc5c56c4ca7cbc6e65030e54
+      internalID: 1036524571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_61
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 2100
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 796da83b074b192418c1388e8d9c274b
+      internalID: 879804382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_62
+      rect:
+        serializedVersion: 2
+        x: 1916
+        y: 2100
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7774e3022c31b644891d563b2ec15086
+      internalID: 1894871211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_63
+      rect:
+        serializedVersion: 2
+        x: 2874
+        y: 2100
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20dea0fcf8e00a64faa9d05d7c0fe16f
+      internalID: -2137787039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_64
+      rect:
+        serializedVersion: 2
+        x: 3832
+        y: 2100
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 463fc096cf0f5f44ca6978a7aab45bf7
+      internalID: -1592554050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_65
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1400
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f071ba5fc88135c48bc789cac0ee8b29
+      internalID: 618326771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_66
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 1400
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7adcff5929d6dc648a9f9ba908b0ebac
+      internalID: 2013805913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_67
+      rect:
+        serializedVersion: 2
+        x: 1916
+        y: 1400
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0cedfd6752b30c46901634080110cbc
+      internalID: -801772488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_68
+      rect:
+        serializedVersion: 2
+        x: 2874
+        y: 1400
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ac1d10dab019bb40991640298e779b6
+      internalID: 467779161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_69
+      rect:
+        serializedVersion: 2
+        x: 3832
+        y: 1400
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b226f6b3cbb60a49ba25bfe221b7dd9
+      internalID: 1812481225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_70
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 700
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd42b7aa29309d04da8731f35952cc5c
+      internalID: 1890007329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_71
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 700
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ececc6b7b7391e41a475afad486b8ff
+      internalID: -1853779483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_72
+      rect:
+        serializedVersion: 2
+        x: 1916
+        y: 700
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fda3571555b890d48b78c3843eaed21e
+      internalID: -233442275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_73
+      rect:
+        serializedVersion: 2
+        x: 2874
+        y: 700
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 797ee000626a33b45b2b03ee700daab8
+      internalID: -426199317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_74
+      rect:
+        serializedVersion: 2
+        x: 3832
+        y: 700
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f87a2b88cf6d714ca7b35ae8ce203e4
+      internalID: -1031273733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_75
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c9eff2156dc0d84d9c908d7475d6cc4
+      internalID: 1925868048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_76
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 0
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ec119825767a604da3bcb1826b21cbc
+      internalID: -1104914471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_77
+      rect:
+        serializedVersion: 2
+        x: 1916
+        y: 0
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eae335183efb9d64f990a1fbbc90de51
+      internalID: -650002147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ScanMode2_78
+      rect:
+        serializedVersion: 2
+        x: 2874
+        y: 0
+        width: 958
+        height: 700
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bead00e360812584ab711485e1c3767c
+      internalID: -1175422147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: d66fc9a0e2f5b3640ae6ed569ddb154a
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      ScanMode2_0: 157670202
+      ScanMode2_1: -1090934083
+      ScanMode2_10: -24385676
+      ScanMode2_11: 162234531
+      ScanMode2_12: -1561084521
+      ScanMode2_13: -1776246770
+      ScanMode2_14: -1534252188
+      ScanMode2_15: -493028495
+      ScanMode2_16: -730796724
+      ScanMode2_17: 621744289
+      ScanMode2_18: -241277994
+      ScanMode2_19: -2102744654
+      ScanMode2_2: 1508467222
+      ScanMode2_20: -136690996
+      ScanMode2_21: 520779907
+      ScanMode2_22: -1617567012
+      ScanMode2_23: -1171050892
+      ScanMode2_24: 2092289173
+      ScanMode2_25: 895613387
+      ScanMode2_26: 356436228
+      ScanMode2_27: 184761663
+      ScanMode2_28: -1762603347
+      ScanMode2_29: 564117563
+      ScanMode2_3: -926416635
+      ScanMode2_30: 1119900862
+      ScanMode2_31: -1883400297
+      ScanMode2_32: 1336354131
+      ScanMode2_33: -784354562
+      ScanMode2_34: -1423231259
+      ScanMode2_35: 911705890
+      ScanMode2_36: -1020923499
+      ScanMode2_37: 461415242
+      ScanMode2_38: 439627356
+      ScanMode2_39: -1941625627
+      ScanMode2_4: 1873021437
+      ScanMode2_40: -389859292
+      ScanMode2_41: 1760474876
+      ScanMode2_42: 1480886815
+      ScanMode2_43: 68060706
+      ScanMode2_44: 579739237
+      ScanMode2_45: -68470284
+      ScanMode2_46: 2003174847
+      ScanMode2_47: -2017114122
+      ScanMode2_48: 458219732
+      ScanMode2_49: 427521153
+      ScanMode2_5: -1686147855
+      ScanMode2_50: 269471990
+      ScanMode2_51: 667412423
+      ScanMode2_52: -700771012
+      ScanMode2_53: 1165367108
+      ScanMode2_54: -868951324
+      ScanMode2_55: -1265456156
+      ScanMode2_56: -689707874
+      ScanMode2_57: 1964347329
+      ScanMode2_58: -1423270139
+      ScanMode2_59: 1606570754
+      ScanMode2_6: 399054547
+      ScanMode2_60: 1036524571
+      ScanMode2_61: 879804382
+      ScanMode2_62: 1894871211
+      ScanMode2_63: -2137787039
+      ScanMode2_64: -1592554050
+      ScanMode2_65: 618326771
+      ScanMode2_66: 2013805913
+      ScanMode2_67: -801772488
+      ScanMode2_68: 467779161
+      ScanMode2_69: 1812481225
+      ScanMode2_7: -1157158759
+      ScanMode2_70: 1890007329
+      ScanMode2_71: -1853779483
+      ScanMode2_72: -233442275
+      ScanMode2_73: -426199317
+      ScanMode2_74: -1031273733
+      ScanMode2_75: 1925868048
+      ScanMode2_76: -1104914471
+      ScanMode2_77: -650002147
+      ScanMode2_78: -1175422147
+      ScanMode2_8: -812395541
+      ScanMode2_9: 75572607
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
