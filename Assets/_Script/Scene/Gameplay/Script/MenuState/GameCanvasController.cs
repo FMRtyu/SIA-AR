@@ -232,6 +232,7 @@ namespace SIAairportSecurity.Training
             //Activate the new state
             activeState = menuDictionary[newState];
 
+            Debug.Log(newState);
             activeState.gameObject.SetActive(true);
 
             //If we are jumping back we shouldn't add to history because then we will get doubles
@@ -341,7 +342,7 @@ namespace SIAairportSecurity.Training
             switch (gameState)
             {
                 case GameState.Scanning:
-                    _trainingScript.ShowScanningSurfaceAnimation();
+                    //_trainingScript.ShowScanningSurfaceAnimation();
                     break;
                 case GameState.MapArea:
                     _trainingScript.ShowMapTheAreaInstruction();
