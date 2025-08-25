@@ -132,8 +132,12 @@ namespace SIAairportSecurity.Training
 
             if (isEditPanelOpen)
             {
-                ReopenMoveRotateBTN();
-                SwitchToMove();
+                //ReopenMoveRotateBTN();
+                _moveRotateAnim.SetBool("Open", true);
+                if (_menuCanvasController.GetGamePlayController().GetIfObjectSpawned())
+                {
+                    SwitchToMove();
+                }
             }
         }
 
@@ -154,12 +158,38 @@ namespace SIAairportSecurity.Training
             _nextButton.onClick.AddListener(NextTutorial);
 
             TutorialUIUpdater();
+            ActivatedDeactivatedEditButton(false);
         }
 
         #region Menupanel
-        public void ActivatedDeactivatedEditButton(bool Condition)
+        public void ActivatedDeactivatedEditButton(bool condition)
         {
-            editButton.interactable = Condition;
+            StartCoroutine(BypassDelay(condition));
+
+            float targetAlpha = condition ? 1f : 90f / 255f; // 1 when enabled, 90/255 when disabled
+
+            Image childImage = editButton.transform.Find("IconIMG").GetComponent<Image>();
+            TMP_Text text = editButton.gameObject.GetComponentInChildren<TMP_Text>();
+
+            SetAlpha(childImage, targetAlpha);
+            SetAlpha(text, targetAlpha);
+            Debug.Log("button edit goes " + condition);
+        }
+
+        IEnumerator BypassDelay(bool condition)
+        {
+            yield return new WaitForSeconds(0.7f);
+            editButton.interactable = condition;
+
+        }
+        private void SetAlpha(Graphic graphic, float alpha)
+        {
+            if (graphic != null)
+            {
+                Color c = graphic.color;
+                c.a = alpha;
+                graphic.color = c;
+            }
         }
         public void CloseMenuGroup()
         {
@@ -215,7 +245,8 @@ namespace SIAairportSecurity.Training
 
                 if (isEditPanelOpen)
                 {
-                    ReopenMoveRotateBTN();
+                    _moveRotateAnim.SetBool("Open", true);
+                    //ReopenMoveRotateBTN();
                 }
 
                 if (_rescanGroup.activeInHierarchy)
@@ -336,19 +367,20 @@ namespace SIAairportSecurity.Training
 
             ChangeButtonInteractable(false);
 
-            _scanInstruction.SetActive(true);
-            _menuCanvasController.GetGamePlayController().RaiseStateChangeEvent(GameState.Scanning);
-
             SwitchRotateMoveToDefault();
-            ScaleUpAnimation(_instructionPanel, Vector3.zero);
 
             LeanTween.alphaCanvas(_loadingCanvasGroup, to: 1, 1f).setOnComplete(() =>
             {
                 _menuCanvasController.ResetPlane();
                 ResetMapArea();
+                ScaleUpAnimation(_instructionPanel, Vector3.zero);
                 LeanTween.alphaCanvas(_loadingCanvasGroup, to: 0, 1f).setDelay(1f).setOnComplete(() =>
                 {
                     _loadingCanvasGroup.gameObject.SetActive(false);
+                    if (_gameState == GameState.Scanning)
+                    {
+                        ShowScanningSurfaceAnimation();
+                    }
                 });
             });
         }
@@ -474,13 +506,18 @@ namespace SIAairportSecurity.Training
         public void ShowScanningSurfaceAnimation()
         {
             //_scanInstruction.SetActive(true);
-            ScaleUpAnimation(_scanInstruction, _scanInstructionInitScale);
+            if (!LeanTween.isTweening(_scanInstruction))
+            {
+                ScaleUpAnimation(_scanInstruction, _scanInstructionInitScale);
+            }
         }
 
         public void ShowMapTheAreaInstruction()
         {
             //_scanInstruction.SetActive(false);
+
             LeanTween.cancel(_scanInstruction);
+
             ScaleUpAnimation(_scanInstruction, Vector3.zero);
             ChangeInstructionText("Scan all required areas and object");
 

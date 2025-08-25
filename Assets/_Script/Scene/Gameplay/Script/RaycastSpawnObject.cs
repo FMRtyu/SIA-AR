@@ -16,7 +16,7 @@ namespace SIAairportSecurity.Training
 
         [SerializeField] private Training _trainingObj;
         [SerializeField] private LayerMask itemLayerMask;
-        [SerializeField] private Vector2 requiredSize = new Vector2(1.0f, 1.0f); // required size in meters
+        public Vector2 requiredSize = new Vector2(1.0f, 1.0f); // required size in meters
 
         private List<ARRaycastHit> _hits = new List<ARRaycastHit>();
         private GameObject _selectedObject;
@@ -29,6 +29,10 @@ namespace SIAairportSecurity.Training
         private string _horizontalVerticalPlane = "";
 
         public static RaycastSpawnObject Instance { get; private set; }
+
+        //debug
+        //[SerializeField]private TMP_Text debugText;
+        //[SerializeField] private GameObject surfaceDebug;
 
         #region Unity Callbacks
 
@@ -193,40 +197,59 @@ namespace SIAairportSecurity.Training
 
         private void PlanesSizeChecker(ARPlanesChangedEventArgs args)
         {
+
             // Check newly added planes
-            foreach (ARPlane plane in args.added)
-            {
-                CheckPlane(plane);
-            }
+//            foreach (ARPlane plane in args.added)
+//            {
+//                if (CheckPlane(plane))
+//                {
+//#if UNITY_EDITOR
+//                    Debug.Log($"Plane Added");
+//#endif
+//                    return;
+//                }
+//            }
 
             // Check updated planes
             foreach (ARPlane plane in args.updated)
             {
-                CheckPlane(plane);
+                if (CheckPlane(plane))
+                {
+#if UNITY_EDITOR
+                    Debug.Log($"Checking Plane");
+#endif
+                    return;
+                }
             }
         }
 
-        void CheckPlane(ARPlane plane)
+        bool CheckPlane(ARPlane plane)
         {
             // Only consider non-vertical (horizontal) planes
-            if (plane.alignment != PlaneAlignment.Vertical)
+            if (plane.alignment != PlaneAlignment.Vertical && _gamePlayController.GetCurrentGameState() == GameState.Scanning)
             {
+                //debug surface info
+                //if (plane.transform.Find("InfoPanel") == null)
+                //{
+                //    GameObject info = Instantiate(surfaceDebug, plane.transform);
+                //    info.name = "InfoPanel";
 
+                //    info.transform.localPosition = new Vector3(0, 0.3f, 0);
+
+                //    info.GetComponent<ARPlaneSize>().plane = plane;
+                //}
+                    
                 if (plane.size.x >= requiredSize.x && plane.size.y >= requiredSize.y)
                 {
-                    if (_gamePlayController.GetCurrentGameState() == GameState.Scanning)
-                    {
-                        Debug.Log($"Plane {plane.trackableId} meets the requirement!");
-
-                        _gamePlayController.RaiseStateChangeEvent(GameState.MapArea);
-                        _trainingObj.ShowHideInfoPanel(false);
-                    }
-                }
-                else
-                {
-                    //_trainingObj.ShowInstructionUI();
+                    //debugText.text += $"Plane {plane.trackableId} meets the requirement!\nwith \nx:{plane.size.x}\ny:{plane.size.y}\nchange to map area";
+#if UNITY_EDITOR
+                    Debug.Log($"Plane {plane.trackableId} meets the requirement!");
+#endif
+                    _gamePlayController.RaiseStateChangeEvent(GameState.MapArea);
+                    return true;
                 }
             }
+            return false;
         }
 
         private void CheckPlaneScanned()

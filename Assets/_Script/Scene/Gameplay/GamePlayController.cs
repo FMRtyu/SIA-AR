@@ -164,7 +164,7 @@ namespace SIAairportSecurity.Training
             {
                 _gameCanvasController.ShowPlacedItemBTN(false);
             }
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(3.5f);
             _surfaceManager.EnabledARManager();
             yield return new WaitForSeconds(1f);
             _raycastController.isDelayed = false;
